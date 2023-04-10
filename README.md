@@ -1,4 +1,5 @@
 Bot Der tolle Dinge macht, openai, rssnews, Regeln, berechtigungen setzen beim akzeptieren der Regeln usw..
+Läuft auf Linux, Windows
 
 Der Token wird aus einer Datei "token.txt" ausgelesen. Dabei wird unter Linux und Windows Betriesbssystemen unterschieden. Unter linux muss der Token unter
 
