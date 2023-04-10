@@ -7,7 +7,7 @@ Der Token wird aus einer Datei "token.txt" ausgelesen. Dabei wird unter Linux un
 
 #Windows Desktop/token.txt
 
-Die Datei token.txt muss 6 Zeilen haben: token openaitoken ChannelID PostID GPTChannelID status
+Die Datei token.txt muss 6 Zeilen haben:<br/> token <br/>openaitoken <br/>ChannelID <br/>PostID <br/>GPTChannelID <br/>status
 
 Beispielinhalt: <br/>
 MzgxOLAKSDLTE4NDEx.G28qtc.Rdmk8JD7fAJKASdhh-osXpxiAsd09flO9ZSMLKIE <br/>
