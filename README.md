@@ -7,7 +7,13 @@ Der Token wird aus einer Datei "token.txt" ausgelesen. Dabei wird unter Linux un
 
 #Windows Desktop/token.txt
 
-Die Datei token.txt muss 6 Zeilen haben:<br/> token <br/>openaitoken <br/>ChannelID <br/>PostID <br/>GPTChannelID <br/>status
+Die Datei token.txt muss 6 Zeilen haben:<br/> 
+token (Discord Token)<br/>
+openaitoken (Openai API Token)<br/>
+ChannelID (Channelid where is the post for rules)<br/>
+PostID (PostID for accept Rules)<br/>
+GPTChannelID (ChannelID for openai chat) <br/>
+status (Status for the Bot)
 
 Beispielinhalt: <br/>
 MzgxOLAKSDLTE4NDEx.G28qtc.Rdmk8JD7fAJKASdhh-osXpxiAsd09flO9ZSMLKIE <br/>
