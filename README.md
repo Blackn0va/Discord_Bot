@@ -9,11 +9,11 @@ Der Token wird aus einer Datei "token.txt" ausgelesen. Dabei wird unter Linux un
 Die Datei token.txt muss 6 Zeilen haben: token openaitoken ChannelID PostID GPTChannelID status
 
 Beispielinhalt: 
-MzgxOLAKSDLTE4NDEx.G28qtc.Rdmk8JD7fAJKASdhh-osXpxiAsd09flO9ZSMLKIE 
-sk-g5ALSKDJLJASHCVZ3BlbkFJXHHNluGJ68MUn1rT8HWX 
-1090699813835780096 
-1091314958324727908 
-1091136753735319642 
+MzgxOLAKSDLTE4NDEx.G28qtc.Rdmk8JD7fAJKASdhh-osXpxiAsd09flO9ZSMLKIE
+sk-g5ALSKDJLJASHCVZ3BlbkFJXHHNluGJ68MUn1rT8HWX
+1090699813835780096
+1091314958324727908
+1091136753735319642
 Star Citizen Alpha 4.19
 
 Die Zeilen dürfen nicht leer sein, wenn ihr keinen OpenAI API Key habt, schreibt irgendwas rein.
