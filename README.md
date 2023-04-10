@@ -1,4 +1,4 @@
-Bot Der tolle Dinge macht, openai, rssnews, Regeln, berechtigungen setzen beim akzeptieren der Regeln usw..
+Bot Der tolle Dinge macht, openai, rssnews, Regeln, berechtigungen setzen beim akzeptieren der Regeln usw..<br/>
 Läuft auf Linux, Windows
 
 Der Token wird aus einer Datei "token.txt" ausgelesen. Dabei wird unter Linux und Windows Betriesbssystemen unterschieden. Unter linux muss der Token unter
@@ -9,13 +9,13 @@ Der Token wird aus einer Datei "token.txt" ausgelesen. Dabei wird unter Linux un
 
 Die Datei token.txt muss 6 Zeilen haben: token openaitoken ChannelID PostID GPTChannelID status
 
-Beispielinhalt: 
-MzgxOLAKSDLTE4NDEx.G28qtc.Rdmk8JD7fAJKASdhh-osXpxiAsd09flO9ZSMLKIE
-sk-g5ALSKDJLJASHCVZ3BlbkFJXHHNluGJ68MUn1rT8HWX
-1090699813835780096
-1091314958324727908
-1091136753735319642
-Star Citizen Alpha 4.19
+Beispielinhalt: <br/>
+MzgxOLAKSDLTE4NDEx.G28qtc.Rdmk8JD7fAJKASdhh-osXpxiAsd09flO9ZSMLKIE <br/>
+sk-g5ALSKDJLJASHCVZ3BlbkFJXHHNluGJ68MUn1rT8HWX <br/>
+1090699813835780096 <br/>
+1091314958324727908 <br/>
+1091136753735319642 <br/>
+Star Citizen Alpha 4.19 <br/>
 
 Die Zeilen dürfen nicht leer sein, wenn ihr keinen OpenAI API Key habt, schreibt irgendwas rein.
 
@@ -25,7 +25,7 @@ apt install openjdk-17-jdk screen -y
 
 Run Bot: screen -mdS dcbot java -jar Discord_Bot.jar
 
-Commands: !regeln !stream https://www.twitch.tv/8lackn0va !say Mahlzeit !status Star citizen 3.18 !play https://open.spotify.com/track/2YFtpiy2WoAQVQbM1SIwES !News (RSS Feed from Robertspace)
+Commands: <br/>!regeln <br/>!stream https://www.twitch.tv/8lackn0va <br/>!say Mahlzeit <br/>!status Star citizen 3.18 <br/>!play https://open.spotify.com/track/2YFtpiy2WoAQVQbM1SIwES <br/>!News (RSS Feed from Robertspace)
 
                 ToDo:
                     RSS Feed format
