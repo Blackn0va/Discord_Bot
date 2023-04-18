@@ -1,167 +1,42 @@
 package com.blackn0va.discord_bot;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-import com.apptasticsoftware.rssreader.Item;
-import com.apptasticsoftware.rssreader.RssReader;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
 
 public class rssNews {
 
     public static void getNews() {
 
         try {
-            // parse rss feed to string
-            String rss = "";
 
-            RssReader reader = new RssReader();
-            Stream<Item> items = reader.read("https://developertracker.com/star-citizen/rss");
-            // get only the last 2 feeds
-            items = items.limit(1);
+            Document doc = Jsoup.connect("https://robertsspaceindustries.com/comm-link//19229-Star-Citizen-Alpha-3181")
+                    .get();
+            // String rss = doc.body().text();
 
-            List<Item> list = items.collect(Collectors.toList());
-            for (Item item : list) {
-                rss += item.getTitle() + "\n" + item.getDescription();
+            // Get the text from div.content and remove the html tags
+            String text = doc.select("div.content").html();
+            String Version = "";
+            String DatabaseReset = "";
 
-                // Remove html tags
-                rss = rss.replaceAll("<[^>]*>", "");
-                rss = rss.replaceAll("&#39;", "'");
-                rss = rss.replaceAll("&quot;", "\"");
-                rss = rss.replaceAll("&amp;", "&");
-                rss = rss.replaceAll("&lt;", "<");
-                rss = rss.replaceAll("&gt;", ">");
-                rss = rss.replaceAll("&nbsp;", " ");
-                rss = rss.replaceAll("&rsquo;", "'");
-                rss = rss.replaceAll("&ldquo;", "\"");
-                rss = rss.replaceAll("&rdquo;", "\"");
-                rss = rss.replaceAll("&hellip;", "...");
-                rss = rss.replaceAll("&mdash;", "-");
-                rss = rss.replaceAll("&ndash;", "-");
-                rss = rss.replaceAll("&eacute;", "é");
-                rss = rss.replaceAll("&oacute;", "ó");
-                rss = rss.replaceAll("&iacute;", "í");
-                rss = rss.replaceAll("&aacute;", "á");
-                rss = rss.replaceAll("&uacute;", "ú");
-                rss = rss.replaceAll("&ntilde;", "ñ");
-                rss = rss.replaceAll("&uuml;", "ü");
-                rss = rss.replaceAll("&ouml;", "ö");
-                rss = rss.replaceAll("&szlig;", "ß");
-                rss = rss.replaceAll("&Auml;", "Ä");
-                rss = rss.replaceAll("&Ouml;", "Ö");
-                rss = rss.replaceAll("&Uuml;", "Ü");
-                rss = rss.replaceAll("&euro;", "€");
-                rss = rss.replaceAll("&copy;", "©");
-                rss = rss.replaceAll("&reg;", "®");
-                rss = rss.replaceAll("&trade;", "™");
-                rss = rss.replaceAll("&cent;", "¢");
-                rss = rss.replaceAll("&pound;", "£");
-                rss = rss.replaceAll("&yen;", "¥");
-                rss = rss.replaceAll("&sect;", "§");
-                rss = rss.replaceAll("&deg;", "°");
-                rss = rss.replaceAll("&plusmn;", "±");
-                rss = rss.replaceAll("&sup2;", "²");
-                rss = rss.replaceAll("&sup3;", "³");
-                rss = rss.replaceAll("&frac14;", "¼");
-                rss = rss.replaceAll("&frac12;", "½");
-                rss = rss.replaceAll("&frac34;", "¾");
-                rss = rss.replaceAll("&times;", "×");
-                rss = rss.replaceAll("&divide;", "÷");
-                rss = rss.replaceAll("&micro;", "µ");
-                rss = rss.replaceAll("&middot;", "·");
-                rss = rss.replaceAll("&bull;", "•");
-                rss = rss.replaceAll("&hellip;", "…");
-                rss = rss.replaceAll("&prime;", "′");
-                rss = rss.replaceAll("&Prime;", "″");
-                rss = rss.replaceAll("&oline;", "‾");
-                rss = rss.replaceAll("&frasl;", "⁄");
-                rss = rss.replaceAll("&weierp;", "℘");
-                rss = rss.replaceAll("&image;", "ℑ");
-                rss = rss.replaceAll("&real;", "ℜ");
-                rss = rss.replaceAll("&trade;", "™");
-                rss = rss.replaceAll("&alefsym;", "ℵ");
-                rss = rss.replaceAll("&larr;", "←");
-                rss = rss.replaceAll("&uarr;", "↑");
-                rss = rss.replaceAll("&rarr;", "→");
-                rss = rss.replaceAll("&darr;", "↓");
-                rss = rss.replaceAll("&harr;", "↔");
-                rss = rss.replaceAll("&crarr;", "↵");
-                rss = rss.replaceAll("&lArr;", "⇐");
-                rss = rss.replaceAll("&uArr;", "⇑");
-                rss = rss.replaceAll("&rArr;", "⇒");
-                rss = rss.replaceAll("&dArr;", "⇓");
-                rss = rss.replaceAll("&hArr;", "⇔");
-                rss = rss.replaceAll("&forall;", "∀");
-                rss = rss.replaceAll("&part;", "∂");
-                rss = rss.replaceAll("&exist;", "∃");
-                rss = rss.replaceAll("&empty;", "∅");
-                rss = rss.replaceAll("&nabla;", "∇");
-                rss = rss.replaceAll("&isin;", "∈");
-                rss = rss.replaceAll("&notin;", "∉");
-                rss = rss.replaceAll("&ni;", "∋");
-                rss = rss.replaceAll("&prod;", "∏");
-                rss = rss.replaceAll("&sum;", "∑");
-                rss = rss.replaceAll("&minus;", "−");
-                rss = rss.replaceAll("&lowast;", "∗");
-                rss = rss.replaceAll("&radic;", "√");
-                rss = rss.replaceAll("&prop;", "∝");
-                rss = rss.replaceAll("&infin;", "∞");
-                rss = rss.replaceAll("&ang;", "∠");
-                rss = rss.replaceAll("&and;", "∧");
-                rss = rss.replaceAll("&or;", "∨");
-                rss = rss.replaceAll("&cap;", "∩");
-                rss = rss.replaceAll("&cup;", "∪");
-                rss = rss.replaceAll("&int;", "∫");
-                rss = rss.replaceAll("&there4;", "∴");
-                rss = rss.replaceAll("&sim;", "∼");
-                rss = rss.replaceAll("&cong;", "≅");
-                rss = rss.replaceAll("&asymp;", "≈");
-                rss = rss.replaceAll("&ne;", "≠");
-                rss = rss.replaceAll("&equiv;", "≡");
-                rss = rss.replaceAll("&le;", "≤");
-                rss = rss.replaceAll("&ge;", "≥");
-                rss = rss.replaceAll("&sub;", "⊂");
-                rss = rss.replaceAll("&sup;", "⊃");
-                rss = rss.replaceAll("&nsub;", "⊄");
-                rss = rss.replaceAll("&sube;", "⊆");
-                rss = rss.replaceAll("&supe;", "⊇");
-                rss = rss.replaceAll("&oplus;", "⊕");
-                rss = rss.replaceAll("&otimes;", "⊗");
-                rss = rss.replaceAll("&perp;", "⊥");
-                rss = rss.replaceAll("&sdot;", "⋅");
-                rss = rss.replaceAll("&lceil;", "⌈");
-                rss = rss.replaceAll("&rceil;", "⌉");
-                rss = rss.replaceAll("&lfloor;", "⌊");
-                rss = rss.replaceAll("&rfloor;", "⌋");
-                rss = rss.replaceAll("&lang;", "〈");
-                rss = rss.replaceAll("&rang;", "〉");
-                rss = rss.replaceAll("&loz;", "◊");
-                rss = rss.replaceAll("&spades;", "♠");
-                rss = rss.replaceAll("&clubs;", "♣");
-                rss = rss.replaceAll("&hearts;", "♥");
-                rss = rss.replaceAll("&diams;", "♦");
-                rss = rss.replaceAll("&OElig;", "Œ");
-                rss = rss.replaceAll("&oelig;", "œ");
-                rss = rss.replaceAll("&Scaron;", "Š");
-                rss = rss.replaceAll("&scaron;", "š");
+            // remove htl tags
+            text = text.replaceAll("\\<.*?>", "");
 
-                // Optional[
-                rss = rss.replaceAll("Optional", "");
+            // get the version number "VERSION 3.*"
+            Version = text.substring(text.indexOf("VERSION"), text.indexOf("VERSION") + 27);
 
-                // ]Optional[
+            // get 4 Characters after "Database Reset:"
+            DatabaseReset = text.substring(text.indexOf("Database Reset:") + 15, text.indexOf("Database Reset:") + 19);
 
-                // replace [ with nothing
-                rss = rss.replaceAll("\\[", "");
-                // replace ] with nothing
-                rss = rss.replaceAll("\\]", "");
+            // remove all after "Feature Updates"
+            text = text.substring(0, text.indexOf("Feature Updates"));
 
+            // remove all bevore "Known Issues"
+            text = text.substring(text.indexOf("Known Issues"));
 
-                rss = rss.replaceAll("Originally posted by", "");
-                //rss = rss.replaceAll("\n\n", "");
-
-            }
-
-            NachrichtenReaction.RSSNews = rss;
+            NachrichtenReaction.RSSNews = "\nStar Citizen Alpha " + Version.replace("VERSION", "") + "\n\n"
+                    + "Database Reset: " + DatabaseReset + "\n\n" + text;
 
         }
 
