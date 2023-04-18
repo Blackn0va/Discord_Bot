@@ -139,12 +139,12 @@ public class Main {
         bauplan.addEventListener(new GiveRole());
 
         // Timer starten (alle 24h News osten)
-        //NewsTimer.Starten();
+        NewsTimer.Starten();
 
         // warten bis API bereit ist
         bauplan.awaitReady();
 
-        //rssNews.getNews();
+        rssNews.getNews();
 
     }
 

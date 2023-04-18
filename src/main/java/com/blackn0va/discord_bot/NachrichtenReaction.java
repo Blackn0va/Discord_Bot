@@ -25,20 +25,18 @@ public class NachrichtenReaction extends ListenerAdapter {
             } else { // wenn der Chat ein Admin ist
                 if (ereignis.getChannel().getId().equals(Main.GPTChannelID)) {
 
-                    // if content do not start with ! then send message
+                    // if content do not start with ! then send message ignore Case sensitive
                     if (!ereignis.getMessage().getContentStripped().startsWith("!")) {
                         openai.getAnswer(ereignis.getMessage().toString());
 
                         // openai.getAnswer(ereignis.getMessage().toString());
                         if (answer.contains("You exceeded your current quota")) {
-                            //answer = "Ich habe keine Antwort gefunden";
+                            // answer = "Ich habe keine Antwort gefunden";
+                        } else {
+                            ereignis.getChannel().sendTyping().queue();
+                            ereignis.getChannel().sendMessage(answer + ereignis.getAuthor().getAsMention()).queue();
                         }
-                        else
-                        {
-                         ereignis.getChannel().sendTyping().queue();
-                        ereignis.getChannel().sendMessage(answer + ereignis.getAuthor().getAsMention()).queue();
-                        }
-                    }                  
+                    }
 
                     // rssNews.getNews();
                     // ereignis.getChannel().sendMessage(RSSNews +
@@ -58,7 +56,7 @@ public class NachrichtenReaction extends ListenerAdapter {
                                 .queue();
                         // change status from bauplan and stream twitch
                         ereignis.getJDA().getPresence().setActivity(
-                                Activity.streaming("Stream", ereignis.getMessage().getContentStripped().substring(8)));
+                                Activity.streaming("stream", ereignis.getMessage().getContentStripped().substring(8)));
 
                     } else if (ereignis.getMessage().getContentStripped().startsWith("!play")) {
                         // Reaktion hinzufügen
@@ -73,7 +71,7 @@ public class NachrichtenReaction extends ListenerAdapter {
                         ereignis.getChannel().sendTyping().queue();
                         ereignis.getChannel().sendMessage("@everyone " + regeln).queue();
 
-                    } else if (ereignis.getMessage().getContentStripped().startsWith("!News")) {
+                    } else if (ereignis.getMessage().getContentStripped().startsWith("!news")) {
                         // Nachricht senden
                         rssNews.getNews();
                         if (RSSNews == null) {
@@ -84,14 +82,29 @@ public class NachrichtenReaction extends ListenerAdapter {
 
                         ereignis.getChannel().sendMessage("@everyone " + RSSNews).queue();
 
-                    } else if (ereignis.getMessage().getContentStripped().startsWith("!status")) {
+                    } else if (ereignis.getMessage().getContentStripped().startsWith("!news")) {
+                        // Nachricht senden
+                        rssNews.getNews();
+                        if (RSSNews == null) {
+                            ereignis.getChannel().sendTyping().queue();
+                            ereignis.getChannel().sendMessage("Keine News").queue();
+                        } else
+                            ereignis.getChannel().sendTyping().queue();
+
+                        ereignis.getChannel().sendMessage("@everyone " + RSSNews).queue();
+
+                    } else if (ereignis.getMessage().getContentStripped().startsWith("!commands")) {
                         // Nachricht löschen
                         ereignis.getMessage().delete().queue();
                         ereignis.getChannel().sendTyping().queue();
 
-                        // change status from bauplan and stream twitch
-                        ereignis.getJDA().getPresence().setActivity(
-                                Activity.playing(ereignis.getMessage().getContentStripped().substring(8)));
+                        // Nachricht senden
+                        ereignis.getChannel()
+                                .sendMessage("!say Hallo \n" + "!stream Twitch Link \n"
+                                        + "!play Link Spotify \n"
+                                        + "!regeln \n" + "!news \n" + "!commands \n"
+                                        + ereignis.getAuthor().getAsMention())
+                                .queue();
 
                     } else if (ereignis.getMessage().getContentStripped().equals("hallo")) {
                         try {

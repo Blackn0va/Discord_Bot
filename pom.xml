@@ -43,7 +43,7 @@
             <groupId>net.dv8tion</groupId>
             <artifactId>JDA</artifactId>
             <version>5.0.0-beta.6</version>
-        </dependency>
+        </dependency>       
     <dependency>
     <groupId>com.theokanning.openai-gpt3-java</groupId>
     <artifactId>service</artifactId>

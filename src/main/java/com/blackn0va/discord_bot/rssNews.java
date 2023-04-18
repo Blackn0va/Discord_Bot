@@ -1,9 +1,11 @@
 package com.blackn0va.discord_bot;
 
+ 
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-
+ 
+ 
 
 public class rssNews {
 
@@ -34,6 +36,8 @@ public class rssNews {
 
             // remove all bevore "Known Issues"
             text = text.substring(text.indexOf("Known Issues"));
+
+
 
             NachrichtenReaction.RSSNews = "\nStar Citizen Alpha " + Version.replace("VERSION", "") + "\n\n"
                     + "Database Reset: " + DatabaseReset + "\n\n" + text;
