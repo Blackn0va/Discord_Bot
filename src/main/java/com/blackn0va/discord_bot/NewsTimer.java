@@ -13,7 +13,7 @@ public class NewsTimer {
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    rssNews.getNews();
+                    rssNews.getPatchNotes();
                 }
             }, 0, 21600000);
 

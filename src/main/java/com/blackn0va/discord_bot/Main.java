@@ -10,7 +10,9 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Map;
 
+import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -124,27 +126,36 @@ public class Main {
 
         // JDA bauplan = JDABuilder.createDefault(token).build();
         bauplan = JDABuilder.createDefault(token)
-                .enableIntents(GatewayIntent.GUILD_MEMBERS, GatewayIntent.DIRECT_MESSAGE_REACTIONS,
+                 .enableIntents(GatewayIntent.GUILD_MEMBERS, GatewayIntent.DIRECT_MESSAGE_REACTIONS,
                         GatewayIntent.GUILD_EMOJIS_AND_STICKERS, GatewayIntent.MESSAGE_CONTENT,
                         GatewayIntent.GUILD_MESSAGES, GatewayIntent.DIRECT_MESSAGES,
-                        GatewayIntent.DIRECT_MESSAGE_TYPING, GatewayIntent.GUILD_WEBHOOKS)
-                .build();
+                        GatewayIntent.DIRECT_MESSAGE_TYPING, GatewayIntent.GUILD_WEBHOOKS, GatewayIntent.GUILD_VOICE_STATES)
+                 .build();
+
+
+
+
 
         bauplan.awaitReady();
         bauplan.getPresence().setStatus(OnlineStatus.ONLINE);
         bauplan.getPresence().setActivity(Activity.playing(status));
 
+
+        
+
+
+
         // Listener starten
         bauplan.addEventListener(new NachrichtenReaction());
         bauplan.addEventListener(new GiveRole());
-
+  
         // Timer starten (alle 24h News osten)
-        NewsTimer.Starten();
+        //NewsTimer.Starten();
 
         // warten bis API bereit ist
-        bauplan.awaitReady();
+       bauplan.awaitReady();
 
-        rssNews.getNews();
+        //rssNews.getPatchNotes();
 
     }
 
