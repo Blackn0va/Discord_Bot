@@ -155,7 +155,7 @@ public class Main {
         // warten bis API bereit ist
        bauplan.awaitReady();
 
-        //rssNews.getPatchNotes();
+       //NewsTimer.Starten();
 
     }
 

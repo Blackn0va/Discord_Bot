@@ -19,11 +19,7 @@ public class NachrichtenReaction extends ListenerAdapter {
 @Override
 public void onReady(ReadyEvent event) {
     System.out.println("Bot ist bereit");
-    System.out.println("Bot ist bereit");
-    System.out.println("Bot ist bereit");
-    System.out.println("Bot ist bereit");
-    System.out.println("Bot ist bereit");
-    System.out.println("Bot ist bereit");
+ 
 
 }
 
@@ -79,18 +75,6 @@ public void onReady(ReadyEvent event) {
                          
 
 
-
-
-
-
-
-
-
-
-
-
-
-                
                         
                         
                          } else if (ereignis.getMessage().getContentStripped().startsWith("!regeln")) {
