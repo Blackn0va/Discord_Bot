@@ -46,10 +46,9 @@ public void onReady(ReadyEvent event) {
                         }
                     }
 
-                    // rssNews.getNews();
-                    // ereignis.getChannel().sendMessage(RSSNews +
-                    // ereignis.getAuthor().getAsMention()).queue();
                 }
+
+                //Admin commands
                 if (ereignis.getMember().getRoles()
                         .contains(ereignis.getGuild().getRolesByName("Admin", true).get(0))) {
                     if (ereignis.getMessage().getContentStripped().startsWith("!say")) {
@@ -66,69 +65,61 @@ public void onReady(ReadyEvent event) {
                         ereignis.getJDA().getPresence().setActivity(
                                 Activity.streaming("stream", ereignis.getMessage().getContentStripped().substring(8)));
 
+
+
+                                //
                     } else if (ereignis.getMessage().getContentStripped().startsWith("!play")) {
                         // Reaktion hinzufügen
                         ereignis.getMessage().addReaction(Emoji.fromUnicode("\uD83E\uDD73")).queue();
-
-                        
-                         //STream Audio with Lavaplayer and JDA
-                         
-
-
-                        
-                        
+                                    
                          } else if (ereignis.getMessage().getContentStripped().startsWith("!regeln")) {
                         ereignis.getMessage().delete().queue();
                         // Nachricht senden
                         ereignis.getChannel().sendTyping().queue();
                         ereignis.getChannel().sendMessage("@everyone " + regeln).queue();
 
-                    } else if (ereignis.getMessage().getContentStripped().startsWith("!news")) {
-                        // Nachricht senden
+                    }  
+
+                    //if user is a member of scnews
+                } else if (ereignis.getMember().getRoles()
+                .contains(ereignis.getGuild().getRolesByName("scnews", true).get(0))) {
+
+
+                    if (ereignis.getMessage().getContentStripped().startsWith("!news")) {
                         rssNews.getPatchNotes();
                         if (RSSNews == null) {
                             ereignis.getChannel().sendTyping().queue();
                             ereignis.getChannel().sendMessage("Keine News").queue();
                         } else
                             ereignis.getChannel().sendTyping().queue();
-
-                        ereignis.getChannel().sendMessage("@everyone " + RSSNews).queue();
-
-                    }  else if (ereignis.getMessage().getContentStripped().startsWith("!commands")) {
-                        // Nachricht löschen
-                        ereignis.getMessage().delete().queue();
-                        ereignis.getChannel().sendTyping().queue();
-
-                        // Nachricht senden
-                        ereignis.getChannel()
-                                .sendMessage("!say Hallo \n" + "!stream Twitch Link \n"
-                                        + "!play Link Spotify \n"
-                                        + "!regeln \n" + "!news \n" + "!commands \n"
-                                        + ereignis.getAuthor().getAsMention())
-                                .queue();
-
-                                // send message in channelid 1099111135896162425
-                                // 
-
-
-                    } else if (ereignis.getMessage().getContentStripped().equals("hallo")) {
-                        try {
-                            // Reaktion hinzufügen
-                            ereignis.getMessage()
-                                    .addReaction(Emoji
-                                            .fromUnicode("\uD83D\uDE00"))
-                                    .queue();
-
-                            ereignis.getChannel().sendTyping().queue();
-                            ereignis.getChannel().sendMessage("Hallo " + ereignis.getAuthor().getAsMention()).queue();
-
-                            return;
-                        } catch (Exception e) {
-                            System.out.println("Fehler beim Reagieren auf die Nachricht");
-                        }
-
+                        Main.bauplan.getTextChannelById("1099111135896162425")
+                        .sendMessage("@scnews " + RSSNews)
+                        .queue();
                     }
+
+                } else if (ereignis.getMessage().getContentStripped().startsWith("!commands")) {
+                    // Nachricht löschen
+                    ereignis.getMessage().delete().queue();
+                    ereignis.getChannel().sendTyping().queue();
+
+                    // Nachricht senden
+                    ereignis.getChannel()
+                            .sendMessage("!say Hallo \n" + "!stream Twitch Link \n"
+                                    + "!play Link Spotify \n"
+                                    + "!regeln \n" + "!news \n" + "!commands \n"
+                                    + ereignis.getAuthor().getAsMention())
+                            .queue();
+
+                            // send message in channelid 1099111135896162425
+                            // 
+
+
                 }
+
+
+
+
+
             }
         }
 

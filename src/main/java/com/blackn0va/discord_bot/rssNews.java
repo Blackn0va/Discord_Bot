@@ -108,7 +108,7 @@ public class rssNews {
                                                         new FileWriter(System.getProperty("user.home")
                                                                         + "/Desktop/link.txt"))) {
                                                 Main.bauplan.getTextChannelById("1099111135896162425")
-                                                                .sendMessage("@everyone " + NachrichtenReaction.RSSNews)
+                                                                .sendMessage("@scnews " + NachrichtenReaction.RSSNews)
                                                                 .queue();
 
                                                 NachrichtenReaction.RSSNews = "";
@@ -120,7 +120,7 @@ public class rssNews {
                                         new File("/root/link.txt").createNewFile();
                                         try (BufferedWriter bw = new BufferedWriter(new FileWriter("/root/link.txt"))) {
                                                 Main.bauplan.getTextChannelById("1099111135896162425")
-                                                                .sendMessage("@everyone " + NachrichtenReaction.RSSNews)
+                                                                .sendMessage("@scnews " + NachrichtenReaction.RSSNews)
                                                                 .queue();
 
                                                 NachrichtenReaction.RSSNews = "";
@@ -138,7 +138,7 @@ public class rssNews {
                                         }
                                         try (BufferedWriter bw = new BufferedWriter(new FileWriter("/root/link.txt"))) {
                                                 Main.bauplan.getTextChannelById("1099111135896162425")
-                                                                .sendMessage("@everyone " + NachrichtenReaction.RSSNews)
+                                                                .sendMessage("@scnews " + NachrichtenReaction.RSSNews)
                                                                 .queue();
 
                                                 NachrichtenReaction.RSSNews = "";

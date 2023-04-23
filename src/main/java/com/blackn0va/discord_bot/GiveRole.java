@@ -57,6 +57,19 @@ public class GiveRole extends ListenerAdapter {
                             }
 
                         }
+                    } else if (ereignis.getReaction().getEmoji().getName().equals("🤖")) {
+                        if (!ereignis.getMember().getRoles()
+                                .contains(ereignis.getGuild().getRolesByName("scnews", true).get(0))) {
+                            try {
+                                ereignis.getGuild().addRoleToMember(ereignis.getMember(),
+                                        ereignis.getGuild().getRolesByName("scnews", true).get(0)).queue();
+                                System.out.println(ereignis.getUserId() + " wurde die Rolle scnews erteilt!");
+                            } catch (Exception e) {
+                                System.out.println("Die Berechtigung konnte nicht erteilt werden! \n" + e.toString());
+                            }
+
+                        }         
+
                     }
 
                 }
@@ -94,6 +107,18 @@ public class GiveRole extends ListenerAdapter {
                                         member.getGuild().getRolesByName("openai", true).get(0)).queue();
                             });
                             System.out.println(ereignis.getUserId() + " wurde die Rolle openai entfernt!");
+                        } catch (Exception e) {
+                            System.out.println("Fehler beim entfernen der Rolle! \n" + e.toString());
+                        }
+
+                    } else if (ereignis.getReaction().getEmoji().getName().equals("🤖")) {
+                        try {
+                            ereignis.retrieveMember().queue(member -> {
+                                // remove role
+                                member.getGuild().removeRoleFromMember(member,
+                                        member.getGuild().getRolesByName("scnews", true).get(0)).queue();
+                            });
+                            System.out.println(ereignis.getUserId() + " wurde die Rolle scnews entfernt!");
                         } catch (Exception e) {
                             System.out.println("Fehler beim entfernen der Rolle! \n" + e.toString());
                         }
