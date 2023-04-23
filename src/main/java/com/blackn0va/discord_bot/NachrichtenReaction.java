@@ -107,6 +107,10 @@ public void onReady(ReadyEvent event) {
                                         + ereignis.getAuthor().getAsMention())
                                 .queue();
 
+                                // send message in channelid 1099111135896162425
+                                // 
+
+
                     } else if (ereignis.getMessage().getContentStripped().equals("hallo")) {
                         try {
                             // Reaktion hinzufügen

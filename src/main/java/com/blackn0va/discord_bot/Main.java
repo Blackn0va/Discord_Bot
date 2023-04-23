@@ -10,9 +10,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Map;
 
-import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -132,30 +130,23 @@ public class Main {
                         GatewayIntent.DIRECT_MESSAGE_TYPING, GatewayIntent.GUILD_WEBHOOKS, GatewayIntent.GUILD_VOICE_STATES)
                  .build();
 
-
-
-
-
-        bauplan.awaitReady();
         bauplan.getPresence().setStatus(OnlineStatus.ONLINE);
         bauplan.getPresence().setActivity(Activity.playing(status));
 
 
         
-
+        bauplan.awaitReady();
 
 
         // Listener starten
         bauplan.addEventListener(new NachrichtenReaction());
         bauplan.addEventListener(new GiveRole());
-  
-        // Timer starten (alle 24h News osten)
-        //NewsTimer.Starten();
 
-        // warten bis API bereit ist
-       bauplan.awaitReady();
+    
 
-       //NewsTimer.Starten();
+       NewsTimer.Starten();
+
+       //rssNews.getPatchNotes();
 
     }
 
