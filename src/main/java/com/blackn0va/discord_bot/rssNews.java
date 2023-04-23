@@ -36,8 +36,6 @@ public class rssNews {
                         // System.out.println("https://robertsspaceindustries.com" + link); // Print
                         // link
 
-                        CheckandSaveLink("https://robertsspaceindustries.com" + link);
-
                         // get the text from the post
                         Document doc3 = Jsoup.connect("https://robertsspaceindustries.com" + link)
                                         .get();
@@ -69,6 +67,7 @@ public class rssNews {
                         NachrichtenReaction.RSSNews = NachrichtenReaction.RSSNews + "\n\n" + "Last Update: "
                                         + timestamp;
 
+                        CheckandSaveLink("https://robertsspaceindustries.com" + link);
                         // post message to channel
 
                 } catch (Exception e) {
