@@ -134,6 +134,8 @@ public class Main {
         bauplan.getPresence().setActivity(Activity.playing(status));
 
 
+
+
         
         bauplan.awaitReady();
 
@@ -144,9 +146,10 @@ public class Main {
 
     
 
-       NewsTimer.Starten();
+        NewsTimer.Starten();
 
        //rssNews.getPatchNotes();
+       //statusfeed.getStatus();
 
     }
 

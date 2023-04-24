@@ -19,8 +19,7 @@ public class rssNews {
                 try {
                         String Version = "";
                         String Live = "";
-                        String os = System.getProperty("os.name").toLowerCase();
-
+ 
                         // create timestamp now
                         String timestamp = new java.util.Date().toString();
 
