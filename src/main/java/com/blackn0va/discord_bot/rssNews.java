@@ -130,7 +130,7 @@ public class rssNews {
                                                 String line;
                                                 while ((line = br.readLine()) != null) {
                                                         if (line.equals(link)) {
-                                                                System.out.println("line is in file");
+                                                                System.out.println("Keine neuen Patchenotes");
                                                                 return;
                                                         }
                                                 }

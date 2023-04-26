@@ -131,22 +131,26 @@ public class Main {
                  .build();
 
         bauplan.getPresence().setStatus(OnlineStatus.ONLINE);
-        bauplan.getPresence().setActivity(Activity.playing(status));
+        //bauplan.getPresence().setActivity(Activity.playing(status));
+
+
 
 
 
 
         
-        bauplan.awaitReady();
+         bauplan.awaitReady();
 
 
         // Listener starten
         bauplan.addEventListener(new NachrichtenReaction());
-        bauplan.addEventListener(new GiveRole());
+         bauplan.addEventListener(new GiveRole());
 
     
 
-        NewsTimer.Starten();
+         NewsTimer.Starten();
+
+         statusfeed.getStatus();
 
        //rssNews.getPatchNotes();
        //statusfeed.getStatus();

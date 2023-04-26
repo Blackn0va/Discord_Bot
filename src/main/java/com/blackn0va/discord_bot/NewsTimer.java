@@ -8,15 +8,20 @@ public class NewsTimer {
     public static void Starten() {
 
         try {
-            // make a timer all 6 Hours if it tiks, then get the news 21600000
+            // make a timer all 1 Hours if it tiks, then get the news
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    rssNews.getPatchNotes();
-
+                    try {
+                        rssNews.getPatchNotes();
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
                 }
-            }, 0, 21600000);
+            }, 0, 3600000);
+
+ 
 
         } catch (Exception e) {
             System.out.println(e);

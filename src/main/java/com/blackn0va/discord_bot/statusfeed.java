@@ -1,14 +1,9 @@
 package com.blackn0va.discord_bot;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+
+import net.dv8tion.jda.api.entities.Activity;
 
 public class statusfeed {
 
@@ -17,30 +12,51 @@ public class statusfeed {
         try {
             String Platform = "";
             String Persistent = "";
-            String Electronic = System.getProperty("os.name").toLowerCase();
-
-            // create timestamp now
-            String timestamp = new java.util.Date().toString();
+            String Electronic = "";
 
             Document doc = Jsoup.connect("https://status.robertsspaceindustries.com/")
                     .get();
 
             // get the first flex flex-row justify-between operational from doc
             Platform = doc.select("div.flex.flex-row.justify-between.operational").first().text();
+            if (Platform.contains("Operational")) {
+                Platform = "Platform: Operational :white_check_mark:";
 
+            } else {
+                Platform = "Platform: Degraded Performance :x:";
+
+            }
             // get the second flex flex-row justify-between operational from doc
             Persistent = doc.select("div.flex.flex-row.justify-between.operational").get(1).text();
+            if (Persistent.contains("Operational")) {
+                Persistent = "Persistent: Operational :white_check_mark:";
+
+            } else {
+                Persistent = "Persistent: Degraded Performance :x:";
+
+            }
 
             // get the third flex flex-row justify-between operational from doc
             Electronic = doc.select("div.flex.flex-row.justify-between.operational").get(2).text();
+            if (Electronic.contains("Operational")) {
+                Electronic = "Electronic Access: Operational :white_check_mark:";
 
-            System.out.println(Platform); // Print Platform
-            System.out.println(Persistent); // Print Persistent
-            System.out.println(Electronic); // Print Electronic
+            } else {
+                Electronic = "Electronic Access: Degraded Performance :x:";
+
+            }
+
+            NachrichtenReaction.Status = "\n" + Platform + "\n" + Persistent + "\n" + Electronic;
+
+            // Main.bauplan.getTextChannelById("1099111135896162425")
+            // .sendMessage("@scnews " + NachrichtenReaction.Status)
+            // .queue();
+
+            // set info for the bot
+            //Main.bauplan.getPresence().setActivity(Activity.playing(Persistent).asRichPresence());
+            //Main.bauplan.getPresence().setPresence(Activity.playing(Persistent), true);
 
 
- 
-            
         } catch (Exception e) {
         }
 
