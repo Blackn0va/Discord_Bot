@@ -11,7 +11,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -124,36 +123,32 @@ public class Main {
 
         // JDA bauplan = JDABuilder.createDefault(token).build();
         bauplan = JDABuilder.createDefault(token)
-                 .enableIntents(GatewayIntent.GUILD_MEMBERS, GatewayIntent.DIRECT_MESSAGE_REACTIONS,
+                .enableIntents(GatewayIntent.GUILD_MEMBERS, GatewayIntent.DIRECT_MESSAGE_REACTIONS,
                         GatewayIntent.GUILD_EMOJIS_AND_STICKERS, GatewayIntent.MESSAGE_CONTENT,
                         GatewayIntent.GUILD_MESSAGES, GatewayIntent.DIRECT_MESSAGES,
-                        GatewayIntent.DIRECT_MESSAGE_TYPING, GatewayIntent.GUILD_WEBHOOKS, GatewayIntent.GUILD_VOICE_STATES)
-                 .build();
+                        GatewayIntent.DIRECT_MESSAGE_TYPING, GatewayIntent.GUILD_WEBHOOKS,
+                        GatewayIntent.GUILD_VOICE_STATES)
+                .build();
 
         bauplan.getPresence().setStatus(OnlineStatus.ONLINE);
-        //bauplan.getPresence().setActivity(Activity.playing(status));
-
-
-
-
-
-
-        
-         bauplan.awaitReady();
-
+ 
+        //
+        bauplan.awaitReady();
 
         // Listener starten
         bauplan.addEventListener(new NachrichtenReaction());
-         bauplan.addEventListener(new GiveRole());
+        bauplan.addEventListener(new GiveRole());
 
-    
+        //start Timer for News and Status
+        rssNews.startTimer();
+        statusfeed.startTimer();
 
-         NewsTimer.Starten();
+        //initial Status
+        statusfeed.getStatus();
 
-         statusfeed.getStatus();
+        //initial News
+        rssNews.getPatchNotes();
 
-       //rssNews.getPatchNotes();
-       //statusfeed.getStatus();
 
     }
 

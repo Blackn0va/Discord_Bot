@@ -12,14 +12,14 @@ import org.jsoup.nodes.Document;
 
 public class rssNews {
 
-        public static String link = "";
+        public static String Version = "";
 
         public static void getPatchNotes() {
 
                 try {
                         String Version = "";
                         String Live = "";
- 
+
                         // create timestamp now
                         String timestamp = new java.util.Date().toString();
 
@@ -27,16 +27,10 @@ public class rssNews {
                                         .get();
 
                         // get the link from post where "Star Citizen Alpha 3.18.1" or greater
-                        link = doc2.select("a[href*=Star-Citizen-Alpha-3]").first().attr("href");
-
-                        // Save link
-
-                        // https://robertsspaceindustries.com/comm-link//19258-Star-Citizen-Alpha-3182
-                        // System.out.println("https://robertsspaceindustries.com" + link); // Print
-                        // link
+                        Version = doc2.select("a[href*=Star-Citizen-Alpha-3]").first().attr("href");
 
                         // get the text from the post
-                        Document doc3 = Jsoup.connect("https://robertsspaceindustries.com" + link)
+                        Document doc3 = Jsoup.connect("https://robertsspaceindustries.com" + Version)
                                         .get();
 
                         // get the text from div.content and remove the html tags
@@ -66,7 +60,7 @@ public class rssNews {
                         NachrichtenReaction.RSSNews = NachrichtenReaction.RSSNews + "\n\n" + "Last Update: "
                                         + timestamp;
 
-                        CheckandSaveLink("https://robertsspaceindustries.com" + link);
+                        CheckandSaveLink(Version + "LIVE" + Live);
                         // post message to channel
 
                 } catch (Exception e) {
@@ -77,71 +71,75 @@ public class rssNews {
 
         }
 
-        public static void CheckandSaveLink(String link) throws IOException {
+        public static void CheckandSaveLink(String Version) throws IOException {
                 // read file from desktop /link.txt on linux /root/link.txt
                 try {
                         String os = System.getProperty("os.name").toLowerCase();
                         // if link is in file ignore it, when link is not ini fil ewrite it
                         if (os.contains("win")) {
-                                if (!new File(System.getProperty("user.home") + "/Desktop/link.txt").exists()) {
-                                        new File(System.getProperty("user.home") + "/Desktop/link.txt").createNewFile();
+                                if (!new File(System.getProperty("user.home") + "/Desktop/version.txt").exists()) {
+                                        new File(System.getProperty("user.home") + "/Desktop/version.txt")
+                                                        .createNewFile();
                                         try (BufferedWriter bw = new BufferedWriter(
                                                         new FileWriter(System.getProperty("user.home")
-                                                                        + "/Desktop/link.txt"))) {
-                                                bw.write(link);
+                                                                        + "/Desktop/version.txt"))) {
+                                                bw.write(Version);
 
                                         }
                                 } else {
                                         try (BufferedReader br = new BufferedReader(
                                                         new FileReader(System.getProperty("user.home")
-                                                                        + "/Desktop/link.txt"))) {
+                                                                        + "/Desktop/version.txt"))) {
                                                 String line;
                                                 while ((line = br.readLine()) != null) {
-                                                        if (line.equals(link)) {
-                                                                System.out.println("line is in file");
+                                                        if (line.equals(Version)) {
+                                                                System.out.println("Version is in file");
                                                                 return;
                                                         }
                                                 }
                                         }
                                         try (BufferedWriter bw = new BufferedWriter(
                                                         new FileWriter(System.getProperty("user.home")
-                                                                        + "/Desktop/link.txt"))) {
+                                                                        + "/Desktop/version.txt"))) {
                                                 Main.bauplan.getTextChannelById("1099111135896162425")
                                                                 .sendMessage("@scnews " + NachrichtenReaction.RSSNews)
                                                                 .queue();
 
                                                 NachrichtenReaction.RSSNews = "";
-                                                bw.write(link);
+                                                bw.write(Version);
                                         }
                                 }
                         } else {
-                                if (!new File("/root/link.txt").exists()) {
-                                        new File("/root/link.txt").createNewFile();
-                                        try (BufferedWriter bw = new BufferedWriter(new FileWriter("/root/link.txt"))) {
+                                if (!new File("/root/version.txt").exists()) {
+                                        new File("/root/version.txt").createNewFile();
+                                        try (BufferedWriter bw = new BufferedWriter(
+                                                        new FileWriter("/root/version.txt"))) {
                                                 Main.bauplan.getTextChannelById("1099111135896162425")
                                                                 .sendMessage("@scnews " + NachrichtenReaction.RSSNews)
                                                                 .queue();
 
                                                 NachrichtenReaction.RSSNews = "";
-                                                bw.write(link);
+                                                bw.write(Version);
                                         }
                                 } else {
-                                        try (BufferedReader br = new BufferedReader(new FileReader("/root/link.txt"))) {
+                                        try (BufferedReader br = new BufferedReader(
+                                                        new FileReader("/root/version.txt"))) {
                                                 String line;
                                                 while ((line = br.readLine()) != null) {
-                                                        if (line.equals(link)) {
+                                                        if (line.equals(Version)) {
                                                                 System.out.println("Keine neuen Patchenotes");
                                                                 return;
                                                         }
                                                 }
                                         }
-                                        try (BufferedWriter bw = new BufferedWriter(new FileWriter("/root/link.txt"))) {
+                                        try (BufferedWriter bw = new BufferedWriter(
+                                                        new FileWriter("/root/version.txt"))) {
                                                 Main.bauplan.getTextChannelById("1099111135896162425")
                                                                 .sendMessage("@scnews " + NachrichtenReaction.RSSNews)
                                                                 .queue();
 
                                                 NachrichtenReaction.RSSNews = "";
-                                                bw.write(link);
+                                                bw.write(Version);
                                         }
                                 }
                         }
@@ -151,5 +149,20 @@ public class rssNews {
                 }
 
         }
+
+
+            //async timer 1 hour tick 3600000
+    public static void startTimer() {
+        new java.util.Timer().schedule(
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        getPatchNotes();
+                        startTimer();
+                    }
+                },
+                3600000
+        );
+    }
 
 }

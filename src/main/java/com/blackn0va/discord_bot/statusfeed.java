@@ -47,14 +47,7 @@ public class statusfeed {
             }
 
             NachrichtenReaction.Status = "\n" + Platform + "\n" + Persistent + "\n" + Electronic;
-
-            // Main.bauplan.getTextChannelById("1099111135896162425")
-            // .sendMessage("@scnews " + NachrichtenReaction.Status)
-            // .queue();
-
-            // set info for the bot
-            //Main.bauplan.getPresence().setActivity(Activity.playing(Persistent).asRichPresence());
-            //Main.bauplan.getPresence().setPresence(Activity.playing(Persistent), true);
+            Main.bauplan.getPresence().setActivity(Activity.playing(Platform));
 
 
         } catch (Exception e) {
@@ -62,4 +55,26 @@ public class statusfeed {
 
     }
 
+    public static void test() {
+System.err.println("test");
+    }
+
+
+
+    //async timer 10 minutes tick 600000
+    public static void startTimer() {
+        new java.util.Timer().schedule(
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        getStatus();
+                        startTimer();
+                    }
+                },
+                600000
+        );
+    }
+
+
 }
+ 

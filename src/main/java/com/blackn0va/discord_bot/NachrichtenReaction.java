@@ -116,10 +116,6 @@ public void onReady(ReadyEvent event) {
                                     + ereignis.getAuthor().getAsMention())
                             .queue();
 
-                            // send message in channelid 1099111135896162425
-                            // 
-
-
                 }
 
 
