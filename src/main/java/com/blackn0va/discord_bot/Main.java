@@ -131,7 +131,7 @@ public class Main {
                 .build();
 
         bauplan.getPresence().setStatus(OnlineStatus.ONLINE);
- 
+
         //
         bauplan.awaitReady();
 
@@ -139,16 +139,16 @@ public class Main {
         bauplan.addEventListener(new NachrichtenReaction());
         bauplan.addEventListener(new GiveRole());
 
-        //start Timer for News and Status
+        // start Timer for News and Status
         rssNews.startTimer();
         statusfeed.startTimer();
 
-        //initial Status
+        // initial Status
         statusfeed.getStatus();
 
-        //initial News
+        // initial News
         rssNews.getPatchNotes();
-        //Translate.translate("test");
+        // Translate.translate("test");
 
     }
 

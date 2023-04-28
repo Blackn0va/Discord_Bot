@@ -68,7 +68,7 @@ public class GiveRole extends ListenerAdapter {
                                 System.out.println("Die Berechtigung konnte nicht erteilt werden! \n" + e.toString());
                             }
 
-                        }         
+                        }
 
                     }
 
@@ -81,54 +81,53 @@ public class GiveRole extends ListenerAdapter {
 
     @Override
     public void onMessageReactionRemove(MessageReactionRemoveEvent ereignis) {
-            // Wenn eine Reaktion aus dem Channel "Regeln" gibt
-            if (ereignis.getChannel().getId().equals(Main.ChannelID)) {
-                // if the reaction is on a Message with id "1090705151662247936"
-                if (ereignis.getMessageId().equals(Main.PostID)) {
-                    // Wenn die Reaktion "✅" ist
-                    if (ereignis.getReaction().getEmoji().getName().equals("✅")) {
-                        try {
-                            // retrieve
-                            ereignis.retrieveMember().queue(member -> {
-                                // remove role
-                                member.getGuild().removeRoleFromMember(member,
-                                        member.getGuild().getRolesByName("Member", true).get(0)).queue();
-                            });
-                            System.out.println(ereignis.getUserId() + " wurde die Rolle Member entfernt!");
-                        } catch (Exception e) {
-                            System.out.println("Fehler beim entfernen der Rolle! \n" + e.toString());
-                        }
+        // Wenn eine Reaktion aus dem Channel "Regeln" gibt
+        if (ereignis.getChannel().getId().equals(Main.ChannelID)) {
+            // if the reaction is on a Message with id "1090705151662247936"
+            if (ereignis.getMessageId().equals(Main.PostID)) {
+                // Wenn die Reaktion "✅" ist
+                if (ereignis.getReaction().getEmoji().getName().equals("✅")) {
+                    try {
+                        // retrieve
+                        ereignis.retrieveMember().queue(member -> {
+                            // remove role
+                            member.getGuild().removeRoleFromMember(member,
+                                    member.getGuild().getRolesByName("Member", true).get(0)).queue();
+                        });
+                        System.out.println(ereignis.getUserId() + " wurde die Rolle Member entfernt!");
+                    } catch (Exception e) {
+                        System.out.println("Fehler beim entfernen der Rolle! \n" + e.toString());
+                    }
 
-                    } else if (ereignis.getReaction().getEmoji().getName().equals("🤪")) {
-                        try {
-                            ereignis.retrieveMember().queue(member -> {
-                                // remove role
-                                member.getGuild().removeRoleFromMember(member,
-                                        member.getGuild().getRolesByName("openai", true).get(0)).queue();
-                            });
-                            System.out.println(ereignis.getUserId() + " wurde die Rolle openai entfernt!");
-                        } catch (Exception e) {
-                            System.out.println("Fehler beim entfernen der Rolle! \n" + e.toString());
-                        }
+                } else if (ereignis.getReaction().getEmoji().getName().equals("🤪")) {
+                    try {
+                        ereignis.retrieveMember().queue(member -> {
+                            // remove role
+                            member.getGuild().removeRoleFromMember(member,
+                                    member.getGuild().getRolesByName("openai", true).get(0)).queue();
+                        });
+                        System.out.println(ereignis.getUserId() + " wurde die Rolle openai entfernt!");
+                    } catch (Exception e) {
+                        System.out.println("Fehler beim entfernen der Rolle! \n" + e.toString());
+                    }
 
-                    } else if (ereignis.getReaction().getEmoji().getName().equals("🤖")) {
-                        try {
-                            ereignis.retrieveMember().queue(member -> {
-                                // remove role
-                                member.getGuild().removeRoleFromMember(member,
-                                        member.getGuild().getRolesByName("scnews", true).get(0)).queue();
-                            });
-                            System.out.println(ereignis.getUserId() + " wurde die Rolle scnews entfernt!");
-                        } catch (Exception e) {
-                            System.out.println("Fehler beim entfernen der Rolle! \n" + e.toString());
-                        }
-
+                } else if (ereignis.getReaction().getEmoji().getName().equals("🤖")) {
+                    try {
+                        ereignis.retrieveMember().queue(member -> {
+                            // remove role
+                            member.getGuild().removeRoleFromMember(member,
+                                    member.getGuild().getRolesByName("scnews", true).get(0)).queue();
+                        });
+                        System.out.println(ereignis.getUserId() + " wurde die Rolle scnews entfernt!");
+                    } catch (Exception e) {
+                        System.out.println("Fehler beim entfernen der Rolle! \n" + e.toString());
                     }
 
                 }
 
             }
-        
+
+        }
 
     }
 

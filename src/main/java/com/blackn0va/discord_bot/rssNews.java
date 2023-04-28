@@ -150,19 +150,17 @@ public class rssNews {
 
         }
 
-
-            //async timer 1 hour tick 3600000
-    public static void startTimer() {
-        new java.util.Timer().schedule(
-                new java.util.TimerTask() {
-                    @Override
-                    public void run() {
-                        getPatchNotes();
-                        startTimer();
-                    }
-                },
-                3600000
-        );
-    }
+        // async timer 1 hour tick 3600000
+        public static void startTimer() {
+                new java.util.Timer().schedule(
+                                new java.util.TimerTask() {
+                                        @Override
+                                        public void run() {
+                                                getPatchNotes();
+                                                startTimer();
+                                        }
+                                },
+                                3600000);
+        }
 
 }

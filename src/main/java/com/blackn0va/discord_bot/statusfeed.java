@@ -20,48 +20,41 @@ public class statusfeed {
             // get the first flex flex-row justify-between operational from doc
             Platform = doc.select("div.flex.flex-row.justify-between.operational").first().text();
             if (Platform.contains("Operational")) {
-                Platform = "Platform: Operational :white_check_mark:";
+                Platform = "Platform: Operational";
 
             } else {
-                Platform = "Platform: Degraded Performance :x:";
+                Platform = "Platform: Degraded Performance";
 
             }
             // get the second flex flex-row justify-between operational from doc
             Persistent = doc.select("div.flex.flex-row.justify-between.operational").get(1).text();
             if (Persistent.contains("Operational")) {
-                Persistent = "Persistent: Operational :white_check_mark:";
+                Persistent = "Persistent: Operational";
 
             } else {
-                Persistent = "Persistent: Degraded Performance :x:";
+                Persistent = "Persistent: Degraded Performance";
 
             }
 
             // get the third flex flex-row justify-between operational from doc
             Electronic = doc.select("div.flex.flex-row.justify-between.operational").get(2).text();
             if (Electronic.contains("Operational")) {
-                Electronic = "Electronic Access: Operational :white_check_mark:";
+                Electronic = "Electronic Access: Operational";
 
             } else {
-                Electronic = "Electronic Access: Degraded Performance :x:";
+                Electronic = "Electronic Access: Degraded Performance";
 
             }
 
             NachrichtenReaction.Status = "\n" + Platform + "\n" + Persistent + "\n" + Electronic;
             Main.bauplan.getPresence().setActivity(Activity.playing(Platform));
 
-
         } catch (Exception e) {
         }
 
     }
 
-    public static void test() {
-System.err.println("test");
-    }
-
-
-
-    //async timer 10 minutes tick 600000
+    // async timer 10 minutes tick 600000
     public static void startTimer() {
         new java.util.Timer().schedule(
                 new java.util.TimerTask() {
@@ -71,10 +64,7 @@ System.err.println("test");
                         startTimer();
                     }
                 },
-                600000
-        );
+                600000);
     }
 
-
 }
- 
