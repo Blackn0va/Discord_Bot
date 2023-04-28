@@ -148,7 +148,7 @@ public class Main {
 
         //initial News
         rssNews.getPatchNotes();
-
+        //Translate.translate("test");
 
     }
 

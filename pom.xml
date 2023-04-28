@@ -37,6 +37,12 @@
 </plugin>
 </plugins>
 </build>
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+dependencies {
+    implementation 'com.github.therealbush:translator:1.0.2'
+}
     <dependencies>
         <dependency>
             <groupId>net.katsstuff</groupId>
