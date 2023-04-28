@@ -56,15 +56,20 @@ public class statusfeed {
 
     // async timer 10 minutes tick 600000
     public static void startTimer() {
-        new java.util.Timer().schedule(
-                new java.util.TimerTask() {
-                    @Override
-                    public void run() {
-                        getStatus();
-                        startTimer();
-                    }
-                },
-                600000);
+        try {
+            new java.util.Timer().schedule(
+                    new java.util.TimerTask() {
+                        @Override
+                        public void run() {
+                            getStatus();
+                            startTimer();
+                        }
+                    },
+                    600000);
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+
     }
 
 }

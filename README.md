@@ -13,7 +13,8 @@ openaitoken (Openai API Token)<br/>
 ChannelID (Channelid where is the post for rules)<br/>
 PostID (PostID for accept Rules)<br/>
 GPTChannelID (ChannelID for openai chat) <br/>
-status (Status for the Bot)
+status (Status for the Bot) <br/>
+scnewsChannelID <br/>
 
 Beispielinhalt: <br/>
 MzgxOLAKSDLTE4NDEx.G28qtc.Rdmk8JD7fAJKASdhh-osXpxiAsd09flO9ZSMLKIE <br/>
@@ -22,6 +23,7 @@ sk-g5ALSKDJLJASHCVZ3BlbkFJXHHNluGJ68MUn1rT8HWX <br/>
 1091314958324727908 <br/>
 1091136753735319642 <br/>
 Star Citizen Alpha 4.19 <br/>
+1091136753735319642<br/>
 
 Die Zeilen dürfen nicht leer sein, wenn ihr keinen OpenAI API Key habt, schreibt irgendwas rein.
 

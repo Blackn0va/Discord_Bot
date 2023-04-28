@@ -14,7 +14,6 @@ import java.io.IOException;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
-import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 
 /**
@@ -31,6 +30,8 @@ public class Main {
     public static String token = "";
     public static String desktopPath = "";
     public static String GPTChannelID = "";
+    public static String SCNewsChannelID = "";
+    
 
     /**
      * @param args the command line arguments
@@ -66,6 +67,8 @@ public class Main {
                         bw.newLine();
                         bw.write("status");
                         bw.newLine();
+                        bw.write("scnewsChannelID");
+                        bw.newLine();
                     }
                 } else {
                     File file = new File(desktopPath + "/token.txt");
@@ -77,6 +80,7 @@ public class Main {
                         PostID = br.readLine();
                         GPTChannelID = br.readLine();
                         status = br.readLine();
+                        SCNewsChannelID = br.readLine();
                     }
                 }
 
@@ -103,6 +107,8 @@ public class Main {
                         bw.newLine();
                         bw.write("status");
                         bw.newLine();
+                        bw.write("scnewsChannelID");
+                        bw.newLine();
                     }
                 } else {
                     try (BufferedReader br = new BufferedReader(new FileReader(file))) {
@@ -112,6 +118,7 @@ public class Main {
                         PostID = br.readLine();
                         GPTChannelID = br.readLine();
                         status = br.readLine();
+                        SCNewsChannelID = br.readLine();
                     }
                 }
 

@@ -101,7 +101,7 @@ public class rssNews {
                                         try (BufferedWriter bw = new BufferedWriter(
                                                         new FileWriter(System.getProperty("user.home")
                                                                         + "/Desktop/version.txt"))) {
-                                                Main.bauplan.getTextChannelById("1099111135896162425")
+                                                Main.bauplan.getTextChannelById(Main.SCNewsChannelID)
                                                                 .sendMessage("@scnews " + NachrichtenReaction.RSSNews)
                                                                 .queue();
 
@@ -114,7 +114,7 @@ public class rssNews {
                                         new File("/root/version.txt").createNewFile();
                                         try (BufferedWriter bw = new BufferedWriter(
                                                         new FileWriter("/root/version.txt"))) {
-                                                Main.bauplan.getTextChannelById("1099111135896162425")
+                                                Main.bauplan.getTextChannelById(Main.SCNewsChannelID)
                                                                 .sendMessage("@scnews " + NachrichtenReaction.RSSNews)
                                                                 .queue();
 
@@ -134,7 +134,7 @@ public class rssNews {
                                         }
                                         try (BufferedWriter bw = new BufferedWriter(
                                                         new FileWriter("/root/version.txt"))) {
-                                                Main.bauplan.getTextChannelById("1099111135896162425")
+                                                Main.bauplan.getTextChannelById(Main.SCNewsChannelID)
                                                                 .sendMessage("@scnews " + NachrichtenReaction.RSSNews)
                                                                 .queue();
 
@@ -152,15 +152,20 @@ public class rssNews {
 
         // async timer 1 hour tick 3600000
         public static void startTimer() {
-                new java.util.Timer().schedule(
-                                new java.util.TimerTask() {
-                                        @Override
-                                        public void run() {
-                                                getPatchNotes();
-                                                startTimer();
-                                        }
-                                },
-                                3600000);
+                try {
+                        new java.util.Timer().schedule(
+                                        new java.util.TimerTask() {
+                                                @Override
+                                                public void run() {
+                                                        getPatchNotes();
+                                                        startTimer();
+                                                }
+                                        },
+                                        3600000);
+                } catch (Exception e) {
+                        System.out.println("Error: " + e);
+                }
+
         }
 
 }
