@@ -12,23 +12,16 @@ public class statusfeed {
         try {
 
             String Platform = "";
-            String Persistent = "";
-            String Electronic = "";
 
             Document doc = Jsoup.connect("https://status.robertsspaceindustries.com/")
                     .get();
 
-            // try to get the system flex flex-row justify-between degraded-performance, if
-            // this is not found in doc then try system flex flex-row justify-between
-            // operational
             try {
                 Platform = doc.select("div.system.flex.flex-row.justify-between.degraded-performance").text();
             } catch (Exception e) {
                 Platform = doc.select("div.system.flex.flex-row.justify-between.operational").text();
             }
 
-            // NachrichtenReaction.Status = "\n" + Platform + "\n" + Persistent + "\n" +
-            // Electronic;
             Main.bauplan.getPresence().setActivity(Activity.playing(Platform));
 
         } catch (Exception e) {
