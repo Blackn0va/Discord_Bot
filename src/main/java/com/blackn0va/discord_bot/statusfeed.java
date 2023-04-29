@@ -19,13 +19,14 @@ public class statusfeed {
 
             try {
                 PlatformNotWorking = doc.select("div.system.flex.flex-row.justify-between.degraded-performance").text();
+                PlatformNotWorking = doc.select("div.system.flex.flex-row.justify-between.operational").text();
+
 
             } catch (Exception e) {
-                PlatformWork = doc.select("div.system.flex.flex-row.justify-between.operational").text();
 
             }
 
-            Main.bauplan.getPresence().setActivity(Activity.playing(PlatformNotWorking + PlatformWork));
+            Main.bauplan.getPresence().setActivity(Activity.playing(PlatformNotWorking));
 
         } catch (Exception e) {
         }
