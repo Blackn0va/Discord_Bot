@@ -10,6 +10,9 @@ import java.io.IOException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
+
 public class rssNews {
 
         public static String Version = "";
@@ -57,7 +60,7 @@ public class rssNews {
                         Main.RSSNews = "\nStar Citizen Alpha "
                                         + Version + "LIVE" + Live + "\n\n" + text + "\n" + timestamp;
 
-                                        Main.RSSNews = Main.RSSNews + "\n\n" + "Last Update: "
+                        Main.RSSNews = Main.RSSNews + "\n\n" + "Last Update: "
                                         + timestamp;
 
                         CheckandSaveLink(Version + "LIVE" + Live);
@@ -101,11 +104,18 @@ public class rssNews {
                                         try (BufferedWriter bw = new BufferedWriter(
                                                         new FileWriter(System.getProperty("user.home")
                                                                         + "/Desktop/version.txt"))) {
-                                                Main.bauplan.getTextChannelById(Main.SCNewsChannelID)
-                                                                .sendMessage("@Star Citizen #📣rsi-news " + Main.RSSNews)
-                                                                .queue();
 
-                                                                Main.RSSNews = "";
+                                                // foreach server send message to channel where name is #📣rsi-news
+                                                for (Guild guild : Main.bauplan.getGuilds()) {
+                                                        for (TextChannel channel : guild.getTextChannels()) {
+                                                                if (channel.getName().equals("📣rsi-news")) {
+                                                                        channel.sendMessage("@Star Citizen #📣rsi-news"
+                                                                                        + Main.RSSNews).queue();
+                                                                }
+                                                        }
+                                                }
+
+                                                Main.RSSNews = "";
                                                 bw.write(Version);
                                         }
                                 }
@@ -114,11 +124,17 @@ public class rssNews {
                                         new File("/root/version.txt").createNewFile();
                                         try (BufferedWriter bw = new BufferedWriter(
                                                         new FileWriter("/root/version.txt"))) {
-                                                Main.bauplan.getTextChannelById(Main.SCNewsChannelID)
-                                                                .sendMessage("@Star Citizen #📣rsi-news " + Main.RSSNews)
-                                                                .queue();
+                                                // foreach server send message to channel where name is #📣rsi-news
+                                                for (Guild guild : Main.bauplan.getGuilds()) {
+                                                        for (TextChannel channel : guild.getTextChannels()) {
+                                                                if (channel.getName().equals("📣rsi-news")) {
+                                                                        channel.sendMessage("@Star Citizen #📣rsi-news"
+                                                                                        + Main.RSSNews).queue();
+                                                                }
+                                                        }
+                                                }
 
-                                                                Main.RSSNews = "";
+                                                Main.RSSNews = "";
                                                 bw.write(Version);
                                         }
                                 } else {
@@ -134,11 +150,17 @@ public class rssNews {
                                         }
                                         try (BufferedWriter bw = new BufferedWriter(
                                                         new FileWriter("/root/version.txt"))) {
-                                                Main.bauplan.getTextChannelById(Main.SCNewsChannelID)
-                                                                .sendMessage("@Star Citizen #📣rsi-news " + Main.RSSNews)
-                                                                .queue();
+                                                // foreach server send message to channel where name is #📣rsi-news
+                                                for (Guild guild : Main.bauplan.getGuilds()) {
+                                                        for (TextChannel channel : guild.getTextChannels()) {
+                                                                if (channel.getName().equals("📣rsi-news")) {
+                                                                        channel.sendMessage("@Star Citizen #📣rsi-news"
+                                                                                        + Main.RSSNews).queue();
+                                                                }
+                                                        }
+                                                }
 
-                                                                Main.RSSNews = "";
+                                                Main.RSSNews = "";
                                                 bw.write(Version);
                                         }
                                 }

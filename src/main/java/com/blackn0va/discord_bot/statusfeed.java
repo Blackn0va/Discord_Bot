@@ -11,18 +11,21 @@ public class statusfeed {
 
         try {
 
-            String Platform = "";
+            String PlatformWork = "";
+            String PlatformNotWorking = "";
 
             Document doc = Jsoup.connect("https://status.robertsspaceindustries.com/")
                     .get();
 
             try {
-                Platform = doc.select("div.system.flex.flex-row.justify-between.degraded-performance").text();
+                PlatformNotWorking = doc.select("div.system.flex.flex-row.justify-between.degraded-performance").text();
+
             } catch (Exception e) {
-                Platform = doc.select("div.system.flex.flex-row.justify-between.operational").text();
+                PlatformWork = doc.select("div.system.flex.flex-row.justify-between.operational").text();
+
             }
 
-            Main.bauplan.getPresence().setActivity(Activity.playing(Platform));
+            Main.bauplan.getPresence().setActivity(Activity.playing(PlatformNotWorking + PlatformWork));
 
         } catch (Exception e) {
         }
