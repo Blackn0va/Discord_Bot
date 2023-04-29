@@ -102,7 +102,7 @@ public class rssNews {
                                                         new FileWriter(System.getProperty("user.home")
                                                                         + "/Desktop/version.txt"))) {
                                                 Main.bauplan.getTextChannelById(Main.SCNewsChannelID)
-                                                                .sendMessage("@scnews " + NachrichtenReaction.RSSNews)
+                                                                .sendMessage("@Star Citizen " + NachrichtenReaction.RSSNews)
                                                                 .queue();
 
                                                 NachrichtenReaction.RSSNews = "";
@@ -115,7 +115,7 @@ public class rssNews {
                                         try (BufferedWriter bw = new BufferedWriter(
                                                         new FileWriter("/root/version.txt"))) {
                                                 Main.bauplan.getTextChannelById(Main.SCNewsChannelID)
-                                                                .sendMessage("@scnews " + NachrichtenReaction.RSSNews)
+                                                                .sendMessage("@Star Citizen " + NachrichtenReaction.RSSNews)
                                                                 .queue();
 
                                                 NachrichtenReaction.RSSNews = "";
@@ -135,7 +135,7 @@ public class rssNews {
                                         try (BufferedWriter bw = new BufferedWriter(
                                                         new FileWriter("/root/version.txt"))) {
                                                 Main.bauplan.getTextChannelById(Main.SCNewsChannelID)
-                                                                .sendMessage("@scnews " + NachrichtenReaction.RSSNews)
+                                                                .sendMessage("@Star Citizen " + NachrichtenReaction.RSSNews)
                                                                 .queue();
 
                                                 NachrichtenReaction.RSSNews = "";

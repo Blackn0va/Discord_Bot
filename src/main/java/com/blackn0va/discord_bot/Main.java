@@ -24,14 +24,17 @@ public class Main {
 
     public static String openaitoken = "";
     public static JDA bauplan;
-    public static String ChannelID = "";
-    public static String PostID = "";
+    public static String RegelnChannelID = "";
+    public static String RegelnPostID = "";
     public static String status = "";
     public static String token = "";
     public static String desktopPath = "";
     public static String GPTChannelID = "";
     public static String SCNewsChannelID = "";
-    
+
+
+    //Public Strings für Berechtigungen
+    public static String RegelnAkzeptiert = ""; 
 
     /**
      * @param args the command line arguments
@@ -59,16 +62,9 @@ public class Main {
                         bw.newLine();
                         bw.write("openaitoken");
                         bw.newLine();
-                        bw.write("ChannelID");
+                        bw.write("Regeln_Akzeptiert_Gruppen_Name");
                         bw.newLine();
-                        bw.write("PostID");
-                        bw.newLine();
-                        bw.write("GPTChannelID");
-                        bw.newLine();
-                        bw.write("status");
-                        bw.newLine();
-                        bw.write("scnewsChannelID");
-                        bw.newLine();
+
                     }
                 } else {
                     File file = new File(desktopPath + "/token.txt");
@@ -76,11 +72,8 @@ public class Main {
                     try (BufferedReader br = new BufferedReader(new FileReader(file))) {
                         token = br.readLine();
                         openaitoken = br.readLine();
-                        ChannelID = br.readLine();
-                        PostID = br.readLine();
-                        GPTChannelID = br.readLine();
-                        status = br.readLine();
-                        SCNewsChannelID = br.readLine();
+                        RegelnAkzeptiert = br.readLine();
+
                     }
                 }
 
@@ -99,26 +92,14 @@ public class Main {
                         bw.newLine();
                         bw.write("openaitoken");
                         bw.newLine();
-                        bw.write("ChannelID");
-                        bw.newLine();
-                        bw.write("PostID");
-                        bw.newLine();
-                        bw.write("GPTChannelID");
-                        bw.newLine();
-                        bw.write("status");
-                        bw.newLine();
-                        bw.write("scnewsChannelID");
+                        bw.write("Regeln_Akzeptiert_Gruppen_Name");
                         bw.newLine();
                     }
                 } else {
                     try (BufferedReader br = new BufferedReader(new FileReader(file))) {
                         token = br.readLine();
                         openaitoken = br.readLine();
-                        ChannelID = br.readLine();
-                        PostID = br.readLine();
-                        GPTChannelID = br.readLine();
-                        status = br.readLine();
-                        SCNewsChannelID = br.readLine();
+                        RegelnAkzeptiert = br.readLine();
                     }
                 }
 
@@ -146,6 +127,19 @@ public class Main {
         bauplan.addEventListener(new NachrichtenReaction());
         bauplan.addEventListener(new GiveRole());
 
+        try {
+            GPTChannelID = bauplan.getTextChannelsByName("chatgpt", true).get(0).getId();
+            SCNewsChannelID = bauplan.getTextChannelsByName("📣rsi-news", true).get(0).getId();
+            RegelnChannelID = bauplan.getTextChannelsByName("regeln", true).get(0).getId();
+            RegelnPostID = bauplan.getTextChannelsByName("regeln", true).get(0).getHistory().retrievePast(100)
+                    .complete().stream().filter(m -> m.getContentRaw().contains("§ 1")).findFirst().get().getId();
+
+
+                   // System.out.println(RegelnAkzeptiert);
+
+        } catch (Exception e) {
+        }
+
         // start Timer for News and Status
         rssNews.startTimer();
         statusfeed.startTimer();
@@ -156,7 +150,7 @@ public class Main {
         // initial News
         rssNews.getPatchNotes();
 
-        //Translate.calcHadanite();
+        // Translate.calcHadanite();
     }
 
 }

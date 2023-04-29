@@ -15,7 +15,7 @@ public class openai {
             final CompletionRequest completionRequest = CompletionRequest.builder()
                     .model("text-davinci-003")
                     .prompt(question)
-                    .maxTokens(150)
+                    .maxTokens(200)
                     .temperature(0.5)
                     .topP(0.3)
                     .frequencyPenalty(0.5)
@@ -29,6 +29,8 @@ public class openai {
                     .replace(", logprobs=", "").replace(", finish_reason=", "")
                     .replace(", index=0nullstop)", "").replace("]", "")
                     .replace("index=0nulllength)", "");
+
+                    //NachrichtenReaction.answer = NachrichtenReaction.answer.replace("ReceivedMessage(*)", "");
 
             return NachrichtenReaction.answer;
 

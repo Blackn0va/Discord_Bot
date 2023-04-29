@@ -29,17 +29,17 @@ public class GiveRole extends ListenerAdapter {
             return;
         } else {
             // Wenn eine Reaktion aus dem Channel "Regeln" gibt
-            if (ereignis.getChannel().getId().equals(Main.ChannelID)) {
+            if (ereignis.getChannel().getId().equals(Main.RegelnChannelID)) {
                 // if the reaction is on a Message with id "1090705151662247936"
-                if (ereignis.getMessageId().equals(Main.PostID)) {
+                if (ereignis.getMessageId().equals(Main.RegelnPostID)) {
                     // Wenn die Reaktion "✅" ist
                     if (ereignis.getReaction().getEmoji().getName().equals("✅")) {
                         if (!ereignis.getMember().getRoles()
-                                .contains(ereignis.getGuild().getRolesByName("Member", true).get(0))) {
+                                .contains(ereignis.getGuild().getRolesByName(Main.RegelnAkzeptiert, true).get(0))) {
                             try {
                                 ereignis.getGuild().addRoleToMember(ereignis.getMember(),
-                                        ereignis.getGuild().getRolesByName("Member", true).get(0)).queue();
-                                System.out.println(ereignis.getUserId() + " wurde die Rolle Member erteilt!");
+                                        ereignis.getGuild().getRolesByName(Main.RegelnAkzeptiert, true).get(0)).queue();
+                                System.out.println(ereignis.getUserId() + " wurde die Rolle " + Main.RegelnAkzeptiert + " erteilt!");
                             } catch (Exception e) {
                                 System.out.println("Die Berechtigung konnte nicht erteilt werden! \n" + e.toString());
                             }
@@ -82,9 +82,9 @@ public class GiveRole extends ListenerAdapter {
     @Override
     public void onMessageReactionRemove(MessageReactionRemoveEvent ereignis) {
         // Wenn eine Reaktion aus dem Channel "Regeln" gibt
-        if (ereignis.getChannel().getId().equals(Main.ChannelID)) {
+        if (ereignis.getChannel().getId().equals(Main.RegelnChannelID)) {
             // if the reaction is on a Message with id "1090705151662247936"
-            if (ereignis.getMessageId().equals(Main.PostID)) {
+            if (ereignis.getMessageId().equals(Main.RegelnPostID)) {
                 // Wenn die Reaktion "✅" ist
                 if (ereignis.getReaction().getEmoji().getName().equals("✅")) {
                     try {
@@ -92,9 +92,9 @@ public class GiveRole extends ListenerAdapter {
                         ereignis.retrieveMember().queue(member -> {
                             // remove role
                             member.getGuild().removeRoleFromMember(member,
-                                    member.getGuild().getRolesByName("Member", true).get(0)).queue();
+                                    member.getGuild().getRolesByName(Main.RegelnAkzeptiert, true).get(0)).queue();
                         });
-                        System.out.println(ereignis.getUserId() + " wurde die Rolle Member entfernt!");
+                        System.out.println(ereignis.getUserId() + " wurde die Rolle " + Main.RegelnAkzeptiert + " entfernt!");
                     } catch (Exception e) {
                         System.out.println("Fehler beim entfernen der Rolle! \n" + e.toString());
                     }
