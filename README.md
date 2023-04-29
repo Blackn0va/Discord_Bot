@@ -7,7 +7,7 @@ Der Token wird aus einer Datei "token.txt" ausgelesen. Dabei wird unter Linux un
 
 #Windows Desktop/token.txt
 
-Die Datei token.txt muss 6 Zeilen haben:<br/> 
+Die Datei token.txt muss 7 Zeilen haben:<br/> 
 token (Discord Token)<br/>
 openaitoken (Openai API Token)<br/>
 ChannelID (Channelid where is the post for rules)<br/>

@@ -10,6 +10,7 @@ public class statusfeed {
     public static void getStatus() {
 
         try {
+
             String Platform = "";
             String Persistent = "";
             String Electronic = "";
@@ -17,36 +18,17 @@ public class statusfeed {
             Document doc = Jsoup.connect("https://status.robertsspaceindustries.com/")
                     .get();
 
-            // get the first flex flex-row justify-between operational from doc
-            Platform = doc.select("div.flex.flex-row.justify-between.operational").first().text();
-            if (Platform.contains("Operational")) {
-                Platform = "Platform: Operational";
-
-            } else {
-                Platform = "Platform: Degraded Performance";
-
-            }
-            // get the second flex flex-row justify-between operational from doc
-            Persistent = doc.select("div.flex.flex-row.justify-between.operational").get(1).text();
-            if (Persistent.contains("Operational")) {
-                Persistent = "Persistent: Operational";
-
-            } else {
-                Persistent = "Persistent: Degraded Performance";
-
+            // try to get the system flex flex-row justify-between degraded-performance, if
+            // this is not found in doc then try system flex flex-row justify-between
+            // operational
+            try {
+                Platform = doc.select("div.system.flex.flex-row.justify-between.degraded-performance").text();
+            } catch (Exception e) {
+                Platform = doc.select("div.system.flex.flex-row.justify-between.operational").text();
             }
 
-            // get the third flex flex-row justify-between operational from doc
-            Electronic = doc.select("div.flex.flex-row.justify-between.operational").get(2).text();
-            if (Electronic.contains("Operational")) {
-                Electronic = "Electronic Access: Operational";
-
-            } else {
-                Electronic = "Electronic Access: Degraded Performance";
-
-            }
-
-            NachrichtenReaction.Status = "\n" + Platform + "\n" + Persistent + "\n" + Electronic;
+            // NachrichtenReaction.Status = "\n" + Platform + "\n" + Persistent + "\n" +
+            // Electronic;
             Main.bauplan.getPresence().setActivity(Activity.playing(Platform));
 
         } catch (Exception e) {
