@@ -31,7 +31,8 @@ public class Main {
     public static String desktopPath = "";
     public static String GPTChannelID = "";
     public static String SCNewsChannelID = "";
-
+    public static String answer = "";
+     public static String RSSNews = "";
 
     //Public Strings für Berechtigungen
     public static String RegelnAkzeptiert = ""; 
@@ -130,10 +131,6 @@ public class Main {
         try {
             GPTChannelID = bauplan.getTextChannelsByName("chatgpt", true).get(0).getId();
             SCNewsChannelID = bauplan.getTextChannelsByName("📣rsi-news", true).get(0).getId();
-            RegelnChannelID = bauplan.getTextChannelsByName("regeln", true).get(0).getId();
-            RegelnPostID = bauplan.getTextChannelsByName("regeln", true).get(0).getHistory().retrievePast(100)
-                    .complete().stream().filter(m -> m.getContentRaw().contains("§ 1")).findFirst().get().getId();
-
 
                    // System.out.println(RegelnAkzeptiert);
 

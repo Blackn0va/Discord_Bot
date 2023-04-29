@@ -24,7 +24,7 @@ public class openai {
                     .build();
 
             // service.createCompletion(completionRequest).getChoices().forEach(System.out::print);
-            NachrichtenReaction.answer = service.createCompletion(completionRequest).getChoices().toString()
+            Main.answer = service.createCompletion(completionRequest).getChoices().toString()
                     .replace("[CompletionChoice(text=", "").replace(", index=)]", "")
                     .replace(", logprobs=", "").replace(", finish_reason=", "")
                     .replace(", index=0nullstop)", "").replace("]", "")
@@ -32,14 +32,14 @@ public class openai {
 
                     //NachrichtenReaction.answer = NachrichtenReaction.answer.replace("ReceivedMessage(*)", "");
 
-            return NachrichtenReaction.answer;
+            return Main.answer;
 
         } catch (Exception e) {
             System.out.println("Fehler beim Erstellen der Antwort");
-            NachrichtenReaction.answer = e.toString();
+            Main.answer = e.toString();
 
         }
-        return NachrichtenReaction.answer;
+        return Main.answer;
     }
 
 }

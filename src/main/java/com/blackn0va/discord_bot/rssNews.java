@@ -54,10 +54,10 @@ public class rssNews {
 
                         // Version: 3.18.1-
                         // Live: .8430497
-                        NachrichtenReaction.RSSNews = "\nStar Citizen Alpha "
+                        Main.RSSNews = "\nStar Citizen Alpha "
                                         + Version + "LIVE" + Live + "\n\n" + text + "\n" + timestamp;
 
-                        NachrichtenReaction.RSSNews = NachrichtenReaction.RSSNews + "\n\n" + "Last Update: "
+                                        Main.RSSNews = Main.RSSNews + "\n\n" + "Last Update: "
                                         + timestamp;
 
                         CheckandSaveLink(Version + "LIVE" + Live);
@@ -102,10 +102,10 @@ public class rssNews {
                                                         new FileWriter(System.getProperty("user.home")
                                                                         + "/Desktop/version.txt"))) {
                                                 Main.bauplan.getTextChannelById(Main.SCNewsChannelID)
-                                                                .sendMessage("@Star Citizen " + NachrichtenReaction.RSSNews)
+                                                                .sendMessage("@Star Citizen #📣rsi-news " + Main.RSSNews)
                                                                 .queue();
 
-                                                NachrichtenReaction.RSSNews = "";
+                                                                Main.RSSNews = "";
                                                 bw.write(Version);
                                         }
                                 }
@@ -115,10 +115,10 @@ public class rssNews {
                                         try (BufferedWriter bw = new BufferedWriter(
                                                         new FileWriter("/root/version.txt"))) {
                                                 Main.bauplan.getTextChannelById(Main.SCNewsChannelID)
-                                                                .sendMessage("@Star Citizen " + NachrichtenReaction.RSSNews)
+                                                                .sendMessage("@Star Citizen #📣rsi-news " + Main.RSSNews)
                                                                 .queue();
 
-                                                NachrichtenReaction.RSSNews = "";
+                                                                Main.RSSNews = "";
                                                 bw.write(Version);
                                         }
                                 } else {
@@ -135,10 +135,10 @@ public class rssNews {
                                         try (BufferedWriter bw = new BufferedWriter(
                                                         new FileWriter("/root/version.txt"))) {
                                                 Main.bauplan.getTextChannelById(Main.SCNewsChannelID)
-                                                                .sendMessage("@Star Citizen " + NachrichtenReaction.RSSNews)
+                                                                .sendMessage("@Star Citizen #📣rsi-news " + Main.RSSNews)
                                                                 .queue();
 
-                                                NachrichtenReaction.RSSNews = "";
+                                                                Main.RSSNews = "";
                                                 bw.write(Version);
                                         }
                                 }

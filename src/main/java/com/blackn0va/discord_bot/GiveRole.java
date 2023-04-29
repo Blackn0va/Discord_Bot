@@ -28,10 +28,10 @@ public class GiveRole extends ListenerAdapter {
         if (ereignis.getUser().isBot()) {
             return;
         } else {
-            // Wenn eine Reaktion aus dem Channel "Regeln" gibt
-            if (ereignis.getChannel().getId().equals(Main.RegelnChannelID)) {
+
+            if (ereignis.getChannel().getId().equals("1101894180734775346")) {
                 // if the reaction is on a Message with id "1090705151662247936"
-                if (ereignis.getMessageId().equals(Main.RegelnPostID)) {
+                if (ereignis.getMessageId().equals("1101894342605545563")) {
                     // Wenn die Reaktion "✅" ist
                     if (ereignis.getReaction().getEmoji().getName().equals("✅")) {
                         if (!ereignis.getMember().getRoles()
@@ -59,10 +59,10 @@ public class GiveRole extends ListenerAdapter {
                         }
                     } else if (ereignis.getReaction().getEmoji().getName().equals("🤖")) {
                         if (!ereignis.getMember().getRoles()
-                                .contains(ereignis.getGuild().getRolesByName("scnews", true).get(0))) {
+                                .contains(ereignis.getGuild().getRolesByName("Star Citizen", true).get(0))) {
                             try {
                                 ereignis.getGuild().addRoleToMember(ereignis.getMember(),
-                                        ereignis.getGuild().getRolesByName("scnews", true).get(0)).queue();
+                                        ereignis.getGuild().getRolesByName("Star Citizen", true).get(0)).queue();
                                 System.out.println(ereignis.getUserId() + " wurde die Rolle scnews erteilt!");
                             } catch (Exception e) {
                                 System.out.println("Die Berechtigung konnte nicht erteilt werden! \n" + e.toString());
@@ -81,10 +81,9 @@ public class GiveRole extends ListenerAdapter {
 
     @Override
     public void onMessageReactionRemove(MessageReactionRemoveEvent ereignis) {
-        // Wenn eine Reaktion aus dem Channel "Regeln" gibt
-        if (ereignis.getChannel().getId().equals(Main.RegelnChannelID)) {
+        if (ereignis.getChannel().getId().equals("1101894180734775346")) {
             // if the reaction is on a Message with id "1090705151662247936"
-            if (ereignis.getMessageId().equals(Main.RegelnPostID)) {
+            if (ereignis.getMessageId().equals("1101894342605545563")) {
                 // Wenn die Reaktion "✅" ist
                 if (ereignis.getReaction().getEmoji().getName().equals("✅")) {
                     try {
@@ -116,7 +115,7 @@ public class GiveRole extends ListenerAdapter {
                         ereignis.retrieveMember().queue(member -> {
                             // remove role
                             member.getGuild().removeRoleFromMember(member,
-                                    member.getGuild().getRolesByName("scnews", true).get(0)).queue();
+                                    member.getGuild().getRolesByName("Star Citizen", true).get(0)).queue();
                         });
                         System.out.println(ereignis.getUserId() + " wurde die Rolle scnews entfernt!");
                     } catch (Exception e) {
