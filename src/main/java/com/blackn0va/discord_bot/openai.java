@@ -1,6 +1,12 @@
 package com.blackn0va.discord_bot;
 
-import com.theokanning.openai.completion.CompletionRequest;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import com.theokanning.openai.completion.chat.ChatCompletionRequest;
+import com.theokanning.openai.completion.chat.ChatMessage;
+import com.theokanning.openai.completion.chat.ChatMessageRole;
 import com.theokanning.openai.service.OpenAiService;
 
 public class openai {
@@ -10,32 +16,39 @@ public class openai {
         try {
             OpenAiService service = new OpenAiService(Main.openaitoken);
 
+            final List<ChatMessage> messages = new ArrayList<>();
+            final ChatMessage systemMessage = new ChatMessage(ChatMessageRole.SYSTEM.value(), question);
 
-             System.out.println("\nCreating completion... ");
-            final CompletionRequest completionRequest = CompletionRequest.builder()
-                    .model("text-davinci-003")
-                    .prompt(question)
-                    .maxTokens(200)
+            messages.add(systemMessage);
+            ChatCompletionRequest chatCompletionRequest = ChatCompletionRequest
+                    .builder()
+                    .model("gpt-3.5-turbo")
                     .temperature(0.5)
-                    .topP(0.3)
-                    .frequencyPenalty(0.5)
                     .presencePenalty(0.0)
-                    .echo(true)
+                    .frequencyPenalty(0.5)
+                    .messages(messages)
+                    .n(1)
+                    .maxTokens(200)
+                    .logitBias(new HashMap<>())
                     .build();
 
             // service.createCompletion(completionRequest).getChoices().forEach(System.out::print);
-            Main.answer = service.createCompletion(completionRequest).getChoices().toString()
-                    .replace("[CompletionChoice(text=", "").replace(", index=)]", "")
-                    .replace(", logprobs=", "").replace(", finish_reason=", "")
-                    .replace(", index=0nullstop)", "").replace("]", "")
-                    .replace("index=0nulllength)", "")
-                    .replace("ReceivedMessage", "");
+            Main.answer = service.createChatCompletion(chatCompletionRequest).getChoices().toString()
+                    .replace("[ChatCompletionChoice(index=0, message=ChatMessage(role=assistant, content=", "");
 
-                    //remove all between ( and )
-                    Main.answer = Main.answer.replaceAll("\\(.*?\\) ?", "");
-               
+            // if answer contains "), finishReason=length)]" remove it
+            if (Main.answer.contains("), finishReason=length)]")) {
+                Main.answer = Main.answer.replace("), finishReason=length)]", "");
+            }
+            // if answer contains "), finishReason=stop)]" remove it
+            if (Main.answer.contains("), finishReason=stop)]")) {
+                Main.answer = Main.answer.replace("), finishReason=stop)]", "");
+            }
 
-                    //NachrichtenReaction.answer = NachrichtenReaction.answer.replace("ReceivedMessage(*)", "");
+            System.out.println("Antwort: " + Main.answer);
+
+            // NachrichtenReaction.answer =
+            // NachrichtenReaction.answer.replace("ReceivedMessage(*)", "");
 
             return Main.answer;
 
