@@ -28,7 +28,12 @@ public class openai {
                     .replace("[CompletionChoice(text=", "").replace(", index=)]", "")
                     .replace(", logprobs=", "").replace(", finish_reason=", "")
                     .replace(", index=0nullstop)", "").replace("]", "")
-                    .replace("index=0nulllength)", "");
+                    .replace("index=0nulllength)", "")
+                    .replace("ReceivedMessage", "");
+
+                    //remove all between ( and )
+                    Main.answer = Main.answer.replaceAll("\\(.*?\\) ?", "");
+               
 
                     //NachrichtenReaction.answer = NachrichtenReaction.answer.replace("ReceivedMessage(*)", "");
 
