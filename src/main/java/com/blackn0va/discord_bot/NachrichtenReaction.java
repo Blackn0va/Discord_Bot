@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.theokanning.openai.completion.chat.ChatMessage;
+import com.theokanning.openai.completion.chat.ChatMessageRole;
 
 /**
 *
@@ -13,6 +14,8 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class NachrichtenReaction extends ListenerAdapter {
+
+   public static final List<ChatMessage> messages = new ArrayList<>();
 
     @Override
     public void onMessageReceived(MessageReceivedEvent ereignis) {
@@ -30,6 +33,11 @@ public class NachrichtenReaction extends ListenerAdapter {
 
                             String frage = ereignis.getMessage().getContentStripped();
                             System.out.println("Frage: " + frage);
+
+
+                            final ChatMessage systemMessage = new ChatMessage(ChatMessageRole.SYSTEM.value(), frage);
+                
+                            messages.add(systemMessage);
 
                             openai.getAnswer(frage);
 

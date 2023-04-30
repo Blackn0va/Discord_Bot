@@ -16,17 +16,14 @@ public class openai {
         try {
             OpenAiService service = new OpenAiService(Main.openaitoken);
 
-            final List<ChatMessage> messages = new ArrayList<>();
-            final ChatMessage systemMessage = new ChatMessage(ChatMessageRole.SYSTEM.value(), question);
 
-            messages.add(systemMessage);
             ChatCompletionRequest chatCompletionRequest = ChatCompletionRequest
                     .builder()
                     .model("gpt-3.5-turbo")
                     .temperature(0.5)
                     .presencePenalty(0.0)
                     .frequencyPenalty(0.5)
-                    .messages(messages)
+                    .messages(NachrichtenReaction.messages)
                     .n(1)
                     .maxTokens(200)
                     .logitBias(new HashMap<>())
