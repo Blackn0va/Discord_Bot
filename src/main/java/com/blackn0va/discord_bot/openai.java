@@ -1,12 +1,8 @@
 package com.blackn0va.discord_bot;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import com.theokanning.openai.completion.chat.ChatCompletionRequest;
-import com.theokanning.openai.completion.chat.ChatMessage;
-import com.theokanning.openai.completion.chat.ChatMessageRole;
 import com.theokanning.openai.service.OpenAiService;
 
 public class openai {
@@ -15,7 +11,6 @@ public class openai {
     public static String getAnswer(String question) {
         try {
             OpenAiService service = new OpenAiService(Main.openaitoken);
-
 
             ChatCompletionRequest chatCompletionRequest = ChatCompletionRequest
                     .builder()

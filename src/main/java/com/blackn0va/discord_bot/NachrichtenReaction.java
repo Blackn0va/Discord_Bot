@@ -33,8 +33,7 @@ public class NachrichtenReaction extends ListenerAdapter {
 
                             String frage = ereignis.getMessage().getContentStripped();
                             System.out.println("Frage: " + frage);
-
-
+ 
                             final ChatMessage systemMessage = new ChatMessage(ChatMessageRole.SYSTEM.value(), frage);
                 
                             messages.add(systemMessage);

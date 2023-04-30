@@ -17,7 +17,6 @@ MzgxOLAKSDLTE4NDEx.G28qtc.Rdmk8JD7fAJKASdhh-osXpxiAsd09flO9ZSMLKIE <br/>
 sk-g5ALSKDJLJASHCVZ3BlbkFJXHHNluGJ68MUn1rT8HWX <br/>
 
 
-
 Channels die benötigt werden:
                             sc-news
                             chatgpt

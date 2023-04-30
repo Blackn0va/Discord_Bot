@@ -11,7 +11,6 @@ public class statusfeed {
 
         try {
 
-            String PlatformWork = "";
             String PlatformNotWorking = "";
 
             Document doc = Jsoup.connect("https://status.robertsspaceindustries.com/")
@@ -20,7 +19,6 @@ public class statusfeed {
             try {
                 PlatformNotWorking = doc.select("div.system.flex.flex-row.justify-between.degraded-performance").text();
                 PlatformNotWorking = doc.select("div.system.flex.flex-row.justify-between.operational").text();
-
 
             } catch (Exception e) {
 
