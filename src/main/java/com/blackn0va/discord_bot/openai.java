@@ -37,7 +37,7 @@ public class openai {
                 Main.answer = Main.answer.replace("), finishReason=stop)]", "");
             }
 
-            System.out.println("Antwort: " + Main.answer);
+            System.out.println("Antwort:\n" + Main.answer);
 
             // NachrichtenReaction.answer =
             // NachrichtenReaction.answer.replace("ReceivedMessage(*)", "");

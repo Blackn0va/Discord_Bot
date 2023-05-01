@@ -32,15 +32,17 @@ public class NachrichtenReaction extends ListenerAdapter {
                         if (!ereignis.getMessage().getContentStripped().startsWith("!")) {
 
                             String frage = ereignis.getMessage().getContentStripped();
-                            System.out.println("Frage: " + frage);
+                            System.out.println("Frage:\n" + frage);
  
-                            final ChatMessage systemMessage = new ChatMessage(ChatMessageRole.SYSTEM.value(), frage);
+                            //Create message
+                            final ChatMessage systemMessage = new ChatMessage(ChatMessageRole.USER.value(), frage);
                 
+                            //Add message to list
                             messages.add(systemMessage);
 
+                            //ask GPT
                             openai.getAnswer(frage);
 
-                            // make a List<ChatMessage> messages for ereignis.getMessage().toString()
 
                             // openai.getAnswer(ereignis.getMessage().toString());
                             if (Main.answer.contains("You exceeded your current quota")) {
