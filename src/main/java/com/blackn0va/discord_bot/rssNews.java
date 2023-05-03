@@ -22,12 +22,20 @@ public class rssNews {
                 try {
                         String Version = "";
                         String Live = "";
+                        String DatabaseReset = "";
 
                         // create timestamp now
                         String timestamp = new java.util.Date().toString();
 
                         Document doc2 = Jsoup.connect("https://robertsspaceindustries.com/patch-notes")
                                         .get();
+
+                //get the value from Database Reset of .theme-dark .content-block.text
+                //DatabaseReset = doc2.select("forum-thread-item type-forum_thread style-type-large depth-0 depth-even thread-discussion is-highlighted is-highlighted-staff").first().text();
+
+
+                //System.out.println(DatabaseReset);
+                                     
 
                         // get the link from post where "Star Citizen Alpha 3.18.1" or greater
                         Version = doc2.select("a[href*=Star-Citizen-Alpha-3]").first().attr("href");

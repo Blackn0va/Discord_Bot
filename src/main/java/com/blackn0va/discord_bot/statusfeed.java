@@ -10,22 +10,33 @@ public class statusfeed {
     public static void getStatus() {
 
         try {
+            String timestamp = new java.util.Date().toString();
 
-            String PlatformNotWorking = "";
+            String Degraded = "";
+            String operational = "";
+            String outage = "";
 
             Document doc = Jsoup.connect("https://status.robertsspaceindustries.com/")
                     .get();
 
             try {
-                PlatformNotWorking = doc.select("div.system.flex.flex-row.justify-between.degraded-performance").text();
-                PlatformNotWorking = doc.select("div.system.flex.flex-row.justify-between.operational").text();
+                //get the value of the first div.system.flex.flex-row.justify-between.degraded-performance
+                Degraded = doc.select("div.system.flex.flex-row.justify-between.degraded-performance").text();
+                operational = doc.select("div.system.flex.flex-row.justify-between.operational").text();
+                outage = doc.select("div.system.flex.flex-row.justify-between.partial-outage").text();
+
+                //System.out.println(Degraded + " \n" + operational + " \n" + outage);
 
             } catch (Exception e) {
 
             }
 
-            Main.bauplan.getPresence().setActivity(Activity.playing(PlatformNotWorking));
+            Main.RSIStatus =  "Operational: " + operational + "\n" + "Eingeschränkt: " + Degraded + "\n"   + "Ausfälle: " + outage;
+            Main.bauplan.getPresence().setActivity(Activity.playing(Degraded + " |" + operational + " | " + outage));
 
+
+            //change in discord the "about me text"
+            
         } catch (Exception e) {
         }
 

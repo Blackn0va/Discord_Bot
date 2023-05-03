@@ -32,7 +32,8 @@ public class Main {
     public static String GPTChannelID = "";
     public static String SCNewsChannelID = "";
     public static String answer = "";
-     public static String RSSNews = "";
+    public static String RSSNews = "";
+    public static String RSIStatus = "";
 
     //Public Strings für Berechtigungen
     public static String RegelnAkzeptiert = ""; 
@@ -147,7 +148,6 @@ public class Main {
         // initial News
         rssNews.getPatchNotes();
 
-        // Translate.calcHadanite();
-    }
+     }
 
 }
