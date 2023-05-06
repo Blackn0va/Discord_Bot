@@ -139,11 +139,11 @@ public class Main {
         }
 
         // start Timer for News and Status
-        rssNews.startTimer();
-        statusfeed.startTimer();
+        //rssNews.startTimer();
+        //statusfeed.startTimer();
 
         // initial Status
-        statusfeed.getStatus();
+        //statusfeed.getStatus();
 
         // initial News
         rssNews.getPatchNotes();

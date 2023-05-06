@@ -10,9 +10,6 @@ import java.io.IOException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
-
 public class rssNews {
 
         public static String Version = "";
@@ -22,7 +19,7 @@ public class rssNews {
                 try {
                         String Version = "";
                         String Live = "";
-                        String DatabaseReset = "";
+                        String Persistence = "";
 
                         // create timestamp now
                         String timestamp = new java.util.Date().toString();
@@ -30,12 +27,7 @@ public class rssNews {
                         Document doc2 = Jsoup.connect("https://robertsspaceindustries.com/patch-notes")
                                         .get();
 
-                //get the value from Database Reset of .theme-dark .content-block.text
-                //DatabaseReset = doc2.select("forum-thread-item type-forum_thread style-type-large depth-0 depth-even thread-discussion is-highlighted is-highlighted-staff").first().text();
-
-
-                //System.out.println(DatabaseReset);
-                                     
+                        // System.out.println(DatabaseReset);
 
                         // get the link from post where "Star Citizen Alpha 3.18.1" or greater
                         Version = doc2.select("a[href*=Star-Citizen-Alpha-3]").first().attr("href");
@@ -44,35 +36,123 @@ public class rssNews {
                         Document doc3 = Jsoup.connect("https://robertsspaceindustries.com" + Version)
                                         .get();
 
-                        // get the text from div.content and remove the html tags
-                        String text = doc3.select("div.content").html();
-
-                        // get 20 characters after "VERSION" 3.18.1-LIVE.8430497
-                        Version = text.substring(text.indexOf("VERSION"), text.indexOf("VERSION") + 40)
-                                        .replaceAll("VERSION", "")
-                                        .replaceAll("\\<.*?>", "").replaceAll("<span class=\"caps\"", "");
-                        ;
-
-                        Live = text.substring(text.indexOf("LIVE"), text.indexOf("LIVE") + 19).replaceAll("LIVE", "")
+                        Persistence = doc3.select(".rsi-markup .segment .content p").html();
+                        Persistence = Persistence
+                                        .substring(Persistence.indexOf("Long Term Persistence"),
+                                                        Persistence.indexOf("Known Issues"))
                                         .replaceAll("\\<.*?>", "");
-                        ;
+ 
+                        // try to get get the text from .rsi-markup .segment .content p
+                        // if it fails get the text from .rsi-markup .segment .content
+                        try {
+                                // get the text from .rsi-markup .segment .content p
+                                String text = doc3.select(".rsi-markup .segment .content p").html();
+                                // get 20 characters after "VERSION" 3.18.1-LIVE.8430497
+                                Version = text.substring(text.indexOf("VERSION"), text.indexOf("VERSION") + 40)
+                                                .replaceAll("VERSION", "")
+                                                .replaceAll("\\<.*?>", "").replaceAll("<span class=\"caps\"", "");
+                                ;
 
-                        // remove all bevore "Known Issues"
-                        text = text.substring(text.indexOf("Known Issues")).replaceAll("\\<.*?>", "");
+                                Live = text.substring(text.indexOf("LIVE"), text.indexOf("LIVE") + 19)
+                                                .replaceAll("LIVE", "")
+                                                .replaceAll("\\<.*?>", "");
+                                ;
 
-                        // remove all after "Feature Updates"
-                        text = text.substring(0, text.indexOf("Feature Updates"));
+                                // remove all bevore "Known Issues"
+                                text = text.substring(text.indexOf("Known Issues")).replaceAll("\\<.*?>", "");
 
-                        // Version: 3.18.1-
-                        // Live: .8430497
-                        Main.RSSNews = "\nStar Citizen Alpha "
-                                        + Version + "LIVE" + Live + "\n\n" + text + "\n" + timestamp;
+                                // remove all after "Feature Updates"
+                                text = text.substring(0, text.indexOf("Feature Updates"));
 
-                        Main.RSSNews = Main.RSSNews + "\n\n" + "Last Update: "
-                                        + timestamp;
+                                // Version: 3.18.1-
+                                // Live: .8430497
+                                Main.RSSNews = "\nStar Citizen Alpha "
+                                                + Version + "LIVE" + Live + "\n\n" + Persistence + "\n" + text + "\n"
+                                                + timestamp;
 
-                        CheckandSaveLink(Version + "LIVE" + Live);
-                        // post message to channel
+                                // make a beatiful message from Main.RSSNews for discord
+                                Main.RSSNews = Main.RSSNews.replaceAll("Star Citizen Alpha", "**Star Citizen Alpha**");
+                                Main.RSSNews = Main.RSSNews.replaceAll("Known Issues", "**Known Issues**");
+                                Main.RSSNews = Main.RSSNews.replaceAll("Feature Updates", "**Feature Updates**");
+                                Main.RSSNews = Main.RSSNews.replaceAll("Bug Fixes", "**Bug Fixes**");
+                                Main.RSSNews = Main.RSSNews.replaceAll("New Features", "**New Features**");
+                                Main.RSSNews = Main.RSSNews.replaceAll("Balance", "**Balance**");
+                                Main.RSSNews = Main.RSSNews.replaceAll("Technical", "**Technical**");
+                                Main.RSSNews = Main.RSSNews.replaceAll("Gameplay", "**Gameplay**");
+                                Main.RSSNews = Main.RSSNews.replaceAll("Ships and Vehicles", "**Ships and Vehicles**");
+                                Main.RSSNews = Main.RSSNews.replaceAll("Locations", "**Locations**");
+                                Main.RSSNews = Main.RSSNews.replaceAll("Weapons and Items", "**Weapons and Items**");
+                                Main.RSSNews = Main.RSSNews.replaceAll("Core Tech", "**Core Tech**");
+                                Main.RSSNews = Main.RSSNews.replaceAll("AI", "**AI**");
+                                Main.RSSNews = Main.RSSNews.replaceAll("Ships", "**Ships**");
+                                Main.RSSNews = Main.RSSNews.replaceAll("Vehicles", "**Vehicles**");
+                                Main.RSSNews = Main.RSSNews.replaceAll("Weapons", "**Weapons**");
+                                Main.RSSNews = Main.RSSNews.replaceAll("FPS Weapons", "**FPS Weapons**");
+                                Main.RSSNews = Main.RSSNews.replaceAll("FPS Gadgets", "**FPS Gadgets**");
+
+
+
+                                Main.RSSNews = "`" + Main.RSSNews + "`";
+
+                                CheckandSaveLink(Version + "LIVE" + Live);
+                                // post message to channel
+
+                                // Version: 3.18.1-
+                        } catch (Exception e) {
+                                // get the text from .rsi-markup .segment .content
+                                String text = doc3.select(".rsi-markup .segment .content").html();
+                                // get 20 characters after "VERSION" 3.18.1-LIVE.8430497
+                                Version = text.substring(text.indexOf("VERSION"), text.indexOf("VERSION") + 40)
+                                                .replaceAll("VERSION", "")
+                                                .replaceAll("\\<.*?>", "").replaceAll("<span class=\"caps\"", "");
+                                ;
+
+                                Live = text.substring(text.indexOf("LIVE"), text.indexOf("LIVE") + 19)
+                                                .replaceAll("LIVE", "")
+                                                .replaceAll("\\<.*?>", "");
+                                ;
+
+                                // remove all bevore "Known Issues"
+                                text = text.substring(text.indexOf("Known Issues")).replaceAll("\\<.*?>", "");
+
+                                // remove all after "Feature Updates"
+                                text = text.substring(0, text.indexOf("Feature Updates"));
+
+                                // Version: 3.18.1-
+                                // Live: .8430497
+                                Main.RSSNews = "\nStar Citizen Alpha "
+                                                + Version + "LIVE" + Live + "\n\n" + Persistence + "\n" + text + "\n"
+                                                + timestamp;
+
+                                // make a beatiful message from Main.RSSNews for discord
+                                Main.RSSNews = Main.RSSNews.replaceAll("Star Citizen Alpha", "**Star Citizen Alpha**");
+                                Main.RSSNews = Main.RSSNews.replaceAll("Known Issues", "**Known Issues**");
+                                Main.RSSNews = Main.RSSNews.replaceAll("Feature Updates", "**Feature Updates**");
+                                Main.RSSNews = Main.RSSNews.replaceAll("Bug Fixes", "**Bug Fixes**");
+                                Main.RSSNews = Main.RSSNews.replaceAll("New Features", "**New Features**");
+                                Main.RSSNews = Main.RSSNews.replaceAll("Balance", "**Balance**");
+                                Main.RSSNews = Main.RSSNews.replaceAll("Technical", "**Technical**");
+                                Main.RSSNews = Main.RSSNews.replaceAll("Gameplay", "**Gameplay**");
+                                Main.RSSNews = Main.RSSNews.replaceAll("Ships and Vehicles", "**Ships and Vehicles**");
+                                Main.RSSNews = Main.RSSNews.replaceAll("Locations", "**Locations**");
+                                Main.RSSNews = Main.RSSNews.replaceAll("Weapons and Items", "**Weapons and Items**");
+                                Main.RSSNews = Main.RSSNews.replaceAll("Core Tech", "**Core Tech**");
+                                Main.RSSNews = Main.RSSNews.replaceAll("AI", "**AI**");
+                                Main.RSSNews = Main.RSSNews.replaceAll("Ships", "**Ships**");
+                                Main.RSSNews = Main.RSSNews.replaceAll("Vehicles", "**Vehicles**");
+                                Main.RSSNews = Main.RSSNews.replaceAll("Weapons", "**Weapons**");
+                                Main.RSSNews = Main.RSSNews.replaceAll("FPS Weapons", "**FPS Weapons**");
+                                Main.RSSNews = Main.RSSNews.replaceAll("FPS Gadgets", "**FPS Gadgets**");
+
+
+
+
+                                Main.RSSNews = "`" + Main.RSSNews + "`";
+
+                                CheckandSaveLink(Version + "LIVE" + Live);
+                                // post message to channel
+
+                        }
 
                 } catch (Exception e) {
                         e.printStackTrace();
@@ -113,17 +193,8 @@ public class rssNews {
                                                         new FileWriter(System.getProperty("user.home")
                                                                         + "/Desktop/version.txt"))) {
 
-                                                // foreach server send message to channel where name is #📣rsi-news
-                                                for (Guild guild : Main.bauplan.getGuilds()) {
-                                                        for (TextChannel channel : guild.getTextChannels()) {
-                                                                if (channel.getName().equals("📣rsi-news")) {
-                                                                        channel.sendMessage("@Star Citizen #📣rsi-news"
-                                                                                        + Main.RSSNews).queue();
-                                                                }
-                                                        }
-                                                }
+                                                SendMessage.ToNewsChannel();
 
-                                                Main.RSSNews = "";
                                                 bw.write(Version);
                                         }
                                 }
@@ -132,17 +203,7 @@ public class rssNews {
                                         new File("/root/version.txt").createNewFile();
                                         try (BufferedWriter bw = new BufferedWriter(
                                                         new FileWriter("/root/version.txt"))) {
-                                                // foreach server send message to channel where name is #📣rsi-news
-                                                for (Guild guild : Main.bauplan.getGuilds()) {
-                                                        for (TextChannel channel : guild.getTextChannels()) {
-                                                                if (channel.getName().equals("📣rsi-news")) {
-                                                                        channel.sendMessage("@Star Citizen #📣rsi-news"
-                                                                                        + Main.RSSNews).queue();
-                                                                }
-                                                        }
-                                                }
-
-                                                Main.RSSNews = "";
+                                                SendMessage.ToNewsChannel();
                                                 bw.write(Version);
                                         }
                                 } else {
@@ -159,16 +220,7 @@ public class rssNews {
                                         try (BufferedWriter bw = new BufferedWriter(
                                                         new FileWriter("/root/version.txt"))) {
                                                 // foreach server send message to channel where name is #📣rsi-news
-                                                for (Guild guild : Main.bauplan.getGuilds()) {
-                                                        for (TextChannel channel : guild.getTextChannels()) {
-                                                                if (channel.getName().equals("📣rsi-news")) {
-                                                                        channel.sendMessage("@Star Citizen #📣rsi-news"
-                                                                                        + Main.RSSNews).queue();
-                                                                }
-                                                        }
-                                                }
-
-                                                Main.RSSNews = "";
+                                                SendMessage.ToNewsChannel();
                                                 bw.write(Version);
                                         }
                                 }
