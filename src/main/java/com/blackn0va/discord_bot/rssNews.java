@@ -41,7 +41,7 @@ public class rssNews {
                                         .substring(Persistence.indexOf("Long Term Persistence"),
                                                         Persistence.indexOf("Known Issues"))
                                         .replaceAll("\\<.*?>", "");
- 
+
                         // try to get get the text from .rsi-markup .segment .content p
                         // if it fails get the text from .rsi-markup .segment .content
                         try {
@@ -70,27 +70,7 @@ public class rssNews {
                                                 + Version + "LIVE" + Live + "\n\n" + Persistence + "\n" + text + "\n"
                                                 + timestamp;
 
-                                // make a beatiful message from Main.RSSNews for discord
-                                Main.RSSNews = Main.RSSNews.replaceAll("Star Citizen Alpha", "**Star Citizen Alpha**");
-                                Main.RSSNews = Main.RSSNews.replaceAll("Known Issues", "**Known Issues**");
-                                Main.RSSNews = Main.RSSNews.replaceAll("Feature Updates", "**Feature Updates**");
-                                Main.RSSNews = Main.RSSNews.replaceAll("Bug Fixes", "**Bug Fixes**");
-                                Main.RSSNews = Main.RSSNews.replaceAll("New Features", "**New Features**");
-                                Main.RSSNews = Main.RSSNews.replaceAll("Balance", "**Balance**");
-                                Main.RSSNews = Main.RSSNews.replaceAll("Technical", "**Technical**");
-                                Main.RSSNews = Main.RSSNews.replaceAll("Gameplay", "**Gameplay**");
-                                Main.RSSNews = Main.RSSNews.replaceAll("Ships and Vehicles", "**Ships and Vehicles**");
-                                Main.RSSNews = Main.RSSNews.replaceAll("Locations", "**Locations**");
-                                Main.RSSNews = Main.RSSNews.replaceAll("Weapons and Items", "**Weapons and Items**");
-                                Main.RSSNews = Main.RSSNews.replaceAll("Core Tech", "**Core Tech**");
-                                Main.RSSNews = Main.RSSNews.replaceAll("AI", "**AI**");
-                                Main.RSSNews = Main.RSSNews.replaceAll("Ships", "**Ships**");
-                                Main.RSSNews = Main.RSSNews.replaceAll("Vehicles", "**Vehicles**");
-                                Main.RSSNews = Main.RSSNews.replaceAll("Weapons", "**Weapons**");
-                                Main.RSSNews = Main.RSSNews.replaceAll("FPS Weapons", "**FPS Weapons**");
-                                Main.RSSNews = Main.RSSNews.replaceAll("FPS Gadgets", "**FPS Gadgets**");
-
-
+                                FormatNews();
 
                                 Main.RSSNews = "`" + Main.RSSNews + "`";
 
@@ -124,28 +104,7 @@ public class rssNews {
                                                 + Version + "LIVE" + Live + "\n\n" + Persistence + "\n" + text + "\n"
                                                 + timestamp;
 
-                                // make a beatiful message from Main.RSSNews for discord
-                                Main.RSSNews = Main.RSSNews.replaceAll("Star Citizen Alpha", "**Star Citizen Alpha**");
-                                Main.RSSNews = Main.RSSNews.replaceAll("Known Issues", "**Known Issues**");
-                                Main.RSSNews = Main.RSSNews.replaceAll("Feature Updates", "**Feature Updates**");
-                                Main.RSSNews = Main.RSSNews.replaceAll("Bug Fixes", "**Bug Fixes**");
-                                Main.RSSNews = Main.RSSNews.replaceAll("New Features", "**New Features**");
-                                Main.RSSNews = Main.RSSNews.replaceAll("Balance", "**Balance**");
-                                Main.RSSNews = Main.RSSNews.replaceAll("Technical", "**Technical**");
-                                Main.RSSNews = Main.RSSNews.replaceAll("Gameplay", "**Gameplay**");
-                                Main.RSSNews = Main.RSSNews.replaceAll("Ships and Vehicles", "**Ships and Vehicles**");
-                                Main.RSSNews = Main.RSSNews.replaceAll("Locations", "**Locations**");
-                                Main.RSSNews = Main.RSSNews.replaceAll("Weapons and Items", "**Weapons and Items**");
-                                Main.RSSNews = Main.RSSNews.replaceAll("Core Tech", "**Core Tech**");
-                                Main.RSSNews = Main.RSSNews.replaceAll("AI", "**AI**");
-                                Main.RSSNews = Main.RSSNews.replaceAll("Ships", "**Ships**");
-                                Main.RSSNews = Main.RSSNews.replaceAll("Vehicles", "**Vehicles**");
-                                Main.RSSNews = Main.RSSNews.replaceAll("Weapons", "**Weapons**");
-                                Main.RSSNews = Main.RSSNews.replaceAll("FPS Weapons", "**FPS Weapons**");
-                                Main.RSSNews = Main.RSSNews.replaceAll("FPS Gadgets", "**FPS Gadgets**");
-
-
-
+                                FormatNews();
 
                                 Main.RSSNews = "`" + Main.RSSNews + "`";
 
@@ -159,6 +118,34 @@ public class rssNews {
                 }
 
                 //
+
+        }
+
+        public static void FormatNews() {
+                try {
+                        // make a beatiful message from Main.RSSNews for discord
+                        Main.RSSNews = Main.RSSNews.replaceAll("Star Citizen Alpha", "**Star Citizen Alpha**");
+                        Main.RSSNews = Main.RSSNews.replaceAll("Known Issues", "**Known Issues**");
+                        Main.RSSNews = Main.RSSNews.replaceAll("Feature Updates", "**Feature Updates**");
+                        Main.RSSNews = Main.RSSNews.replaceAll("Bug Fixes", "**Bug Fixes**");
+                        Main.RSSNews = Main.RSSNews.replaceAll("New Features", "**New Features**");
+                        Main.RSSNews = Main.RSSNews.replaceAll("Balance", "**Balance**");
+                        Main.RSSNews = Main.RSSNews.replaceAll("Technical", "**Technical**");
+                        Main.RSSNews = Main.RSSNews.replaceAll("Gameplay", "**Gameplay**");
+                        Main.RSSNews = Main.RSSNews.replaceAll("Ships and Vehicles", "**Ships and Vehicles**");
+                        Main.RSSNews = Main.RSSNews.replaceAll("Locations", "**Locations**");
+                        Main.RSSNews = Main.RSSNews.replaceAll("Weapons and Items", "**Weapons and Items**");
+                        Main.RSSNews = Main.RSSNews.replaceAll("Core Tech", "**Core Tech**");
+                        Main.RSSNews = Main.RSSNews.replaceAll("AI", "**AI**");
+                        Main.RSSNews = Main.RSSNews.replaceAll("Ships", "**Ships**");
+                        Main.RSSNews = Main.RSSNews.replaceAll("Vehicles", "**Vehicles**");
+                        Main.RSSNews = Main.RSSNews.replaceAll("Weapons", "**Weapons**");
+                        Main.RSSNews = Main.RSSNews.replaceAll("FPS Weapons", "**FPS Weapons**");
+                        Main.RSSNews = Main.RSSNews.replaceAll("FPS Gadgets", "**FPS Gadgets**");
+                        Main.RSSNews = Main.RSSNews.replaceAll("Long Term Persistence", "**Long Term Persistence**");
+                        Main.RSSNews = Main.RSSNews.replaceAll("Starting aUEC", "**Starting aUEC**");
+                } catch (Exception e) {
+                }
 
         }
 
@@ -184,7 +171,8 @@ public class rssNews {
                                                 String line;
                                                 while ((line = br.readLine()) != null) {
                                                         if (line.equals(Version)) {
-                                                                System.out.println("Version is in file");
+                                                                System.out.println(
+                                                                                "Version " + Version + " is in file");
                                                                 return;
                                                         }
                                                 }
@@ -212,7 +200,8 @@ public class rssNews {
                                                 String line;
                                                 while ((line = br.readLine()) != null) {
                                                         if (line.equals(Version)) {
-                                                                System.out.println("Keine neuen Patchenotes");
+                                                                System.out.println("Version is in File " + Version
+                                                                                + " Keine neuen Patchenotes");
                                                                 return;
                                                         }
                                                 }
