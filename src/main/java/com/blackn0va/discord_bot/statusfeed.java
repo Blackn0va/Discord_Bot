@@ -32,9 +32,20 @@ public class statusfeed {
 
             Main.RSIStatus = "Operational: " + operational + "\n" + "Eingeschränkt: " + Degraded + "\n" + "Ausfälle: "
                     + outage;
-            Main.bauplan.getPresence().setActivity(Activity.playing(Degraded + " |" + operational + " | " + outage));
+            Main.bauplan.getPresence().setActivity(Activity.playing(Degraded + " |"
+                    + operational.replaceAll("Platform Operational", "Platform ist Operational_______________|")
+                            .replaceAll("Persistent Universe Operational",
+                                    "|Persistente Universum ist Operational____|")
+                            .replaceAll("Electronic Access Operational", "|Electronic Access ist Operational_______|")
+                    + outage));
 
-            // change in discord the "about me text"
+            
+
+                    
+
+
+
+
 
         } catch (Exception e) {
         }
