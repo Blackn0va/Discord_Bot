@@ -18,6 +18,8 @@ public class GiveRole extends ListenerAdapter {
         var prefix = "!";
         System.out.print("Der Bot ist jetzt online!\n");
         System.out.print("Der Prefix des Bots lautet: " + prefix + "\n");
+        WriteLogs.writeLog("Der Bot ist jetzt online!\n");
+        WriteLogs.writeLog("Der Prefix des Bots lautet: " + prefix + "\n");
 
     }
 
@@ -39,9 +41,13 @@ public class GiveRole extends ListenerAdapter {
                             try {
                                 ereignis.getGuild().addRoleToMember(ereignis.getMember(),
                                         ereignis.getGuild().getRolesByName(Main.RegelnAkzeptiert, true).get(0)).queue();
-                                System.out.println(ereignis.getUserId() + " wurde die Rolle " + Main.RegelnAkzeptiert + " erteilt!");
+                                System.out.println(ereignis.getUserId() + " wurde die Rolle " + Main.RegelnAkzeptiert
+                                        + " erteilt!");
+                                WriteLogs.writeLog(ereignis.getUserId() + " wurde die Rolle " + Main.RegelnAkzeptiert
+                                        + " erteilt!");
                             } catch (Exception e) {
                                 System.out.println("Die Berechtigung konnte nicht erteilt werden! \n" + e.toString());
+                                WriteLogs.writeLog("Die Berechtigung konnte nicht erteilt werden! \n" + e.toString());
                             }
 
                         }
@@ -52,8 +58,10 @@ public class GiveRole extends ListenerAdapter {
                                 ereignis.getGuild().addRoleToMember(ereignis.getMember(),
                                         ereignis.getGuild().getRolesByName("openai", true).get(0)).queue();
                                 System.out.println(ereignis.getUserId() + " wurde die Rolle openai erteilt!");
+                                WriteLogs.writeLog(ereignis.getUserId() + " wurde die Rolle openai erteilt!");
                             } catch (Exception e) {
                                 System.out.println("Die Berechtigung konnte nicht erteilt werden! \n" + e.toString());
+                                WriteLogs.writeLog("Die Berechtigung konnte nicht erteilt werden! \n" + e.toString());
                             }
 
                         }
@@ -64,8 +72,10 @@ public class GiveRole extends ListenerAdapter {
                                 ereignis.getGuild().addRoleToMember(ereignis.getMember(),
                                         ereignis.getGuild().getRolesByName("Star Citizen", true).get(0)).queue();
                                 System.out.println(ereignis.getUserId() + " wurde die Rolle scnews erteilt!");
+                                WriteLogs.writeLog(ereignis.getUserId() + " wurde die Rolle scnews erteilt!");
                             } catch (Exception e) {
                                 System.out.println("Die Berechtigung konnte nicht erteilt werden! \n" + e.toString());
+                                WriteLogs.writeLog("Die Berechtigung konnte nicht erteilt werden! \n" + e.toString());
                             }
 
                         }
@@ -93,9 +103,13 @@ public class GiveRole extends ListenerAdapter {
                             member.getGuild().removeRoleFromMember(member,
                                     member.getGuild().getRolesByName(Main.RegelnAkzeptiert, true).get(0)).queue();
                         });
-                        System.out.println(ereignis.getUserId() + " wurde die Rolle " + Main.RegelnAkzeptiert + " entfernt!");
+                        System.out.println(
+                                ereignis.getUserId() + " wurde die Rolle " + Main.RegelnAkzeptiert + " entfernt!");
+                        WriteLogs.writeLog(
+                                ereignis.getUserId() + " wurde die Rolle " + Main.RegelnAkzeptiert + " entfernt!");
                     } catch (Exception e) {
                         System.out.println("Fehler beim entfernen der Rolle! \n" + e.toString());
+                        WriteLogs.writeLog("Fehler beim entfernen der Rolle! \n" + e.toString());
                     }
 
                 } else if (ereignis.getReaction().getEmoji().getName().equals("🤪")) {
@@ -106,8 +120,10 @@ public class GiveRole extends ListenerAdapter {
                                     member.getGuild().getRolesByName("openai", true).get(0)).queue();
                         });
                         System.out.println(ereignis.getUserId() + " wurde die Rolle openai entfernt!");
+                        WriteLogs.writeLog(ereignis.getUserId() + " wurde die Rolle openai entfernt!");
                     } catch (Exception e) {
                         System.out.println("Fehler beim entfernen der Rolle! \n" + e.toString());
+                        WriteLogs.writeLog("Fehler beim entfernen der Rolle! \n" + e.toString());
                     }
 
                 } else if (ereignis.getReaction().getEmoji().getName().equals("🤖")) {
@@ -118,8 +134,10 @@ public class GiveRole extends ListenerAdapter {
                                     member.getGuild().getRolesByName("Star Citizen", true).get(0)).queue();
                         });
                         System.out.println(ereignis.getUserId() + " wurde die Rolle scnews entfernt!");
+                        WriteLogs.writeLog(ereignis.getUserId() + " wurde die Rolle scnews entfernt!");
                     } catch (Exception e) {
                         System.out.println("Fehler beim entfernen der Rolle! \n" + e.toString());
+                        WriteLogs.writeLog("Fehler beim entfernen der Rolle! \n" + e.toString());
                     }
 
                 }

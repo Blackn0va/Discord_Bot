@@ -30,13 +30,20 @@ public class statusfeed {
 
             }
 
+            String Status = operational
+                    .replaceAll("Platform Operational", "|Platform ist Operational_______________|")
+                    .replaceAll("Persistent Universe Operational",
+                            "|Persistente Universum ist Operational____|")
+                    .replaceAll("Electronic Access Operational", "|Electronic Access ist Operational_______|")
+                    + Degraded + Outage;
+
             Main.bauplan.getPresence()
-                    .setActivity(Activity.playing(operational
-                            .replaceAll("Platform Operational", "|Platform ist Operational_______________|")
-                            .replaceAll("Persistent Universe Operational",
-                                    "|Persistente Universum ist Operational____|")
-                            .replaceAll("Electronic Access Operational", "|Electronic Access ist Operational_______|")
-                            + Degraded + Outage));
+                    .setActivity(Activity.playing(Status));
+
+            System.out.println("Serverstatus wurde aktualisiert. " + Status);
+            WriteLogs.writeLog("Serverstatus wurde aktualisiert. " + Status);
+
+            Status = "";
 
         } catch (Exception e) {
         }
@@ -57,6 +64,7 @@ public class statusfeed {
                     600000);
         } catch (Exception e) {
             System.out.println("Error: " + e);
+            WriteLogs.writeLog("Error: " + e);
         }
 
     }

@@ -48,6 +48,7 @@ public class Main {
         // Betriebssystem bestimmen, wegen der unterschiedlichen Pfade
         String os = System.getProperty("os.name").toLowerCase();
         System.out.println("Erkanntes Betriebssystem: " + os);
+        WriteLogs.writeLog("Erkanntes Betriebssystem: " + os);
 
         // rssNews.getNews();
 
@@ -107,6 +108,7 @@ public class Main {
 
             } catch (IOException e) {
                 System.out.println("Exception caught =" + e.getMessage());
+                WriteLogs.writeLog("Exception caught =" + e.getMessage());
             }
 
         }
@@ -137,6 +139,7 @@ public class Main {
 
         } catch (Exception e) {
         }
+        
 
         // start Timer for News and Status
         rssNews.startTimer();
@@ -147,6 +150,8 @@ public class Main {
 
         // initial News
         rssNews.getPatchNotes();
+
+        //WriteLogs.startTimer();
 
      }
 

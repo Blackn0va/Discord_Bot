@@ -15,7 +15,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class NachrichtenReaction extends ListenerAdapter {
 
-   public static final List<ChatMessage> messages = new ArrayList<>();
+    public static final List<ChatMessage> messages = new ArrayList<>();
 
     @Override
     public void onMessageReceived(MessageReceivedEvent ereignis) {
@@ -33,16 +33,15 @@ public class NachrichtenReaction extends ListenerAdapter {
 
                             String frage = ereignis.getMessage().getContentStripped();
                             System.out.println("Frage:\n" + frage);
- 
-                            //Create message
+
+                            // Create message
                             final ChatMessage systemMessage = new ChatMessage(ChatMessageRole.USER.value(), frage);
-                
-                            //Add message to list
+
+                            // Add message to list
                             messages.add(systemMessage);
 
-                            //ask GPT
+                            // ask GPT
                             openai.getAnswer(frage);
-
 
                             // openai.getAnswer(ereignis.getMessage().toString());
                             if (Main.answer.contains("You exceeded your current quota")) {
@@ -54,10 +53,12 @@ public class NachrichtenReaction extends ListenerAdapter {
                                     ereignis.getChannel()
                                             .sendMessage("API Key überprüfen!")
                                             .queue();
+                                    WriteLogs.writeLog("API Key überprüfen!");
                                 } else {
                                     ereignis.getChannel().sendTyping().queue();
                                     ereignis.getChannel().sendMessage(Main.answer)
                                             .queue();
+                                    WriteLogs.writeLog("Antwort: " + Main.answer);
                                 }
 
                             }
@@ -69,6 +70,7 @@ public class NachrichtenReaction extends ListenerAdapter {
             }
         } catch (Exception e) {
             System.out.println("Fehler in onMessageReceived: " + e.getMessage());
+            WriteLogs.writeLog("Fehler in onMessageReceived: " + e.getMessage());
         }
 
     }

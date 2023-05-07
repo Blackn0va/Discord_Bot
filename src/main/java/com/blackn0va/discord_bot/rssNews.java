@@ -115,6 +115,7 @@ public class rssNews {
 
                 } catch (Exception e) {
                         e.printStackTrace();
+                        WriteLogs.writeLog("Fehler beim Abrufen der Patchnotes " + e.toString());
                 }
 
                 //
@@ -173,6 +174,8 @@ public class rssNews {
                                                         if (line.equals(Version)) {
                                                                 System.out.println(
                                                                                 "Version " + Version + " is in file");
+                                                                WriteLogs.writeLog(
+                                                                                "Version " + Version + " is in file");
                                                                 return;
                                                         }
                                                 }
@@ -202,6 +205,8 @@ public class rssNews {
                                                         if (line.equals(Version)) {
                                                                 System.out.println("Version is in File " + Version
                                                                                 + " Keine neuen Patchenotes");
+                                                                WriteLogs.writeLog("Version is in File " + Version
+                                                                                + " Keine neuen Patchenotes");
                                                                 return;
                                                         }
                                                 }
@@ -217,6 +222,7 @@ public class rssNews {
 
                 } catch (Exception e) {
                         e.printStackTrace();
+                        WriteLogs.writeLog("Fehler beim Abrufen der News " + e.toString());
                 }
 
         }
@@ -235,6 +241,7 @@ public class rssNews {
                                         3600000);
                 } catch (Exception e) {
                         System.out.println("Error: " + e);
+                        WriteLogs.writeLog("Error: " + e);
                 }
 
         }

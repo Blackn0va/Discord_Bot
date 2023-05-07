@@ -38,6 +38,7 @@ public class openai {
             }
 
             System.out.println("Antwort:\n" + Main.answer);
+            WriteLogs.writeLog("Antwort:\n" + Main.answer);
 
             // NachrichtenReaction.answer =
             // NachrichtenReaction.answer.replace("ReceivedMessage(*)", "");
@@ -46,6 +47,7 @@ public class openai {
 
         } catch (Exception e) {
             System.out.println("Fehler beim Erstellen der Antwort");
+            WriteLogs.writeLog("Fehler beim Erstellen der Antwort");
             Main.answer = e.toString();
 
         }

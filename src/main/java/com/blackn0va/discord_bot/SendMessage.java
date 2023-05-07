@@ -19,32 +19,33 @@ public class SendMessage {
             Main.RSSNews = "";
         } catch (Exception e) {
             System.out.println("Error: " + e);
+            WriteLogs.writeLog("Error: " + e);
         }
 
     }
 
-    //async send message to channel
+    // async send message to channel
     public static void ToChannel(String channelID, String message) {
         try {
             Main.bauplan.getTextChannelById(channelID).sendMessage(message).queue();
         } catch (Exception e) {
             System.out.println("Error: " + e);
+            WriteLogs.writeLog("Error: " + e);
         }
 
     }
 
-    //async send message to User
+    // async send message to User
     public static void ToUser(String userID, String message) {
         try {
-            Main.bauplan.getUserById(userID).openPrivateChannel().queue((channel) ->
-            {
+            Main.bauplan.getUserById(userID).openPrivateChannel().queue((channel) -> {
                 channel.sendMessage(message).queue();
             });
         } catch (Exception e) {
             System.out.println("Error: " + e);
+            WriteLogs.writeLog("Error: " + e);
         }
 
     }
 
-    
 }
