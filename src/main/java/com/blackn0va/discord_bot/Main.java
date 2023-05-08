@@ -11,10 +11,13 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import com.fasterxml.jackson.core.filter.TokenFilter;
+
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.requests.GatewayIntent;
+import scala.util.parsing.combinator.token.Tokens.Token;
 
 /**
  *
@@ -34,9 +37,13 @@ public class Main {
     public static String answer = "";
     public static String RSSNews = "";
     public static String RSIStatus = "";
+    public static String workingDir = System.getProperty("user.dir");
+    public static String os = System.getProperty("os.name").toLowerCase();
 
-    //Public Strings für Berechtigungen
-    public static String RegelnAkzeptiert = ""; 
+    public static String TokenFile = "";
+
+    // Public Strings für Berechtigungen
+    public static String RegelnAkzeptiert = "";
 
     /**
      * @param args the command line arguments
@@ -46,7 +53,6 @@ public class Main {
 
         // rssNews.getNews();
         // Betriebssystem bestimmen, wegen der unterschiedlichen Pfade
-        String os = System.getProperty("os.name").toLowerCase();
         System.out.println("Erkanntes Betriebssystem: " + os);
         WriteLogs.writeLog("Erkanntes Betriebssystem: " + os);
 
@@ -55,12 +61,13 @@ public class Main {
         if (os.contains("win")) {
             try { // Betriebssystem ist Windows basiert
 
-                desktopPath = System.getProperty("user.home") + "/Desktop";
+                TokenFile = workingDir + "\\" + "Token.txt";
+
                 // if file not exists, create it
-                if (!new File(desktopPath + "/token.txt").exists()) {
-                    new File(desktopPath + "/token.txt").createNewFile();
+                if (!new File(TokenFile).exists()) {
+                    new File(TokenFile).createNewFile();
                     // insert 6 lines in the file
-                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(desktopPath + "/token.txt"))) {
+                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(TokenFile))) {
                         bw.write("token");
                         bw.newLine();
                         bw.write("openaitoken");
@@ -70,7 +77,7 @@ public class Main {
 
                     }
                 } else {
-                    File file = new File(desktopPath + "/token.txt");
+                    File file = new File(TokenFile);
                     // line one of the file is token and line 2 is openaitoken
                     try (BufferedReader br = new BufferedReader(new FileReader(file))) {
                         token = br.readLine();
@@ -85,12 +92,13 @@ public class Main {
             }
         } else if (os.contains("nix") || os.contains("aix") || os.contains("nux")) {
             try { // Betriebssystem ist Linux/Unix basiert
-                File file = new File("/root/token.txt");
-                // if file not exists, create it
-                if (!file.exists()) {
-                    file.createNewFile();
+
+                TokenFile = workingDir + "/" + "Token.txt";
+
+                if (!new File(TokenFile).exists()) {
+                    new File(TokenFile).createNewFile();
                     // insert 6 lines in the file
-                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
+                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(TokenFile))) {
                         bw.write("token");
                         bw.newLine();
                         bw.write("openaitoken");
@@ -99,7 +107,7 @@ public class Main {
                         bw.newLine();
                     }
                 } else {
-                    try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+                    try (BufferedReader br = new BufferedReader(new FileReader(TokenFile))) {
                         token = br.readLine();
                         openaitoken = br.readLine();
                         RegelnAkzeptiert = br.readLine();
@@ -135,11 +143,10 @@ public class Main {
             GPTChannelID = bauplan.getTextChannelsByName("chatgpt", true).get(0).getId();
             SCNewsChannelID = bauplan.getTextChannelsByName("📣rsi-news", true).get(0).getId();
 
-                   // System.out.println(RegelnAkzeptiert);
+            // System.out.println(RegelnAkzeptiert);
 
         } catch (Exception e) {
         }
-        
 
         // start Timer for News and Status
         rssNews.startTimer();
@@ -151,8 +158,8 @@ public class Main {
         // initial News
         rssNews.getPatchNotes();
 
-        //WriteLogs.startTimer();
+        // WriteLogs.startTimer();
 
-     }
+    }
 
 }

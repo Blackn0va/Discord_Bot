@@ -12,13 +12,17 @@ import org.jsoup.nodes.Document;
 
 public class rssNews {
 
+
+        public static String os = System.getProperty("os.name").toLowerCase();
+        public static String VersionFile = "";
         public static String Version = "";
+        public static String workingDir = System.getProperty("user.dir");
+
 
         public static void getPatchNotes() {
 
                 try {
-                        String Version = "";
-                        String Live = "";
+                         String Live = "";
                         String Persistence = "";
 
                         // create timestamp now
@@ -153,22 +157,24 @@ public class rssNews {
         public static void CheckandSaveLink(String Version) throws IOException {
                 // read file from desktop /link.txt on linux /root/link.txt
                 try {
-                        String os = System.getProperty("os.name").toLowerCase();
+
                         // if link is in file ignore it, when link is not ini fil ewrite it
                         if (os.contains("win")) {
-                                if (!new File(System.getProperty("user.home") + "/Desktop/version.txt").exists()) {
-                                        new File(System.getProperty("user.home") + "/Desktop/version.txt")
+                                VersionFile = workingDir + "\\" + "version.txt";
+ 
+                                System.out.println("VersionFile: " + VersionFile);
+
+                                if (!new File(VersionFile).exists()) {
+                                        new File(VersionFile)
                                                         .createNewFile();
                                         try (BufferedWriter bw = new BufferedWriter(
-                                                        new FileWriter(System.getProperty("user.home")
-                                                                        + "/Desktop/version.txt"))) {
+                                                        new FileWriter(VersionFile))) {
                                                 bw.write(Version);
 
                                         }
                                 } else {
                                         try (BufferedReader br = new BufferedReader(
-                                                        new FileReader(System.getProperty("user.home")
-                                                                        + "/Desktop/version.txt"))) {
+                                                        new FileReader(VersionFile))) {
                                                 String line;
                                                 while ((line = br.readLine()) != null) {
                                                         if (line.equals(Version)) {
@@ -181,25 +187,26 @@ public class rssNews {
                                                 }
                                         }
                                         try (BufferedWriter bw = new BufferedWriter(
-                                                        new FileWriter(System.getProperty("user.home")
-                                                                        + "/Desktop/version.txt"))) {
+                                                        new FileWriter(VersionFile))) {
 
                                                 SendMessage.ToNewsChannel();
 
                                                 bw.write(Version);
                                         }
                                 }
-                        } else {
-                                if (!new File("/root/version.txt").exists()) {
-                                        new File("/root/version.txt").createNewFile();
+                        } else if(os.contains("nix") || os.contains("aix") || os.contains("nux")) {
+                                VersionFile = workingDir + "/" + "version.txt";
+
+                                if (!new File(VersionFile).exists()) {
+                                        new File(VersionFile).createNewFile();
                                         try (BufferedWriter bw = new BufferedWriter(
-                                                        new FileWriter("/root/version.txt"))) {
+                                                        new FileWriter(VersionFile))) {
                                                 SendMessage.ToNewsChannel();
                                                 bw.write(Version);
                                         }
                                 } else {
                                         try (BufferedReader br = new BufferedReader(
-                                                        new FileReader("/root/version.txt"))) {
+                                                        new FileReader(VersionFile))) {
                                                 String line;
                                                 while ((line = br.readLine()) != null) {
                                                         if (line.equals(Version)) {
@@ -212,7 +219,7 @@ public class rssNews {
                                                 }
                                         }
                                         try (BufferedWriter bw = new BufferedWriter(
-                                                        new FileWriter("/root/version.txt"))) {
+                                                        new FileWriter(VersionFile))) {
                                                 // foreach server send message to channel where name is #📣rsi-news
                                                 SendMessage.ToNewsChannel();
                                                 bw.write(Version);
