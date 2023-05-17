@@ -6,251 +6,180 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 public class rssNews {
-
-
         public static String os = System.getProperty("os.name").toLowerCase();
         public static String VersionFile = "";
-        public static String Version = "";
         public static String workingDir = System.getProperty("user.dir");
 
+        public static String RSSNews = "";
+        public static String Persistence = "";
+        public static String Live = "";
+        public static String Version = "";
+        public static String Link = "";
+        public static String baseUrl = "https://robertsspaceindustries.com/patch-notes";
+        public static String Patchlink = "https://robertsspaceindustries.com";
 
-        public static void getPatchNotes() {
+        // main
 
-                try {
-                         String Live = "";
-                        String Persistence = "";
-
-                        // create timestamp now
-                        String timestamp = new java.util.Date().toString();
-
-                        Document doc2 = Jsoup.connect("https://robertsspaceindustries.com/patch-notes")
-                                        .get();
-
-                        // System.out.println(DatabaseReset);
-
-                        // get the link from post where "Star Citizen Alpha 3.18.1" or greater
-                        Version = doc2.select("a[href*=Star-Citizen-Alpha-3]").first().attr("href");
-
-                        // get the text from the post
-                        Document doc3 = Jsoup.connect("https://robertsspaceindustries.com" + Version)
-                                        .get();
-
-                        Persistence = doc3.select(".rsi-markup .segment .content p").html();
-                        Persistence = Persistence
-                                        .substring(Persistence.indexOf("Long Term Persistence"),
-                                                        Persistence.indexOf("Known Issues"))
-                                        .replaceAll("\\<.*?>", "");
-
-                        // try to get get the text from .rsi-markup .segment .content p
-                        // if it fails get the text from .rsi-markup .segment .content
-                        try {
-                                // get the text from .rsi-markup .segment .content p
-                                String text = doc3.select(".rsi-markup .segment .content p").html();
-                                // get 20 characters after "VERSION" 3.18.1-LIVE.8430497
-                                Version = text.substring(text.indexOf("VERSION"), text.indexOf("VERSION") + 40)
-                                                .replaceAll("VERSION", "")
-                                                .replaceAll("\\<.*?>", "").replaceAll("<span class=\"caps\"", "");
-                                ;
-
-                                Live = text.substring(text.indexOf("LIVE"), text.indexOf("LIVE") + 19)
-                                                .replaceAll("LIVE", "")
-                                                .replaceAll("\\<.*?>", "");
-                                ;
-
-                                // remove all bevore "Known Issues"
-                                text = text.substring(text.indexOf("Known Issues")).replaceAll("\\<.*?>", "");
-
-                                // remove all after "Feature Updates"
-                                text = text.substring(0, text.indexOf("Feature Updates"));
-
-                                // Version: 3.18.1-
-                                // Live: .8430497
-                                Main.RSSNews = "\nStar Citizen Alpha "
-                                                + Version + "LIVE" + Live + "\n\n" + Persistence + "\n" + text + "\n"
-                                                + timestamp;
-
-                                FormatNews();
-
-                                Main.RSSNews = "`" + Main.RSSNews + "`";
-
-                                CheckandSaveLink(Version + "LIVE" + Live);
-                                // post message to channel
-
-                                // Version: 3.18.1-
-                        } catch (Exception e) {
-                                // get the text from .rsi-markup .segment .content
-                                String text = doc3.select(".rsi-markup .segment .content").html();
-                                // get 20 characters after "VERSION" 3.18.1-LIVE.8430497
-                                Version = text.substring(text.indexOf("VERSION"), text.indexOf("VERSION") + 40)
-                                                .replaceAll("VERSION", "")
-                                                .replaceAll("\\<.*?>", "").replaceAll("<span class=\"caps\"", "");
-                                ;
-
-                                Live = text.substring(text.indexOf("LIVE"), text.indexOf("LIVE") + 19)
-                                                .replaceAll("LIVE", "")
-                                                .replaceAll("\\<.*?>", "");
-                                ;
-
-                                // remove all bevore "Known Issues"
-                                text = text.substring(text.indexOf("Known Issues")).replaceAll("\\<.*?>", "");
-
-                                // remove all after "Feature Updates"
-                                text = text.substring(0, text.indexOf("Feature Updates"));
-
-                                // Version: 3.18.1-
-                                // Live: .8430497
-                                Main.RSSNews = "\nStar Citizen Alpha "
-                                                + Version + "LIVE" + Live + "\n\n" + Persistence + "\n" + text + "\n"
-                                                + timestamp;
-
-                                FormatNews();
-
-                                Main.RSSNews = "`" + Main.RSSNews + "`";
-
-                                CheckandSaveLink(Version + "LIVE" + Live);
-                                // post message to channel
-
+        public static void GetLatestPatchLink() throws IOException {
+                // get the latest link from baseurl
+                Document doc = Jsoup.connect(baseUrl).get();
+                Elements links = doc.select("a[href]");
+                for (int i = 0; i < links.size(); i++) {
+                        if (links.get(i).text().contains("Alpha")) {
+                                Link = links.get(i).attr("href");
+                                Patchlink = "https://robertsspaceindustries.com" + Link;
+                                break;
                         }
-
-                } catch (Exception e) {
-                        e.printStackTrace();
-                        WriteLogs.writeLog("Fehler beim Abrufen der Patchnotes " + e.toString());
                 }
-
-                //
-
-        }
-
-        public static void FormatNews() {
-                try {
-                        // make a beatiful message from Main.RSSNews for discord
-                        Main.RSSNews = Main.RSSNews.replaceAll("Star Citizen Alpha", "**Star Citizen Alpha**");
-                        Main.RSSNews = Main.RSSNews.replaceAll("Known Issues", "**Known Issues**");
-                        Main.RSSNews = Main.RSSNews.replaceAll("Feature Updates", "**Feature Updates**");
-                        Main.RSSNews = Main.RSSNews.replaceAll("Bug Fixes", "**Bug Fixes**");
-                        Main.RSSNews = Main.RSSNews.replaceAll("New Features", "**New Features**");
-                        Main.RSSNews = Main.RSSNews.replaceAll("Balance", "**Balance**");
-                        Main.RSSNews = Main.RSSNews.replaceAll("Technical", "**Technical**");
-                        Main.RSSNews = Main.RSSNews.replaceAll("Gameplay", "**Gameplay**");
-                        Main.RSSNews = Main.RSSNews.replaceAll("Ships and Vehicles", "**Ships and Vehicles**");
-                        Main.RSSNews = Main.RSSNews.replaceAll("Locations", "**Locations**");
-                        Main.RSSNews = Main.RSSNews.replaceAll("Weapons and Items", "**Weapons and Items**");
-                        Main.RSSNews = Main.RSSNews.replaceAll("Core Tech", "**Core Tech**");
-                        Main.RSSNews = Main.RSSNews.replaceAll("AI", "**AI**");
-                        Main.RSSNews = Main.RSSNews.replaceAll("Ships", "**Ships**");
-                        Main.RSSNews = Main.RSSNews.replaceAll("Vehicles", "**Vehicles**");
-                        Main.RSSNews = Main.RSSNews.replaceAll("Weapons", "**Weapons**");
-                        Main.RSSNews = Main.RSSNews.replaceAll("FPS Weapons", "**FPS Weapons**");
-                        Main.RSSNews = Main.RSSNews.replaceAll("FPS Gadgets", "**FPS Gadgets**");
-                        Main.RSSNews = Main.RSSNews.replaceAll("Long Term Persistence", "**Long Term Persistence**");
-                        Main.RSSNews = Main.RSSNews.replaceAll("Starting aUEC", "**Starting aUEC**");
-                } catch (Exception e) {
-                }
+                CheckandSaveLink(null);
 
         }
 
         public static void CheckandSaveLink(String Version) throws IOException {
-                // read file from desktop /link.txt on linux /root/link.txt
-                try {
+                // get the applications working directory
+                workingDir = System.getProperty("user.dir");
 
-                        // if link is in file ignore it, when link is not ini fil ewrite it
-                        if (os.contains("win")) {
-                                VersionFile = workingDir + "\\" + "version.txt";
- 
-                                System.out.println("VersionFile: " + VersionFile);
+                // check if the version file exists
+                File file = new File(workingDir + "\\Version.txt");
+                if (!file.exists()) {
+                        file.createNewFile();
+                }
 
-                                if (!new File(VersionFile).exists()) {
-                                        new File(VersionFile)
-                                                        .createNewFile();
-                                        try (BufferedWriter bw = new BufferedWriter(
-                                                        new FileWriter(VersionFile))) {
-                                                bw.write(Version);
+                // read the version file
+                BufferedReader br = new BufferedReader(new FileReader(file));
+                String st;
+                while ((st = br.readLine()) != null) {
+                        VersionFile = st;
+                }
+                br.close();
 
-                                        }
-                                } else {
-                                        try (BufferedReader br = new BufferedReader(
-                                                        new FileReader(VersionFile))) {
-                                                String line;
-                                                while ((line = br.readLine()) != null) {
-                                                        if (line.equals(Version)) {
-                                                                System.out.println(
-                                                                                "Version " + Version + " is in file");
-                                                                WriteLogs.writeLog(
-                                                                                "Version " + Version + " is in file");
-                                                                return;
-                                                        }
-                                                }
-                                        }
-                                        try (BufferedWriter bw = new BufferedWriter(
-                                                        new FileWriter(VersionFile))) {
+                // check if the PatchLink file is the same as the latest PatchLink
+                if (!VersionFile.equals(Patchlink)) {
+                        // if not save the latest PatchLink to the PatchLink file
+                        BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+                        writer.write(Patchlink);
+                        writer.close();
+                        System.out.println("Neuer Patch wurde gefunden!");
+                        GetPatchNotes();
 
-                                                SendMessage.ToNewsChannel();
+                } else {
+                        //GetPatchNotes();
 
-                                                bw.write(Version);
-                                        }
-                                }
-                        } else if(os.contains("nix") || os.contains("aix") || os.contains("nux")) {
-                                VersionFile = workingDir + "/" + "version.txt";
-
-                                if (!new File(VersionFile).exists()) {
-                                        new File(VersionFile).createNewFile();
-                                        try (BufferedWriter bw = new BufferedWriter(
-                                                        new FileWriter(VersionFile))) {
-                                                SendMessage.ToNewsChannel();
-                                                bw.write(Version);
-                                        }
-                                } else {
-                                        try (BufferedReader br = new BufferedReader(
-                                                        new FileReader(VersionFile))) {
-                                                String line;
-                                                while ((line = br.readLine()) != null) {
-                                                        if (line.equals(Version)) {
-                                                                System.out.println("Version is in File " + Version
-                                                                                + " Keine neuen Patchenotes");
-                                                                WriteLogs.writeLog("Version is in File " + Version
-                                                                                + " Keine neuen Patchenotes");
-                                                                return;
-                                                        }
-                                                }
-                                        }
-                                        try (BufferedWriter bw = new BufferedWriter(
-                                                        new FileWriter(VersionFile))) {
-                                                // foreach server send message to channel where name is #📣rsi-news
-                                                SendMessage.ToNewsChannel();
-                                                bw.write(Version);
-                                        }
-                                }
-                        }
-
-                } catch (Exception e) {
-                        e.printStackTrace();
-                        WriteLogs.writeLog("Fehler beim Abrufen der News " + e.toString());
+                        System.out.println("Kein Neuer Patch gefunden!");
                 }
 
         }
 
-        // async timer 1 hour tick 3600000
-        public static void startTimer() {
-                try {
-                        new java.util.Timer().schedule(
-                                        new java.util.TimerTask() {
-                                                @Override
-                                                public void run() {
-                                                        getPatchNotes();
-                                                        startTimer();
-                                                }
-                                        },
-                                        3600000);
-                } catch (Exception e) {
-                        System.out.println("Error: " + e);
-                        WriteLogs.writeLog("Error: " + e);
+        public static void GetPatchNotes() throws IOException {
+                // get the text from .rsi-markup .segment .content
+                Document doc = Jsoup.connect(Patchlink).get();
+                Elements links = doc.select(".rsi-markup .segment .content");
+                for (int i = 0; i < links.size(); i++) {
+                        RSSNews = links.get(i).html();
+
                 }
 
+                RSSNews = RSSNews.replaceAll("<li>", "°");
+
+                // remove html tags
+                RSSNews = RSSNews.replaceAll("\\<.*?\\>", "");
+                RSSNews = RSSNews.replaceAll("&nbsp;", "");
+                RSSNews = RSSNews.replaceAll("&amp;", "&");
+                RSSNews = RSSNews.replaceAll("&quot;", "\"");
+                RSSNews = RSSNews.replaceAll("&apos;", "'");
+                RSSNews = RSSNews.replaceAll("&lt;", "<");
+                RSSNews = RSSNews.replaceAll("&gt;", ">");
+                RSSNews = RSSNews.replaceAll("&cent;", "¢");
+                RSSNews = RSSNews.replaceAll("&pound;", "£");
+                RSSNews = RSSNews.replaceAll("&yen;", "¥");
+                RSSNews = RSSNews.replaceAll("&euro;", "€");
+                RSSNews = RSSNews.replaceAll("&copy;", "©");
+                RSSNews = RSSNews.replaceAll("&reg;", "®");
+                RSSNews = RSSNews.replaceAll("&trade;", "™");
+                RSSNews = RSSNews.replaceAll("&times;", "×");
+                RSSNews = RSSNews.replaceAll("&divide;", "÷");
+                RSSNews = RSSNews.replaceAll("&para;", "¶");
+                RSSNews = RSSNews.replaceAll("&sect;", "§");
+                RSSNews = RSSNews.replaceAll("&brvbar;", "¦");
+                RSSNews = RSSNews.replaceAll("&bull;", "•");
+                RSSNews = RSSNews.replaceAll("&hellip;", "…");
+                RSSNews = RSSNews.replaceAll("&prime;", "′");
+                RSSNews = RSSNews.replaceAll("&Prime;", "″");
+                RSSNews = RSSNews.replaceAll("&oline;", "‾");
+                RSSNews = RSSNews.replaceAll("&frasl;", "⁄");
+                RSSNews = RSSNews.replaceAll("&ndash;", "–");
+                RSSNews = RSSNews.replaceAll("&mdash;", "—");
+                RSSNews = RSSNews.replaceAll("&lsquo;", "‘");
+                RSSNews = RSSNews.replaceAll("&rsquo;", "’");
+                RSSNews = RSSNews.replaceAll("&sbquo;", "‚");
+                RSSNews = RSSNews.replaceAll("&ldquo;", "“");
+                RSSNews = RSSNews.replaceAll("&rdquo;", "”");
+                RSSNews = RSSNews.replaceAll("&bdquo;", "„");
+                RSSNews = RSSNews.replaceAll("&dagger;", "†");
+                RSSNews = RSSNews.replaceAll("</span", "");
+                RSSNews = RSSNews.replaceAll("Back to top", "");
+
+                RSSNews = RSSNews.replaceAll("Star Citizen Alpha", "**Star Citizen Alpha**");
+                RSSNews = RSSNews.replaceAll("Known Issues", "**Known Issues**");
+                RSSNews = RSSNews.replaceAll("Feature Updates", "**Feature Updates**");
+                RSSNews = RSSNews.replaceAll("Bug Fixes", "**Bug Fixes**");
+                RSSNews = RSSNews.replaceAll("New Features", "**New Features**");
+                RSSNews = RSSNews.replaceAll("Balance", "**Balance**");
+                RSSNews = RSSNews.replaceAll("Technical", "**Technical**");
+                RSSNews = RSSNews.replaceAll("Gameplay", "**Gameplay**");
+                RSSNews = RSSNews.replaceAll("Ships and Vehicles", "**Ships and Vehicles**");
+                RSSNews = RSSNews.replaceAll("Locations", "**Locations**");
+                RSSNews = RSSNews.replaceAll("Weapons and Items", "**Weapons and Items**");
+                RSSNews = RSSNews.replaceAll("Core Tech", "**Core Tech**");
+                RSSNews = RSSNews.replaceAll("AI", "**AI**");
+                RSSNews = RSSNews.replaceAll("Ships", "**Ships**");
+                RSSNews = RSSNews.replaceAll("Vehicles", "**Vehicles**");
+                RSSNews = RSSNews.replaceAll("Weapons", "**Weapons**");
+                RSSNews = RSSNews.replaceAll("FPS Weapons", "**FPS Weapons**");
+                RSSNews = RSSNews.replaceAll("FPS Gadgets", "**FPS Gadgets**");
+                RSSNews = RSSNews.replaceAll("Long Term Persistence", "**Long Term Persistence**");
+                RSSNews = RSSNews.replaceAll("Starting aUEC", "**Starting aUEC**");
+                RSSNews = RSSNews.replaceAll("Shops and Shopping", "**Shops and Shopping**");
+                RSSNews = RSSNews.replaceAll("Ships", "**Ships**");
+                RSSNews = RSSNews.replaceAll("Vehicles", "**Vehicles**");
+                RSSNews = RSSNews.replaceAll("Weapons", "**Weapons**");
+                RSSNews = RSSNews.replaceAll("Star Citizen Patch", "**Star Citizen Patch**");
+
+
+
+                List<String> splitStrings = splitString(RSSNews, 1000);
+                List<String> finalStrings = new ArrayList<>();
+                for (String s : splitStrings) {
+                        finalStrings.addAll(splitString(s, 1900));
+                }
+
+                for (String s : finalStrings) {
+                        // Posten auf discord
+                        SendMessage.ToNewsChannel("```prolog\n"  + s + "\n```");
+                }
+
+        }
+
+        public static List<String> splitString(String input, int length) {
+                List<String> result = new ArrayList<>();
+                int index = 0;
+                while (index < input.length()) {
+                        result.add(input.substring(index, Math.min(index + length, input.length())));
+                        index += length;
+                }
+                return result;
         }
 
 }

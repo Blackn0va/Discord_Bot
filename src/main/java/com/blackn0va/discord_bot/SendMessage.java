@@ -4,14 +4,13 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 
 public class SendMessage {
-    public static void ToNewsChannel() {
+    public static void ToNewsChannel(String Message) {
         try {
             // foreach server send message to channel where name is #📣rsi-news
             for (Guild guild : Main.bauplan.getGuilds()) {
                 for (TextChannel channel : guild.getTextChannels()) {
                     if (channel.getName().equals("📣rsi-news")) {
-                        channel.sendMessage("@Star Citizen #📣rsi-news"
-                                + Main.RSSNews).queue();
+                        channel.sendMessage( Message).queue();
                     }
                 }
             }

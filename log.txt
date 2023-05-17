@@ -22,3 +22,381 @@ Erkanntes Betriebssystem: windows 11
 Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
 Fehler beim Erstellen der Antwort
 API Key überprüfen!
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
+Fehler beim Abrufen der Patchnotes java.lang.StringIndexOutOfBoundsException: begin -1, end 39, length 20616
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
+Fehler beim Abrufen der Patchnotes java.lang.StringIndexOutOfBoundsException: begin -1, end 39, length 20616
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
+Fehler beim Abrufen der Patchnotes java.lang.StringIndexOutOfBoundsException: begin -1, end 39, length 20616
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
+Fehler beim Abrufen der Patchnotes java.lang.StringIndexOutOfBoundsException: begin -1, end 39, length 20616
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
+Fehler beim Abrufen der Patchnotes java.lang.StringIndexOutOfBoundsException: begin -1, end 39, length 10938
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
+Fehler beim Abrufen der Patchnotes java.lang.StringIndexOutOfBoundsException: begin -1, end 39, length 20616
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
+Fehler beim Abrufen der Patchnotes java.lang.StringIndexOutOfBoundsException: begin -1, end 39, length 20616
+Erkanntes Betriebssystem: windows 11
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
+Fehler beim Abrufen der Patchnotes java.lang.StringIndexOutOfBoundsException: begin -1, end 39, length 20616
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
+Fehler beim Abrufen der Patchnotes java.lang.StringIndexOutOfBoundsException: begin -1, end 39, length 20616
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
+Fehler beim Abrufen der Patchnotes java.lang.StringIndexOutOfBoundsException: begin -1, end 39, length 20616
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
+Error: java.lang.IllegalArgumentException: Content may not be longer than 2000 characters! Provided: "@Star Citizen #?rsi-news`
+Star Citizen Alpha /comm-link//19295-Star-Citizen-Alpha-3190LIVE.8478820
+
+Long Term Persistence: Enabled
+ Starting aUEC: 20,000
+
+Known Issues
+
+ Unstowed Player ships must be claimed after a 30K (Error 30000)
+ FPS weapons are selling for much lower than intended
+ Ships can explode from collision with invisible asteroids
+ Player corpses will not despawn at Grimhex
+ Art assets will clip through the Train during the journey in Lorville
+ The entrance of the Lorville hospital has a large Visarea issue
+ Substenance items lack “Store” option when carrying the item in Inner Thoughts
+ Players cannot see partied player ships when Quantum Linking together
+ The Hornet and Glaive currently have bugged high forward thrust
+ Rest Stop (R&amp;R) – ARC-L4 – Design / Transit / Locations – Players are unable to call elevators from rest stop refinery
+ Multilocation – Locations / Shopping / Interactions – Pharmacy kiosk terminals “Use” interface and Interactions are misaligned
+ Weapon Feature / Game Code – Tractor Beam – If you activate the tractor beam in hangar, you can bring the activated tractor beam back and use it in armistice zone
+ Aegis Reclaimer – Ships / Vehicles – Ship Features – Reclaimer has no rear Elevator interaction from ship exterior
+ ARGO MOLE – Vehicles / UI – The interaction prompts for ALL mining turrets are easy to miss/in unintuitive locations for players
+ CNOU HoverQuad – Vehicles / Locations – The vehicle spawns slightly stuck in the ground
+ Multivehicle – UI / Vehicles / Mining – Mining UI is appearing in Low Resolution
+ Racing – Locations – A specific rock formations on the Yadar Valley race track are visible to some player and not others
+ Crusader – Security Post Kareah – Core Tech – Physics – Actor / Player – Transitioning from EVA onto Kareah’s landing pads has a high chance of instantly killing the player
+ Transit – Area18 – Orison – Shuttles/Trains/Trams – Players are falling through sometimes disappearing trams and shuttles to their deaths
+ Locations – ArcCorp / Crusader – Area18 / Orison – Core Tech / Transit Systems – The Trams are out of sync with the station timers, causing trams to overlap or not appear on time
+ Security Post Kareah – Mission Content / Art – VisArea – Contraband screens have a visarea issue
+
+
+New Features
+Gameplay
+
+ Mission – Salvage Contracts – T0
+
+Addition of Salvage Contracts to the PU. This new contract called the Salvage Resource Rush is a mission where a faction or mission giver requests the scrapping of a derelict or husk in their possession, either on the ground at a junkyard or in space in a debris field. Players accepting the mission are tasked to scrap the derelict to the best of their ability and sell the RCM to a shop. Once the player is finished with the scrapping of the derelict, they can complete the mission in their MobiGlass. This mission will have three variations:
+Lawful: a lawful mission giver or organization requests the scrapping of a derelict. The location is secured by the organization with orbital sentries or Centurions.
+  Lawless: a mission giver requests the scrapping of a derelict. The location is not secured in any way, risk of being raided by pirates is present.
+  Unlawful: an unlawful mission giver or organization asks for the salvage of a recent battle, which is not accessible to civilians/cordoned off. The location is secured by hostile orbital sentries or Centurions.
+
+ Ghost Hollow Reclaimer PVP Mission
+
+Adding a new mission type to the Ghost Hollow crash site on MicroTech. Making use of the comm-array as well as AI nav-mesh, this mission type will create PVP encounters where players will need to fight for control over terminals for a chance at big credit payouts.
+This is a mission with Outlaw UEC terminals in the Reclaimer derelict. When active, they generate UEC that anybody can withdraw, creating PVP encounters between players trying to control the terminals (which are also guarded by Outlaws AI). To start the terminals, the comms array must be disabled. If that is done, the terminals can be activated in the tower next to the derelict ship. To start this event at the Ghost Hollow Crash Site, a player will need to disable the Stanton4 comm array above MicroTech which will enable the terminals and a Mobiglas communication is sent to all nearby players.
+
+ New Player Experience
+
+An initiative for improving the initial (first 30 minutes) gameplay experience, which will help players understand the context of the world and introduce them to some of Star Citizen’s basic features. This update focuses on the experience in Area 18 and Baijini Point. As players enter the main menu to join the universe they will be prompted with the option to join as normal or accept the New Player Experience Mission chain which will set their spawn to Area18 and begining a walkthrough. Being the NPE we are going to leave the details off to give you all the experience of doing this as close to a new player as possible without information.
+
+
+Wed May 17 09:41:40 CEST 2023`"
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
+Fehler beim Abrufen der Patchnotes java.lang.StringIndexOutOfBoundsException: begin -1, end 29, length 20616
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
+Fehler beim Abrufen der Patchnotes java.lang.StringIndexOutOfBoundsException: begin -1, end 4, length 20616
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
+Fehler beim Abrufen der Patchnotes java.lang.StringIndexOutOfBoundsException: begin -1, end 0, length 20616
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
+Fehler beim Abrufen der Patchnotes java.lang.StringIndexOutOfBoundsException: begin -1, end 39, length 20616
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
+Version /comm-link//19295-Star-Citizen-Alpha-3190LIVE.8478820 is in file
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
+Version /comm-link//19295-Star-Citizen-Alpha-3190LIVE.8478820 is in file
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
+Fehler beim Abrufen der Patchnotes java.lang.StringIndexOutOfBoundsException: begin -1, end 39, length 20616
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
+Fehler beim Abrufen der Patchnotes java.lang.StringIndexOutOfBoundsException: begin -1, end -1, length 20616
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
+Fehler beim Abrufen der Patchnotes java.lang.StringIndexOutOfBoundsException: begin -1, end 39, length 20616
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
+Fehler beim Abrufen der Patchnotes java.lang.StringIndexOutOfBoundsException: begin -1, end 39, length 20616
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
+Version /comm-link//19295-Star-Citizen-Alpha-3190LIVE.8478820 is in file
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
+Error: java.lang.IllegalArgumentException: Content may not be longer than 2000 characters! Provided: "@Star Citizen #?rsi-news`
+Star Citizen Alpha /comm-link//19295-Star-Citizen-Alpha-3190LIVE.8478820
+
+Long Term Persistence: Enabled
+ Starting aUEC: 20,000
+
+Known Issues
+
+ Unstowed Player ships must be claimed after a 30K (Error 30000)
+ FPS weapons are selling for much lower than intended
+ Ships can explode from collision with invisible asteroids
+ Player corpses will not despawn at Grimhex
+ Art assets will clip through the Train during the journey in Lorville
+ The entrance of the Lorville hospital has a large Visarea issue
+ Substenance items lack “Store” option when carrying the item in Inner Thoughts
+ Players cannot see partied player ships when Quantum Linking together
+ The Hornet and Glaive currently have bugged high forward thrust
+ Rest Stop (R&amp;R) – ARC-L4 – Design / Transit / Locations – Players are unable to call elevators from rest stop refinery
+ Multilocation – Locations / Shopping / Interactions – Pharmacy kiosk terminals “Use” interface and Interactions are misaligned
+ Weapon Feature / Game Code – Tractor Beam – If you activate the tractor beam in hangar, you can bring the activated tractor beam back and use it in armistice zone
+ Aegis Reclaimer – Ships / Vehicles – Ship Features – Reclaimer has no rear Elevator interaction from ship exterior
+ ARGO MOLE – Vehicles / UI – The interaction prompts for ALL mining turrets are easy to miss/in unintuitive locations for players
+ CNOU HoverQuad – Vehicles / Locations – The vehicle spawns slightly stuck in the ground
+ Multivehicle – UI / Vehicles / Mining – Mining UI is appearing in Low Resolution
+ Racing – Locations – A specific rock formations on the Yadar Valley race track are visible to some player and not others
+ Crusader – Security Post Kareah – Core Tech – Physics – Actor / Player – Transitioning from EVA onto Kareah’s landing pads has a high chance of instantly killing the player
+ Transit – Area18 – Orison – Shuttles/Trains/Trams – Players are falling through sometimes disappearing trams and shuttles to their deaths
+ Locations – ArcCorp / Crusader – Area18 / Orison – Core Tech / Transit Systems – The Trams are out of sync with the station timers, causing trams to overlap or not appear on time
+ Security Post Kareah – Mission Content / Art – VisArea – Contraband screens have a visarea issue
+
+
+New Features
+Gameplay
+
+ Mission – Salvage Contracts – T0
+
+Addition of Salvage Contracts to the PU. This new contract called the Salvage Resource Rush is a mission where a faction or mission giver requests the scrapping of a derelict or husk in their possession, either on the ground at a junkyard or in space in a debris field. Players accepting the mission are tasked to scrap the derelict to the best of their ability and sell the RCM to a shop. Once the player is finished with the scrapping of the derelict, they can complete the mission in their MobiGlass. This mission will have three variations:
+Lawful: a lawful mission giver or organization requests the scrapping of a derelict. The location is secured by the organization with orbital sentries or Centurions.
+  Lawless: a mission giver requests the scrapping of a derelict. The location is not secured in any way, risk of being raided by pirates is present.
+  Unlawful: an unlawful mission giver or organization asks for the salvage of a recent battle, which is not accessible to civilians/cordoned off. The location is secured by hostile orbital sentries or Centurions.
+
+ Ghost Hollow Reclaimer PVP Mission
+
+Adding a new mission type to the Ghost Hollow crash site on MicroTech. Making use of the comm-array as well as AI nav-mesh, this mission type will create PVP encounters where players will need to fight for control over terminals for a chance at big credit payouts.
+This is a mission with Outlaw UEC terminals in the Reclaimer derelict. When active, they generate UEC that anybody can withdraw, creating PVP encounters between players trying to control the terminals (which are also guarded by Outlaws AI). To start the terminals, the comms array must be disabled. If that is done, the terminals can be activated in the tower next to the derelict ship. To start this event at the Ghost Hollow Crash Site, a player will need to disable the Stanton4 comm array above MicroTech which will enable the terminals and a Mobiglas communication is sent to all nearby players.
+
+ New Player Experience
+
+An initiative for improving the initial (first 30 minutes) gameplay experience, which will help players understand the context of the world and introduce them to some of Star Citizen’s basic features. This update focuses on the experience in Area 18 and Baijini Point. As players enter the main menu to join the universe they will be prompted with the option to join as normal or accept the New Player Experience Mission chain which will set their spawn to Area18 and begining a walkthrough. Being the NPE we are going to leave the details off to give you all the experience of doing this as close to a new player as possible without information.
+
+
+Wed May 17 09:48:23 CEST 2023`"
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
+Version /comm-link//19295-Star-Citizen-Alpha-3190LIVE.8478820 is in file
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
+Error: java.lang.IllegalArgumentException: Content may not be longer than 2000 characters! Provided: "@Star Citizen #?rsi-news`
+Star Citizen Alpha /comm-link//19295-Star-Citizen-Alpha-3190LIVE.8478820
+
+Long Term Persistence: Enabled
+ Starting aUEC: 20,000
+
+Known Issues
+
+ Unstowed Player ships must be claimed after a 30K (Error 30000)
+ FPS weapons are selling for much lower than intended
+ Ships can explode from collision with invisible asteroids
+ Player corpses will not despawn at Grimhex
+ Art assets will clip through the Train during the journey in Lorville
+ The entrance of the Lorville hospital has a large Visarea issue
+ Substenance items lack “Store” option when carrying the item in Inner Thoughts
+ Players cannot see partied player ships when Quantum Linking together
+ The Hornet and Glaive currently have bugged high forward thrust
+ Rest Stop (R&amp;R) – ARC-L4 – Design / Transit / Locations – Players are unable to call elevators from rest stop refinery
+ Multilocation – Locations / Shopping / Interactions – Pharmacy kiosk terminals “Use” interface and Interactions are misaligned
+ Weapon Feature / Game Code – Tractor Beam – If you activate the tractor beam in hangar, you can bring the activated tractor beam back and use it in armistice zone
+ Aegis Reclaimer – Ships / Vehicles – Ship Features – Reclaimer has no rear Elevator interaction from ship exterior
+ ARGO MOLE – Vehicles / UI – The interaction prompts for ALL mining turrets are easy to miss/in unintuitive locations for players
+ CNOU HoverQuad – Vehicles / Locations – The vehicle spawns slightly stuck in the ground
+ Multivehicle – UI / Vehicles / Mining – Mining UI is appearing in Low Resolution
+ Racing – Locations – A specific rock formations on the Yadar Valley race track are visible to some player and not others
+ Crusader – Security Post Kareah – Core Tech – Physics – Actor / Player – Transitioning from EVA onto Kareah’s landing pads has a high chance of instantly killing the player
+ Transit – Area18 – Orison – Shuttles/Trains/Trams – Players are falling through sometimes disappearing trams and shuttles to their deaths
+ Locations – ArcCorp / Crusader – Area18 / Orison – Core Tech / Transit Systems – The Trams are out of sync with the station timers, causing trams to overlap or not appear on time
+ Security Post Kareah – Mission Content / Art – VisArea – Contraband screens have a visarea issue
+
+
+New Features
+Gameplay
+
+ Mission – Salvage Contracts – T0
+
+Addition of Salvage Contracts to the PU. This new contract called the Salvage Resource Rush is a mission where a faction or mission giver requests the scrapping of a derelict or husk in their possession, either on the ground at a junkyard or in space in a debris field. Players accepting the mission are tasked to scrap the derelict to the best of their ability and sell the RCM to a shop. Once the player is finished with the scrapping of the derelict, they can complete the mission in their MobiGlass. This mission will have three variations:
+Lawful: a lawful mission giver or organization requests the scrapping of a derelict. The location is secured by the organization with orbital sentries or Centurions.
+  Lawless: a mission giver requests the scrapping of a derelict. The location is not secured in any way, risk of being raided by pirates is present.
+  Unlawful: an unlawful mission giver or organization asks for the salvage of a recent battle, which is not accessible to civilians/cordoned off. The location is secured by hostile orbital sentries or Centurions.
+
+ Ghost Hollow Reclaimer PVP Mission
+
+Adding a new mission type to the Ghost Hollow crash site on MicroTech. Making use of the comm-array as well as AI nav-mesh, this mission type will create PVP encounters where players will need to fight for control over terminals for a chance at big credit payouts.
+This is a mission with Outlaw UEC terminals in the Reclaimer derelict. When active, they generate UEC that anybody can withdraw, creating PVP encounters between players trying to control the terminals (which are also guarded by Outlaws AI). To start the terminals, the comms array must be disabled. If that is done, the terminals can be activated in the tower next to the derelict ship. To start this event at the Ghost Hollow Crash Site, a player will need to disable the Stanton4 comm array above MicroTech which will enable the terminals and a Mobiglas communication is sent to all nearby players.
+
+ New Player Experience
+
+An initiative for improving the initial (first 30 minutes) gameplay experience, which will help players understand the context of the world and introduce them to some of Star Citizen’s basic features. This update focuses on the experience in Area 18 and Baijini Point. As players enter the main menu to join the universe they will be prompted with the option to join as normal or accept the New Player Experience Mission chain which will set their spawn to Area18 and begining a walkthrough. Being the NPE we are going to leave the details off to give you all the experience of doing this as close to a new player as possible without information.
+
+
+Wed May 17 09:49:32 CEST 2023`"
+Erkanntes Betriebssystem: windows 11
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
+Error: java.lang.IllegalArgumentException: Content may not be longer than 2000 characters! Provided: "@Star Citizen #?rsi-news`
+Star Citizen Alpha /comm-link//19295-Star-Citizen-Alpha-3190LIVE.8478820
+
+Long Term Persistence: Enabled
+ Starting aUEC: 20,000
+
+Known Issues
+
+ Unstowed Player ships must be claimed after a 30K (Error 30000)
+ FPS weapons are selling for much lower than intended
+ Ships can explode from collision with invisible asteroids
+ Player corpses will not despawn at Grimhex
+ Art assets will clip through the Train during the journey in Lorville
+ The entrance of the Lorville hospital has a large Visarea issue
+ Substenance items lack “Store” option when carrying the item in Inner Thoughts
+ Players cannot see partied player ships when Quantum Linking together
+ The Hornet and Glaive currently have bugged high forward thrust
+ Rest Stop (R&amp;R) – ARC-L4 – Design / Transit / Locations – Players are unable to call elevators from rest stop refinery
+ Multilocation – Locations / Shopping / Interactions – Pharmacy kiosk terminals “Use” interface and Interactions are misaligned
+ Weapon Feature / Game Code – Tractor Beam – If you activate the tractor beam in hangar, you can bring the activated tractor beam back and use it in armistice zone
+ Aegis Reclaimer – Ships / Vehicles – Ship Features – Reclaimer has no rear Elevator interaction from ship exterior
+ ARGO MOLE – Vehicles / UI – The interaction prompts for ALL mining turrets are easy to miss/in unintuitive locations for players
+ CNOU HoverQuad – Vehicles / Locations – The vehicle spawns slightly stuck in the ground
+ Multivehicle – UI / Vehicles / Mining – Mining UI is appearing in Low Resolution
+ Racing – Locations – A specific rock formations on the Yadar Valley race track are visible to some player and not others
+ Crusader – Security Post Kareah – Core Tech – Physics – Actor / Player – Transitioning from EVA onto Kareah’s landing pads has a high chance of instantly killing the player
+ Transit – Area18 – Orison – Shuttles/Trains/Trams – Players are falling through sometimes disappearing trams and shuttles to their deaths
+ Locations – ArcCorp / Crusader – Area18 / Orison – Core Tech / Transit Systems – The Trams are out of sync with the station timers, causing trams to overlap or not appear on time
+ Security Post Kareah – Mission Content / Art – VisArea – Contraband screens have a visarea issue
+
+
+New Features
+Gameplay
+
+ Mission – Salvage Contracts – T0
+
+Addition of Salvage Contracts to the PU. This new contract called the Salvage Resource Rush is a mission where a faction or mission giver requests the scrapping of a derelict or husk in their possession, either on the ground at a junkyard or in space in a debris field. Players accepting the mission are tasked to scrap the derelict to the best of their ability and sell the RCM to a shop. Once the player is finished with the scrapping of the derelict, they can complete the mission in their MobiGlass. This mission will have three variations:
+Lawful: a lawful mission giver or organization requests the scrapping of a derelict. The location is secured by the organization with orbital sentries or Centurions.
+  Lawless: a mission giver requests the scrapping of a derelict. The location is not secured in any way, risk of being raided by pirates is present.
+  Unlawful: an unlawful mission giver or organization asks for the salvage of a recent battle, which is not accessible to civilians/cordoned off. The location is secured by hostile orbital sentries or Centurions.
+
+ Ghost Hollow Reclaimer PVP Mission
+
+Adding a new mission type to the Ghost Hollow crash site on MicroTech. Making use of the comm-array as well as AI nav-mesh, this mission type will create PVP encounters where players will need to fight for control over terminals for a chance at big credit payouts.
+This is a mission with Outlaw UEC terminals in the Reclaimer derelict. When active, they generate UEC that anybody can withdraw, creating PVP encounters between players trying to control the terminals (which are also guarded by Outlaws AI). To start the terminals, the comms array must be disabled. If that is done, the terminals can be activated in the tower next to the derelict ship. To start this event at the Ghost Hollow Crash Site, a player will need to disable the Stanton4 comm array above MicroTech which will enable the terminals and a Mobiglas communication is sent to all nearby players.
+
+ New Player Experience
+
+An initiative for improving the initial (first 30 minutes) gameplay experience, which will help players understand the context of the world and introduce them to some of Star Citizen’s basic features. This update focuses on the experience in Area 18 and Baijini Point. As players enter the main menu to join the universe they will be prompted with the option to join as normal or accept the New Player Experience Mission chain which will set their spawn to Area18 and begining a walkthrough. Being the NPE we are going to leave the details off to give you all the experience of doing this as close to a new player as possible without information.
+
+
+Wed May 17 09:51:10 CEST 2023`"
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
+Version /comm-link//19295-Star-Citizen-Alpha-3190LIVE.8478820 is in file
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
+Fehler beim Abrufen der Patchnotes java.lang.StringIndexOutOfBoundsException: begin -1, end 39, length 20616
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
+Fehler beim Abrufen der Patchnotes java.lang.StringIndexOutOfBoundsException: begin -1, end 39, length 20616
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
+Fehler beim Abrufen der Patchnotes java.lang.StringIndexOutOfBoundsException: begin -1, end 29, length 20616
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
+Error: java.lang.IllegalArgumentException: Content may not be longer than 2000 characters! Provided: "@Star Citizen #?rsi-news`
+Star Citizen Alpha /comm-link//19295-Star-Citizen-Alpha-3190LIVE.8478820
+
+Long Term Persistence: Enabled
+ Starting aUEC: 20,000
+
+Known Issues
+
+ Unstowed Player ships must be claimed after a 30K (Error 30000)
+ FPS weapons are selling for much lower than intended
+ Ships can explode from collision with invisible asteroids
+ Player corpses will not despawn at Grimhex
+ Art assets will clip through the Train during the journey in Lorville
+ The entrance of the Lorville hospital has a large Visarea issue
+ Substenance items lack “Store” option when carrying the item in Inner Thoughts
+ Players cannot see partied player ships when Quantum Linking together
+ The Hornet and Glaive currently have bugged high forward thrust
+ Rest Stop (R&amp;R) – ARC-L4 – Design / Transit / Locations – Players are unable to call elevators from rest stop refinery
+ Multilocation – Locations / Shopping / Interactions – Pharmacy kiosk terminals “Use” interface and Interactions are misaligned
+ Weapon Feature / Game Code – Tractor Beam – If you activate the tractor beam in hangar, you can bring the activated tractor beam back and use it in armistice zone
+ Aegis Reclaimer – Ships / Vehicles – Ship Features – Reclaimer has no rear Elevator interaction from ship exterior
+ ARGO MOLE – Vehicles / UI – The interaction prompts for ALL mining turrets are easy to miss/in unintuitive locations for players
+ CNOU HoverQuad – Vehicles / Locations – The vehicle spawns slightly stuck in the ground
+ Multivehicle – UI / Vehicles / Mining – Mining UI is appearing in Low Resolution
+ Racing – Locations – A specific rock formations on the Yadar Valley race track are visible to some player and not others
+ Crusader – Security Post Kareah – Core Tech – Physics – Actor / Player – Transitioning from EVA onto Kareah’s landing pads has a high chance of instantly killing the player
+ Transit – Area18 – Orison – Shuttles/Trains/Trams – Players are falling through sometimes disappearing trams and shuttles to their deaths
+ Locations – ArcCorp / Crusader – Area18 / Orison – Core Tech / Transit Systems – The Trams are out of sync with the station timers, causing trams to overlap or not appear on time
+ Security Post Kareah – Mission Content / Art – VisArea – Contraband screens have a visarea issue
+
+
+New Features
+Gameplay
+
+ Mission – Salvage Contracts – T0
+
+Addition of Salvage Contracts to the PU. This new contract called the Salvage Resource Rush is a mission where a faction or mission giver requests the scrapping of a derelict or husk in their possession, either on the ground at a junkyard or in space in a debris field. Players accepting the mission are tasked to scrap the derelict to the best of their ability and sell the RCM to a shop. Once the player is finished with the scrapping of the derelict, they can complete the mission in their MobiGlass. This mission will have three variations:
+Lawful: a lawful mission giver or organization requests the scrapping of a derelict. The location is secured by the organization with orbital sentries or Centurions.
+  Lawless: a mission giver requests the scrapping of a derelict. The location is not secured in any way, risk of being raided by pirates is present.
+  Unlawful: an unlawful mission giver or organization asks for the salvage of a recent battle, which is not accessible to civilians/cordoned off. The location is secured by hostile orbital sentries or Centurions.
+
+ Ghost Hollow Reclaimer PVP Mission
+
+Adding a new mission type to the Ghost Hollow crash site on MicroTech. Making use of the comm-array as well as AI nav-mesh, this mission type will create PVP encounters where players will need to fight for control over terminals for a chance at big credit payouts.
+This is a mission with Outlaw UEC terminals in the Reclaimer derelict. When active, they generate UEC that anybody can withdraw, creating PVP encounters between players trying to control the terminals (which are also guarded by Outlaws AI). To start the terminals, the comms array must be disabled. If that is done, the terminals can be activated in the tower next to the derelict ship. To start this event at the Ghost Hollow Crash Site, a player will need to disable the Stanton4 comm array above MicroTech which will enable the terminals and a Mobiglas communication is sent to all nearby players.
+
+ New Player Experience
+
+An initiative for improving the initial (first 30 minutes) gameplay experience, which will help players understand the context of the world and introduce them to some of Star Citizen’s basic features. This update focuses on the experience in Area 18 and Baijini Point. As players enter the main menu to join the universe they will be prompted with the option to join as normal or accept the New Player Experience Mission chain which will set their spawn to Area18 and begining a walkthrough. Being the NPE we are going to leave the details off to give you all the experience of doing this as close to a new player as possible without information.
+
+
+Wed May 17 12:28:36 CEST 2023`"
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|

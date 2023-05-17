@@ -10,14 +10,15 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
-import com.fasterxml.jackson.core.filter.TokenFilter;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.requests.GatewayIntent;
-import scala.util.parsing.combinator.token.Tokens.Token;
+ 
 
 /**
  *
@@ -39,6 +40,9 @@ public class Main {
     public static String RSIStatus = "";
     public static String workingDir = System.getProperty("user.dir");
     public static String os = System.getProperty("os.name").toLowerCase();
+
+    private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+
 
     public static String TokenFile = "";
 
@@ -149,15 +153,26 @@ public class Main {
         }
 
         // start Timer for News and Status
-        rssNews.startTimer();
+
+
+        rssNews.GetLatestPatchLink();
+
+        scheduler.scheduleAtFixedRate(() -> {
+            try {
+                    rssNews.GetLatestPatchLink();
+            } catch (IOException e) {
+                    e.printStackTrace();
+            }
+    }, 0, 60, TimeUnit.MINUTES);
+        
+        
         statusfeed.startTimer();
 
         // initial Status
         statusfeed.getStatus();
 
         // initial News
-        rssNews.getPatchNotes();
-
+ 
         // WriteLogs.startTimer();
 
     }
