@@ -1,5 +1,7 @@
 package com.blackn0va.discord_bot;
 
+import java.io.IOException;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -7,7 +9,7 @@ import net.dv8tion.jda.api.entities.Activity;
 
 public class statusfeed {
 
-    public static void getStatus() {
+    public static void getStatus() throws IOException{
 
         try {
             String Degraded = "";
@@ -50,23 +52,5 @@ public class statusfeed {
 
     }
 
-    // async timer 10 minutes tick 600000
-    public static void startTimer() {
-        try {
-            new java.util.Timer().schedule(
-                    new java.util.TimerTask() {
-                        @Override
-                        public void run() {
-                            getStatus();
-                            startTimer();
-                        }
-                    },
-                    600000);
-        } catch (Exception e) {
-            System.out.println("Error: " + e);
-            WriteLogs.writeLog("Error: " + e);
-        }
-
-    }
 
 }

@@ -18,7 +18,6 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.requests.GatewayIntent;
- 
 
 /**
  *
@@ -41,8 +40,8 @@ public class Main {
     public static String workingDir = System.getProperty("user.dir");
     public static String os = System.getProperty("os.name").toLowerCase();
 
-    private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-
+    private static final ScheduledExecutorService schedulerPatch = Executors.newScheduledThreadPool(1);
+    private static final ScheduledExecutorService schedulerStatus = Executors.newScheduledThreadPool(1);
 
     public static String TokenFile = "";
 
@@ -154,26 +153,23 @@ public class Main {
 
         // start Timer for News and Status
 
-
-        rssNews.GetLatestPatchLink();
-
-        scheduler.scheduleAtFixedRate(() -> {
+        schedulerPatch.scheduleAtFixedRate(() -> {
             try {
-                    rssNews.GetLatestPatchLink();
+                rssNews.GetLatestPatchLink();
             } catch (IOException e) {
-                    e.printStackTrace();
+                e.printStackTrace();
             }
-    }, 0, 60, TimeUnit.MINUTES);
-        
-        
-        statusfeed.startTimer();
+        }, 0, 60, TimeUnit.MINUTES);
 
-        // initial Status
-        statusfeed.getStatus();
+        schedulerStatus.scheduleAtFixedRate(() -> {
+            try {
+                statusfeed.getStatus();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }, 0, 10, TimeUnit.MINUTES);
 
-        // initial News
- 
-        // WriteLogs.startTimer();
+        
 
     }
 
