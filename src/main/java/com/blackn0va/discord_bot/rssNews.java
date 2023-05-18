@@ -159,7 +159,7 @@ public class rssNews {
 
 
 
-                List<String> splitStrings = splitString(RSSNews, 1000);
+                List<String> splitStrings = splitString(RSSNews, 1900);
                 List<String> finalStrings = new ArrayList<>();
                 for (String s : splitStrings) {
                         finalStrings.addAll(splitString(s, 1900));
