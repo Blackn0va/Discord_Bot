@@ -48,6 +48,6 @@ Commands: <br/>!regeln <br/>!stream https://www.twitch.tv/8lackn0va <br/>!say Ma
 Reactions: Hallo <br/>
 
 
-[![Blackn0va's github stats](https://github-readme-stats.vercel.app/api?username=Blackn0va&theme=blue-green)](https://github.com/Blackn0va/) <br/>
+[![Blackn0va's github stats](https://github-readme-stats.vercel.app/api?username=Blackn0va&theme=blue-green)](https://github.com/Blackn0va/)
 [![Blackn0va's github streak](https://github-readme-streak-stats.herokuapp.com/?user=Blackn0va&theme=blue-green)](https://github.com/Blackn0va/) <br/>
 [![Blackn0va's top languages](https://github-readme-stats.vercel.app/api/top-langs/?username=Blackn0va&theme=blue-green)](https://github.com/Blackn0va/) <br/>
