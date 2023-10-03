@@ -1,7 +1,7 @@
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Blackn0va/Discord_Bot/graphs/commit-activity)
 ![Maintainer](https://img.shields.io/badge/maintainer-Blackn0va-blue)
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
-[![Linux](https://img.shields.io/badge/Linux--red.svg)](https://shields.io/)
+[![Linux](https://img.shields.io/badge/Linux--green.svg)](https://shields.io/)
 [![Mac](https://img.shields.io/badge/Mac--red.svg)](https://shields.io/)
 [![Windows](https://img.shields.io/badge/Windows--green.svg)](https://shields.io/)
 [![GitHub commits](https://badgen.net/github/commits/Blackn0va/Discord_Bot)](https://GitHub.com/Blackn0va/Discord_Bot/commit/)
