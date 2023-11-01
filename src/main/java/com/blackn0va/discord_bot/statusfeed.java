@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import net.dv8tion.jda.api.entities.Activity;
 
@@ -12,35 +14,31 @@ public class statusfeed {
     public static void getStatus() throws IOException{
 
         try {
-            String Degraded = "";
-            String operational = "";
-            String Outage = "";
+            String Status = "";
 
             Document doc = Jsoup.connect("https://status.robertsspaceindustries.com/")
                     .get();
 
             try {
-                // get the value of the first
-                // div.system.flex.flex-row.justify-between.degraded-performance
-                Degraded = doc.select("div.system.flex.flex-row.justify-between.degraded-performance").text();
-                operational = doc.select("div.system.flex.flex-row.justify-between.operational").text();
-                Outage = doc.select("div.system.flex.flex-row.justify-between.partial-outage").text();
+                Elements components = doc.select("div.component");
+                for (Element component : components) {
+                    String componentName = component.text();
+                    String componentStatus = component.select("span.component-status").attr("data-status");
 
-                // System.out.println(Degraded + " \n" + operational + " \n" + outage);
+                    //Status += "|" + componentName + " ist " + (componentStatus.equals("operational") ? "Operational" : componentStatus) + "_______________|";
+
+                    Status += "|" + componentName +  "|" ;
+                }
+
+                //System.out.println(Status);
 
             } catch (Exception e) {
 
             }
 
-            String Status = operational
-                    .replaceAll("Platform Operational", "|Platform ist Operational_______________|")
-                    .replaceAll("Persistent Universe Operational",
-                            "|Persistente Universum ist Operational____|")
-                    .replaceAll("Electronic Access Operational", "|Electronic Access ist Operational_______|")
-                    + Degraded + Outage;
-
+            System.out.println("Serverstatus: " + Status);
             Main.bauplan.getPresence()
-                    .setActivity(Activity.playing(Status));
+                    .setActivity(Activity.customStatus(Status));
 
             System.out.println("Serverstatus wurde aktualisiert. " + Status);
             WriteLogs.writeLog("Serverstatus wurde aktualisiert. " + Status);

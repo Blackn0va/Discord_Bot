@@ -406,3 +406,85 @@ Erkanntes Betriebssystem: windows 11
 Erkanntes Betriebssystem: windows 11
 Erkanntes Betriebssystem: windows 11
 Serverstatus wurde aktualisiert. |Platform ist Operational_______________| |Persistente Universum ist Operational____| |Electronic Access ist Operational_______|
+Erkanntes Betriebssystem: windows 11
+Erkanntes Betriebssystem: windows 11
+Erkanntes Betriebssystem: windows 11
+Erkanntes Betriebssystem: windows 11
+Erkanntes Betriebssystem: windows 11
+Erkanntes Betriebssystem: windows 11
+Erkanntes Betriebssystem: windows 11
+Erkanntes Betriebssystem: windows 11
+Erkanntes Betriebssystem: windows 11
+Erkanntes Betriebssystem: windows 11
+Erkanntes Betriebssystem: windows 11
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform Operational ist Operational_______________||Persistent Universe Operational ist Operational_______________||Arena Commander Operational ist Operational_______________|
+Serverstatus wurde aktualisiert. |Platform Operational ist Operational_______________||Persistent Universe Operational ist Operational_______________||Arena Commander Operational ist Operational_______________|
+Erkanntes Betriebssystem: windows 11
+Erkanntes Betriebssystem: windows 11
+Erkanntes Betriebssystem: windows 11
+Erkanntes Betriebssystem: windows 11
+Erkanntes Betriebssystem: windows 11
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform Operational||Persistent Universe Operational||Arena Commander Operational|
+Serverstatus wurde aktualisiert. |Platform Operational||Persistent Universe Operational||Arena Commander Operational|
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |operational||operational||operational|
+Serverstatus wurde aktualisiert. |operational||operational||operational|
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform Operational||Persistent Universe Operational||Arena Commander Operational|
+Serverstatus wurde aktualisiert. |Platform Operational||Persistent Universe Operational||Arena Commander Operational|
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform Operational|   |Persistent Universe Operational|   |Arena Commander Operational|   
+Serverstatus wurde aktualisiert. |Platform Operational|   |Persistent Universe Operational|   |Arena Commander Operational|   
+Erkanntes Betriebssystem: windows 11
+Erkanntes Betriebssystem: windows 11
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform Operational|Operational||Persistent Universe Operational|Operational||Arena Commander Operational|Operational|
+Serverstatus wurde aktualisiert. |Platform Operational|Operational||Persistent Universe Operational|Operational||Arena Commander Operational|Operational|
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform Operational|operational||Persistent Universe Operational|operational||Arena Commander Operational|operational|
+Serverstatus wurde aktualisiert. |Platform Operational|operational||Persistent Universe Operational|operational||Arena Commander Operational|operational|
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform Operational|false||Persistent Universe Operational|false||Arena Commander Operational|false|
+Serverstatus wurde aktualisiert. |Platform Operational|false||Persistent Universe Operational|false||Arena Commander Operational|false|
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform Operational|||Persistent Universe Operational|||Arena Commander Operational||
+Serverstatus wurde aktualisiert. |Platform Operational|||Persistent Universe Operational|||Arena Commander Operational||
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform Operational||Persistent Universe Operational||Arena Commander Operational|
+Serverstatus wurde aktualisiert. |Platform Operational||Persistent Universe Operational||Arena Commander Operational|
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform Operational|/n|Persistent Universe Operational|/n|Arena Commander Operational|/n
+Serverstatus wurde aktualisiert. |Platform Operational|/n|Persistent Universe Operational|/n|Arena Commander Operational|/n
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform Operational_____||Persistent Universe Operational_____||Arena Commander Operational_____|
+Serverstatus wurde aktualisiert. |Platform Operational_____||Persistent Universe Operational_____||Arena Commander Operational_____|
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform Operational__________||Persistent Universe Operational__________||Arena Commander Operational__________|
+Serverstatus wurde aktualisiert. |Platform Operational__________||Persistent Universe Operational__________||Arena Commander Operational__________|
+Erkanntes Betriebssystem: windows 11
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform Operational____________||Persistent Universe Operational____________||Arena Commander Operational____________|
+Serverstatus wurde aktualisiert. |Platform Operational____________||Persistent Universe Operational____________||Arena Commander Operational____________|
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform Operational___________||Persistent Universe Operational___________||Arena Commander Operational___________|
+Serverstatus wurde aktualisiert. |Platform Operational___________||Persistent Universe Operational___________||Arena Commander Operational___________|
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform Operational___________||Persistent Universe Operational___________||Arena Commander Operational___________|
+Serverstatus wurde aktualisiert. |Platform Operational___________||Persistent Universe Operational___________||Arena Commander Operational___________|
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform Operational___________||Persistent Universe Operational___________||Arena Commander Operational___________|
+Serverstatus wurde aktualisiert. |Platform Operational___________||Persistent Universe Operational___________||Arena Commander Operational___________|
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform Operational___________||Persistent Universe Operational___________||Arena Commander Operational___________|
+Serverstatus wurde aktualisiert. |Platform Operational___________||Persistent Universe Operational___________||Arena Commander Operational___________|
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform Operational______________||Persistent Universe Operational______________||Arena Commander Operational______________|
+Serverstatus wurde aktualisiert. |Platform Operational______________||Persistent Universe Operational______________||Arena Commander Operational______________|
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform Operational/n||Persistent Universe Operational/n||Arena Commander Operational/n|
+Serverstatus wurde aktualisiert. |Platform Operational/n||Persistent Universe Operational/n||Arena Commander Operational/n|
+Erkanntes Betriebssystem: windows 11
+Serverstatus wurde aktualisiert. |Platform Operational      ||Persistent Universe Operational      ||Arena Commander Operational      |
+Serverstatus wurde aktualisiert. |Platform Operational      ||Persistent Universe Operational      ||Arena Commander Operational      |
