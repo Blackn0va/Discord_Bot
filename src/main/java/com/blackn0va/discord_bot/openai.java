@@ -47,6 +47,7 @@ public class openai {
 
         } catch (Exception e) {
             System.out.println("Fehler beim Erstellen der Antwort");
+            //e.printStackTrace();
             WriteLogs.writeLog("Fehler beim Erstellen der Antwort");
             Main.answer = e.toString();
 

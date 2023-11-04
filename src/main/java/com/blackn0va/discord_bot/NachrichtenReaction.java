@@ -46,6 +46,11 @@ public class NachrichtenReaction extends ListenerAdapter {
                             // openai.getAnswer(ereignis.getMessage().toString());
                             if (Main.answer.contains("You exceeded your current quota")) {
                                 // answer = "Ich habe keine Antwort gefunden";
+                                ereignis.getChannel().sendTyping().queue();
+                                ereignis.getChannel()
+                                        .sendMessage("Du hast dein aktuelles Kontingent überschritten!")
+                                        .queue();
+                                WriteLogs.writeLog("Du hast dein aktuelles Kontingent überschritten!");
                             } else {
 
                                 if (Main.answer.contains("Incorrect API key")) {

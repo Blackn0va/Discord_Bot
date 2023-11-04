@@ -142,7 +142,6 @@ public class Main {
         // Listener starten
         bauplan.addEventListener(new NachrichtenReaction());
         bauplan.addEventListener(new GiveRole());
-statusfeed.getStatus();
         try {
             GPTChannelID = bauplan.getTextChannelsByName("chatgpt", true).get(0).getId();
             SCNewsChannelID = bauplan.getTextChannelsByName("📣rsi-news", true).get(0).getId();
