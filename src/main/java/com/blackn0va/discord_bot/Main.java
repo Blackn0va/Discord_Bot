@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package com.blackn0va.discord_bot;
 
 import java.io.File;
@@ -13,11 +9,7 @@ import java.io.IOException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-
-import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.OnlineStatus;
-import net.dv8tion.jda.api.requests.GatewayIntent;
+import scala.App;
 
 /**
  *
@@ -26,7 +18,6 @@ import net.dv8tion.jda.api.requests.GatewayIntent;
 public class Main {
 
     public static String openaitoken = "";
-    public static JDA bauplan;
     public static String RegelnChannelID = "";
     public static String RegelnPostID = "";
     public static String status = "";
@@ -42,6 +33,10 @@ public class Main {
 
     private static final ScheduledExecutorService schedulerPatch = Executors.newScheduledThreadPool(1);
     private static final ScheduledExecutorService schedulerStatus = Executors.newScheduledThreadPool(1);
+    public static String IconURL = "https://knebeltv.de/include/images/knebel_de_live.png";
+    public static String Footer = "Knebel_de 24/7 Bot";
+    public static final String jarPath = new File(
+            App.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParent();
 
     public static String TokenFile = "";
 
@@ -125,31 +120,10 @@ public class Main {
 
         }
 
-        // JDA bauplan = JDABuilder.createDefault(token).build();
-        bauplan = JDABuilder.createDefault(token)
-                .enableIntents(GatewayIntent.GUILD_MEMBERS, GatewayIntent.DIRECT_MESSAGE_REACTIONS,
-                        GatewayIntent.GUILD_EMOJIS_AND_STICKERS, GatewayIntent.MESSAGE_CONTENT,
-                        GatewayIntent.GUILD_MESSAGES, GatewayIntent.DIRECT_MESSAGES,
-                        GatewayIntent.DIRECT_MESSAGE_TYPING, GatewayIntent.GUILD_WEBHOOKS,
-                        GatewayIntent.GUILD_VOICE_STATES)
-                .build();
 
-        bauplan.getPresence().setStatus(OnlineStatus.ONLINE);
+        discordBot.start();
 
-        //
-        bauplan.awaitReady();
 
-        // Listener starten
-        bauplan.addEventListener(new NachrichtenReaction());
-        bauplan.addEventListener(new GiveRole());
-        try {
-            GPTChannelID = bauplan.getTextChannelsByName("chatgpt", true).get(0).getId();
-            SCNewsChannelID = bauplan.getTextChannelsByName("📣rsi-news", true).get(0).getId();
-
-            // System.out.println(RegelnAkzeptiert);
-
-        } catch (Exception e) {
-        }
 
         // start Timer for News and Status
 
@@ -168,8 +142,6 @@ public class Main {
                 e.printStackTrace();
             }
         }, 0, 10, TimeUnit.MINUTES);
-
-        
 
     }
 

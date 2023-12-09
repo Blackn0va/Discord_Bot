@@ -37,7 +37,7 @@ public class statusfeed {
             }
 
             System.out.println("Serverstatus: " + Status);
-            Main.bauplan.getPresence()
+            discordBot.bauplan.getPresence()
                     .setActivity(Activity.customStatus(Status));
 
             System.out.println("Serverstatus wurde aktualisiert. " + Status);

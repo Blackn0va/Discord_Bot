@@ -16,6 +16,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 public class NachrichtenReaction extends ListenerAdapter {
 
     public static final List<ChatMessage> messages = new ArrayList<>();
+    public static String regeln = "\u00A7 1. Sei respektvoll gegen\u00FCber anderen Nutzern hier im Discord - eine h\u00F6fliche und angenehme Atmosph\u00E4re muss gewahrt werden.\n\n\u00A7 2. Alle Formen der Beleidigungen, Diskriminierung, Rassismus oder Antisemitismus und jegliche andere Formen des deutschen Rechts, die diesem widersprechen, sind hier in Text- oder Sprachkan\u00E4len strengstens untersagt.\n\n\u00A7 3. Werbung f\u00FCr eigene oder fremde Inhalte ist hier untersagt. Damit ist auch gemeint, den eigenen oder einen fremden Discord oder \u00C4hnliches zu bewerben. Auch in Privatnachrichten ist dies untersagt. \n\n\u00A7 4. In Chats d\u00FCrfen nur Inhalte diskutiert werden, die Themengerecht sind in den jeweiligen Kan\u00E4len. Als Community - Sprache gilt ausschlie\u00DFlich deutsch. Fremde Sprachen in Wort und Schrift werden hier nicht geduldet und untersagt. Du musst Dich so gut es geht bem\u00FChen, einigerma\u00DFen die geltende deutsche Grammatik einzuhalten.\n \n\u00A7 5. Trolling und Spamming sind komplett zu unterlassen, dazu unterl\u00E4sst Du es auch unn\u00F6tige Diskussionen zu starten, die nichts mit irgendeinem Thema hier im Discord zu tun haben.\n\n\u00A7 6. Soundboards oder Stimmverzerrer oder die Aufnahme von Gespr\u00E4chen sind untersagt, letzteres ist auch gesetzlich im \u00DCbrigen verboten.\n\n\u00A7 7. Das dauerhafte unn\u00F6tige Verlassen und Betreten eines Sprachkanals ist zu unterlassen. \n\n\u00A7 8. St\u00F6rger\u00E4usche wie Handy, Fernseher und andere Dinge, die im Hintergrund zu h\u00F6ren sind, sind zu unterlassen.\n\u00A7 9. In den Sprach Channel zu kommen und dauerhaft nichts zu sagen oder sich dann stumm zu schalten ist sehr unh\u00F6flich und sollte unterlassen werden. Ansonsten gehe daf\u00FCr in den AFK/Pause Channel, dort ist es erlaubt. \n Wenn du die Regeln gelesen hast, dann klicke auf das ✅\n\n";
 
     @Override
     public void onMessageReceived(MessageReceivedEvent ereignis) {
@@ -69,7 +70,13 @@ public class NachrichtenReaction extends ListenerAdapter {
                             }
                         }
 
-                    }
+                    }else if (ereignis.getMessage().getContentStripped().startsWith("!regeln")) {
+                        ereignis.getMessage().delete().queue();
+                        // Nachricht senden
+                        ereignis.getChannel().sendTyping().queue();
+                        ereignis.getChannel().sendMessage("@everyone " + regeln).queue();
+
+                    } 
 
                 }
             }

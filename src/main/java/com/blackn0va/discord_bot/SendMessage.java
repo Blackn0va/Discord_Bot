@@ -7,7 +7,7 @@ public class SendMessage {
     public static void ToNewsChannel(String Message) {
         try {
             // foreach server send message to channel where name is #📣rsi-news
-            for (Guild guild : Main.bauplan.getGuilds()) {
+            for (Guild guild : discordBot.bauplan.getGuilds()) {
                 for (TextChannel channel : guild.getTextChannels()) {
                     if (channel.getName().equals("📣rsi-news")) {
                         channel.sendMessage( Message).queue();
@@ -26,7 +26,7 @@ public class SendMessage {
     // async send message to channel
     public static void ToChannel(String channelID, String message) {
         try {
-            Main.bauplan.getTextChannelById(channelID).sendMessage(message).queue();
+            discordBot.bauplan.getTextChannelById(channelID).sendMessage(message).queue();
         } catch (Exception e) {
             System.out.println("Error: " + e);
             WriteLogs.writeLog("Error: " + e);
@@ -37,7 +37,7 @@ public class SendMessage {
     // async send message to User
     public static void ToUser(String userID, String message) {
         try {
-            Main.bauplan.getUserById(userID).openPrivateChannel().queue((channel) -> {
+            discordBot.bauplan.getUserById(userID).openPrivateChannel().queue((channel) -> {
                 channel.sendMessage(message).queue();
             });
         } catch (Exception e) {
