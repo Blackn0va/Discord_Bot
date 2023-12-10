@@ -59,9 +59,11 @@ public class discordBot {
         bauplan.disableCache(CacheFlag.VOICE_STATE);
         bauplan.disableCache(CacheFlag.SCHEDULED_EVENTS);
         bauplan.disableCache(CacheFlag.STICKER);
+ 
+        bauplan.setMemberCachePolicy(MemberCachePolicy.ALL);
+
 
         // Only cache members who are either in a voice channel or owner of the guild
-        bauplan.setMemberCachePolicy(MemberCachePolicy.VOICE.or(MemberCachePolicy.OWNER));
         // Disable member chunking on startup
         bauplan.setChunkingFilter(ChunkingFilter.NONE);
         // Consider guilds with more than 50 members as "large".
@@ -72,16 +74,19 @@ public class discordBot {
 
     public static void stop() {
         WriteLogs.writeLog("Discord Bot wird gestoppt");
+        System.out.println("Discord Bot wird gestoppt");
         if (bauplan != null) { // Check if bauplan is not null
             bauplan.shutdown(); // Call the shutdown() method on bauplan
             try {
                 WriteLogs.writeLog("Warte auf Disconnect von DC...");
+                System.out.println("Warte auf Disconnect von DC...");
                 // Create a new thread that will wait for the bot to disconnect
                 Thread disconnectThread = new Thread(() -> {
                     try {
                         bauplan.awaitStatus(JDA.Status.SHUTDOWN);
                     } catch (InterruptedException e) {
                         WriteLogs.writeLog("Fehler beim warten: " + e);
+                        System.out.println("Fehler beim warten: " + e);
                     }
                 });
                 disconnectThread.start();
@@ -89,6 +94,7 @@ public class discordBot {
                 disconnectThread.join(5000); // Wait for 5 seconds
                 if (disconnectThread.isAlive()) {
                     WriteLogs.writeLog("DC hat nicht reagiert. Beende den Thread...");
+                    System.out.println("DC hat nicht reagiert. Beende den Thread...");
                     disconnectThread.interrupt(); // Interrupt the thread if it's still running
                 }
             } catch (InterruptedException e) {
@@ -96,6 +102,7 @@ public class discordBot {
             } finally {
                 // Trennen die Verbindung und beende alle Hintergrundthreads
                 WriteLogs.writeLog("Trenne die Verbindung und beende alle Hintergrundthreads");
+                System.out.println("Trenne die Verbindung und beende alle Hintergrundthreads");
                 bauplan.shutdownNow();
                 bauplan = null; // Set bauplan to null
                 // Garbage Collect
@@ -103,10 +110,12 @@ public class discordBot {
             }
 
             WriteLogs.writeLog("Discord Bot gestoppt");
+            System.out.println("Discord Bot gestoppt");
 
         } else {
             // Handle the case where bauplan is null
             WriteLogs.writeLog("Discord Bot ist nicht gestartet");
+            System.out.println("Discord Bot ist nicht gestartet");
         }
     }
 
