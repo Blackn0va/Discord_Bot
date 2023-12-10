@@ -24,9 +24,10 @@ public class NachrichtenReaction extends ListenerAdapter {
         try {
             if (ereignis.isFromGuild()) {
                 // Wenn es ein Bot ist, dann wird die Nachricht nicht weiter verarbeitet
-                if (ereignis.getAuthor().isBot()) {
-                    return;
-                } else { // wenn der Chat ein Admin ist
+                if (!ereignis.getAuthor().isBot()) {
+                    System.out.println("Nachricht von: " + ereignis.getAuthor().getName() + " auf: "
+                            + ereignis.getGuild().getName() + " in: " + ereignis.getChannel().getName() + " mit: "
+                            + ereignis.getMessage().getContentStripped());
                     if (ereignis.getChannel().getId().equals(Main.GPTChannelID)) {
 
                         // if content do not start with ! then send message ignore Case sensitive
@@ -70,14 +71,7 @@ public class NachrichtenReaction extends ListenerAdapter {
                             }
                         }
 
-                    }else if (ereignis.getMessage().getContentStripped().startsWith("!regeln")) {
-                        ereignis.getMessage().delete().queue();
-                        // Nachricht senden
-                        ereignis.getChannel().sendTyping().queue();
-                        ereignis.getChannel().sendMessage("@everyone " + regeln).queue();
-
-                    } 
-
+                    }
                 }
             }
         } catch (Exception e) {
