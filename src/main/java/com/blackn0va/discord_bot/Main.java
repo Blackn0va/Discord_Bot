@@ -33,8 +33,8 @@ public class Main {
 
     private static final ScheduledExecutorService schedulerPatch = Executors.newScheduledThreadPool(1);
     private static final ScheduledExecutorService schedulerStatus = Executors.newScheduledThreadPool(1);
-    public static String IconURL = "https://knebeltv.de/include/images/knebel_de_live.png";
-    public static String Footer = "Knebel_de 24/7 Bot";
+    public static String IconURL = "https://avatars.githubusercontent.com/u/12220332?v=4";
+    public static String Footer = "Bot";
     public static final String jarPath = new File(
             App.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParent();
 

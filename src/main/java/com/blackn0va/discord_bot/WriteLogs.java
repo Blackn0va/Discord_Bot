@@ -9,56 +9,148 @@ public class WriteLogs {
 
     public static String logPath = "";
     public static String logFile = "log.txt";
-    //get the working directory of the program
+    public static String permissionlog = "permissionlog.txt";
+    public static String chatlog = "chatlog.txt";
+
+    // get the working directory of the program
     public static String workingDir = System.getProperty("user.dir");
 
     public static void writeLog(String log) {
-        //determine os
+        // determine os
         String os = System.getProperty("os.name").toLowerCase();
-        if(os.contains("win"))
-        {
+        if (os.contains("win")) {
             logPath = workingDir + "\\" + logFile;
 
+        } else if (os.contains("nix") || os.contains("nux") || os.contains("aix")) {
+            logPath = workingDir + "/" + logFile;
         }
-        else if(os.contains("nix") || os.contains("nux") || os.contains("aix"))
-        {
-            logPath = workingDir  + "/" +  logFile;
-        }
- 
+
         // check os if windows or linux, if windows check if file exists on desktop
-            try {
-                // if file not exists, create it
-                if (!new File(logPath).exists()) {
-                    new File(logPath).createNewFile();
-                    // insert 6 lines in the file
-                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(logPath))) {
-                        bw.write("Logfile");
-                        bw.newLine();
-                        bw.write("--------");
-                        bw.newLine();
-                        bw.write("Logfile created");
-                        bw.newLine();
-                        bw.write("--------");
-                        bw.newLine();                        
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+        try {
+            // if file not exists, create it
+            if (!new File(logPath).exists()) {
+                new File(logPath).createNewFile();
+                // insert 6 lines in the file
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(logPath))) {
+                    bw.write("Logfile");
+                    bw.newLine();
+                    bw.write("--------");
+                    bw.newLine();
+                    bw.write("Logfile created");
+                    bw.newLine();
+                    bw.write("--------");
+                    bw.newLine();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-
-                // if file exists, write logs
-                if (new File(logPath).exists()) {
-                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(logPath, true))) {
-                        bw.newLine();
-                        bw.write(log);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-            } catch (Exception e) {
-                System.out.println("Error: " + e);
             }
-        
+
+            // if file exists, write logs
+            if (new File(logPath).exists()) {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(logPath, true))) {
+                    bw.newLine();
+                    bw.write(log);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
 
     }
+
+    public static void permissions(String log) {
+        // determine os
+        String os = System.getProperty("os.name").toLowerCase();
+        if (os.contains("win")) {
+            logPath = workingDir + "\\" + permissionlog;
+
+        } else if (os.contains("nix") || os.contains("nux") || os.contains("aix")) {
+            logPath = workingDir + "/" + permissionlog;
+        }
+
+        // check os if windows or linux, if windows check if file exists on desktop
+        try {
+            // if file not exists, create it
+            if (!new File(logPath).exists()) {
+                new File(logPath).createNewFile();
+                // insert 6 lines in the file
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(logPath))) {
+                    bw.write("Logfile");
+                    bw.newLine();
+                    bw.write("--------");
+                    bw.newLine();
+                    bw.write("Logfile created");
+                    bw.newLine();
+                    bw.write("--------");
+                    bw.newLine();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            // if file exists, write logs
+            if (new File(logPath).exists()) {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(logPath, true))) {
+                    bw.newLine();
+                    bw.write(log);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+
+    }
+
+    public static void chat(String log) {
+        // determine os
+        String os = System.getProperty("os.name").toLowerCase();
+        if (os.contains("win")) {
+            logPath = workingDir + "\\" + chatlog;
+
+        } else if (os.contains("nix") || os.contains("nux") || os.contains("aix")) {
+            logPath = workingDir + "/" + chatlog;
+        }
+
+        // check os if windows or linux, if windows check if file exists on desktop
+        try {
+            // if file not exists, create it
+            if (!new File(logPath).exists()) {
+                new File(logPath).createNewFile();
+                // insert 6 lines in the file
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(logPath))) {
+                    bw.write("Logfile");
+                    bw.newLine();
+                    bw.write("--------");
+                    bw.newLine();
+                    bw.write("Logfile created");
+                    bw.newLine();
+                    bw.write("--------");
+                    bw.newLine();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            // if file exists, write logs
+            if (new File(logPath).exists()) {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(logPath, true))) {
+                    bw.newLine();
+                    bw.write(log);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+
+    }
+
 }

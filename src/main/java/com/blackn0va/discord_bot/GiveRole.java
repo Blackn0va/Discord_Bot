@@ -24,6 +24,7 @@ public class GiveRole extends ListenerAdapter {
             guild.loadMembers().onSuccess(members -> {
                 for (Member member : members) {
                     System.out.println(member.getEffectiveName());
+                    WriteLogs.writeLog(member.getEffectiveName());
                 }
             });
         }
@@ -35,7 +36,7 @@ public class GiveRole extends ListenerAdapter {
         if (user != null) {
             if (!user.isBot()) {
                 if (ereignis.getChannel().getName().contains("regeln")) {
-                    WriteLogs.writeLog("Regeln wurden akzeptiert von: " + ereignis.getUser().getName() + " auf: "
+                    WriteLogs.permissions("Regeln wurden akzeptiert von: " + ereignis.getUser().getName() + " auf: "
                             + ereignis.getGuild().getName());
                     System.out.println("Regeln wurden akzeptiert von: " + ereignis.getUser().getName() + " auf: "
                             + ereignis.getGuild().getName());
@@ -45,11 +46,11 @@ public class GiveRole extends ListenerAdapter {
                         if (member != null && roles != null && !roles.isEmpty()) {
                             ereignis.getGuild().addRoleToMember(member, roles.get(0)).queue();
                         } else {
-                            WriteLogs.writeLog("Mitglied oder Rolle konnte nicht gefunden werden");
+                            WriteLogs.permissions("Mitglied oder Rolle konnte nicht gefunden werden");
                             System.out.println("Mitglied oder Rolle konnte nicht gefunden werden");
                         }
                     } catch (Exception e) {
-                        WriteLogs.writeLog("Fehler beim zuweisen der Rolle: " + e.getMessage());
+                        WriteLogs.permissions("Fehler beim zuweisen der Rolle: " + e.getMessage());
                         System.out.println("Fehler beim zuweisen der Rolle: " + e.getMessage());
                     }
                 }
@@ -64,7 +65,7 @@ public class GiveRole extends ListenerAdapter {
         if (user != null) {
             if (!user.isBot()) {
                 if (ereignis.getChannel().getName().contains("regeln")) {
-                    WriteLogs.writeLog("Regeln wurden nicht akzeptiert von: " + ereignis.getUser().getName()
+                    WriteLogs.permissions("Regeln wurden nicht akzeptiert von: " + ereignis.getUser().getName()
                             + " auf: " + ereignis.getGuild().getName());
                     System.out.println("Regeln wurden nicht akzeptiert von: " + ereignis.getUser().getName()
                             + " auf: " + ereignis.getGuild().getName());
@@ -74,11 +75,11 @@ public class GiveRole extends ListenerAdapter {
                         if (member != null && roles != null && !roles.isEmpty()) {
                             ereignis.getGuild().removeRoleFromMember(member, roles.get(0)).queue();
                         } else {
-                            WriteLogs.writeLog("Mitglied oder Rolle konnte nicht gefunden werden");
+                            WriteLogs.permissions("Mitglied oder Rolle konnte nicht gefunden werden");
                             System.out.println("Mitglied oder Rolle konnte nicht gefunden werden");
                         }
                     } catch (Exception e) {
-                        WriteLogs.writeLog("Fehler beim entfernen der Rolle: " + e.getMessage());
+                        WriteLogs.permissions("Fehler beim entfernen der Rolle: " + e.getMessage());
                         System.out.println("Fehler beim entfernen der Rolle: " + e.getMessage());
                     }
                 }
