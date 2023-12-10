@@ -105,6 +105,9 @@ public class NachrichtenReaction extends ListenerAdapter {
                                 message.toChannel(ereignis.getChannel().getId(),
                                         "Regeln auf " + ereignis.getGuild().getName(), regeln, Color.GREEN);
                                 WriteLogs.permissions("Regeln wurden angezeigt");
+
+                                 
+
                             }
 
                         }
