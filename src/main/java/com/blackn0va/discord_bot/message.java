@@ -18,6 +18,7 @@ import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
 import net.dv8tion.jda.api.requests.RestAction;
 import net.dv8tion.jda.api.utils.FileUpload;
 import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.emoji.*;
 
 public class message {
 
@@ -36,7 +37,11 @@ public class message {
                     .setTimestamp(java.time.Instant.now())
                     .setFooter(Main.Footer, Main.IconURL);
 
-            channel.sendMessageEmbeds(embed.build()).queue();
+            //channel.sendMessageEmbeds(embed.build()).queue();
+
+            channel.sendMessageEmbeds(embed.build()).queue(sentMessage -> {
+                sentMessage.addReaction(Emoji.fromUnicode("\u2705")).queue();
+            });
 
             channel = null;
             embed = null;
