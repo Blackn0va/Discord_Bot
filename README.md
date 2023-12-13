@@ -7,6 +7,8 @@
 [![GitHub commits](https://badgen.net/github/commits/Blackn0va/Discord_Bot)](https://GitHub.com/Blackn0va/Discord_Bot/commit/)
 
 
+![grafik](https://github.com/Blackn0va/Discord_Bot/assets/12220332/e1773592-1714-4507-91de-1c2c3e4c47b8)
+
 Bot Der tolle Dinge macht, openai, rssnews, Star Citizen Server Status, Regeln, Berechtigungen setzen beim akzeptieren der Regeln usw..<br/>
 Läuft auf Linux, Windows
 
