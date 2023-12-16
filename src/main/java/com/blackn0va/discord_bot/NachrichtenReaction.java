@@ -102,7 +102,7 @@ public class NachrichtenReaction extends ListenerAdapter {
                                 ereignis.getMessage().delete().queue();
 
                                 ereignis.getChannel().sendTyping().queue();
-                                message.toChannel(ereignis.getChannel().getId(),
+                                SendMessage.toChannel(ereignis.getChannel().getId(),
                                         "Regeln auf " + ereignis.getGuild().getName(), regeln, Color.GREEN);
                                 WriteLogs.permissions("Regeln wurden angezeigt");
 
