@@ -121,6 +121,7 @@ public class Main {
         }
 
 
+        
         discordBot.start();
 
 
@@ -130,6 +131,7 @@ public class Main {
         schedulerPatch.scheduleAtFixedRate(() -> {
             try {
                 rssNews.GetLatestPatchLink();
+                palworldNews.GetLatestPatchLink();
             } catch (IOException e) {
                 e.printStackTrace();
             }

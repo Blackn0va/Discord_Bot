@@ -67,13 +67,13 @@ public class rssNews {
                         BufferedWriter writer = new BufferedWriter(new FileWriter(file));
                         writer.write(Patchlink);
                         writer.close();
-                        System.out.println("Neuer Patch wurde gefunden!");
+                        System.out.println("Neuer Star Citizen Patch wurde gefunden!");
                         GetPatchNotes();
 
                 } else {
                         //GetPatchNotes();
 
-                        System.out.println("Kein Neuer Patch gefunden!");
+                        System.out.println("Kein Neuer Star Citizen Patch gefunden!");
                 }
 
         }
@@ -163,7 +163,8 @@ public class rssNews {
 
                 for (String s : finalStrings) {
                         // Posten auf discord
-                        SendMessage.ToNewsChannel("```prolog\n"  + s + "\n```");
+                        //SendMessage.ToNewsChannel("```prolog\n"  + s + "\n```");
+                        SendMessage.toChannel("1101892014351585290", "Star Citizen Update!", "```prolog\n" + s + "\n```", java.awt.Color.GREEN);
                 }
 
         }

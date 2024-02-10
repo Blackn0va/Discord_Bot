@@ -77,6 +77,41 @@ public class SendMessage {
         }
     }
 
+
+    public static void toChannelWithLink(String ChannelID, String Title, String Message, Color color, String Url) {
+        try {
+            TextChannel channel = discordBot.bauplan.getTextChannelById(ChannelID);
+            if (channel == null) {
+                WriteLogs.writeLog("Channel nicht gefunden: " + ChannelID);
+                return;
+            }
+
+            EmbedBuilder embed = new EmbedBuilder()
+                    .setTitle(Title)
+                    .setDescription(Message)
+                    .setColor(color)
+                    .setUrl(Url)
+                    .setTimestamp(java.time.Instant.now())
+                    .setFooter(Main.Footer, Main.IconURL);
+
+            //channel.sendMessageEmbeds(embed.build()).queue();
+
+            channel.sendMessageEmbeds(embed.build()).queue(sentMessage -> {
+                sentMessage.addReaction(Emoji.fromUnicode("\u2705")).queue();
+            });
+
+            channel = null;
+            embed = null;
+            Message = null;
+            Title = null;
+            color = null;
+            ChannelID = null;
+            System.gc();
+        } catch (Exception e) {
+            WriteLogs.writeLog("Fehler in toChannel: " + e.getMessage());
+        }
+    }
+
     private static RestAction<Void> selfDestruct(MessageChannel channel, String content,
             ScheduledExecutorService scheduler) {
         return channel.sendMessage("Die Nachricht wird in 1 Minute gelöscht!")
