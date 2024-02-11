@@ -9,8 +9,11 @@
 
 ![grafik](https://github.com/Blackn0va/Discord_Bot/assets/12220332/e1773592-1714-4507-91de-1c2c3e4c47b8)
 
-Bot Der tolle Dinge macht, openai, rssnews, Star Citizen Server Status, Regeln, Berechtigungen setzen beim akzeptieren der Regeln usw..<br/>
-Läuft auf Linux, Windows
+Bot der Bot kann openai, Star Citizen Server Status, Regeln, Berechtigungen setzen beim akzeptieren der Regeln usw..<br/>
+Star Citizen Patchnotes als embedded Message an Discord Senden.<br/>
+Palworld Patchnotes als embedded Message an Discord Senden.<br/>
+
+Läuft auf Linux und Windows
 
 Der Token wird aus einer Datei "token.txt" ausgelesen. Dabei wird unter Linux und Windows Betriesbssystemen unterschieden. Unter linux muss der Token unter
 
@@ -43,11 +46,7 @@ Run Bot: screen -mdS dcbot java -jar Discord_Bot.jar
 
 Commands: <br/>!regeln <br/>!stream https://www.twitch.tv/8lackn0va <br/>!say Mahlzeit <br/>!status Star citizen 3.18 <br/>!play https://open.spotify.com/track/2YFtpiy2WoAQVQbM1SIwES <br/>!News (RSS Feed from Robertspace)
 
-                ToDo:
-                    RSS Feed format
-                    //
-
-Reactions: Hallo <br/>
+       
 
 
 [![Blackn0va's github stats](https://github-readme-stats.vercel.app/api?username=Blackn0va&theme=blue-green)](https://github.com/Blackn0va/)
