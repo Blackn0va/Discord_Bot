@@ -10,7 +10,6 @@
 ![grafik](https://github.com/Blackn0va/Discord_Bot/assets/12220332/e1773592-1714-4507-91de-1c2c3e4c47b8)
 
 <br/>
-![grafik](https://github.com/Blackn0va/Discord_Bot/assets/12220332/992e99cc-dcf5-43ab-839e-2a5d57318241)
 
 <br/>
 Bot der Bot kann openai, Star Citizen Server Status, Regeln, Berechtigungen setzen beim akzeptieren der Regeln usw..<br/>
