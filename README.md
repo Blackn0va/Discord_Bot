@@ -12,7 +12,7 @@
 <br/>
 ![grafik](https://github.com/Blackn0va/Discord_Bot/assets/12220332/992e99cc-dcf5-43ab-839e-2a5d57318241)
 
-
+<br/>
 Bot der Bot kann openai, Star Citizen Server Status, Regeln, Berechtigungen setzen beim akzeptieren der Regeln usw..<br/>
 Star Citizen Patchnotes als embedded Message an Discord Senden.<br/>
 Palworld Patchnotes als embedded Message an Discord Senden.<br/>
