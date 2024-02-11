@@ -78,7 +78,7 @@ public class SendMessage {
     }
 
 
-    public static void toChannelWithLink(String ChannelID, String Title, String Message, Color color, String Url) {
+    public static void toChannelWithLink(String ChannelID, String Title, String Message, Color color, String Url, String Picture) {
         try {
             TextChannel channel = discordBot.bauplan.getTextChannelById(ChannelID);
             if (channel == null) {
@@ -91,6 +91,7 @@ public class SendMessage {
                     .setDescription(Message)
                     .setColor(color)
                     .setUrl(Url)
+                    .setImage(Picture)
                     .setTimestamp(java.time.Instant.now())
                     .setFooter(Main.Footer, Main.IconURL);
 

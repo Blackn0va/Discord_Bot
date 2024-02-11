@@ -23,9 +23,13 @@ public class palworldNews {
     public static String Persistence = "";
     public static String Live = "";
     public static String Version = "";
-    public static String Link = "";
+    public static String link = "";
     public static String baseUrl = "https://store.steampowered.com/feeds/news/app/1623730/?cc=DE&l=german&snr=1_2108_9__2107";
     public static String Patchlink = "";
+    public static String image = "";
+    public static String title = "";
+    public static String description = "";
+    
 
     // main
 
@@ -80,9 +84,6 @@ public class palworldNews {
     }
 
     public static void GetPatchNotes() throws IOException {
-        String description = "";
-        String title = "";
-        String link = "";
         Document doc = Jsoup.connect(baseUrl).get();
         Elements items = doc.select("item");
         for (Element item : items) {
@@ -90,6 +91,7 @@ public class palworldNews {
             if (title.contains("Patch")) {
                 description = item.select("description").first().text();
                 link = item.select("link").first().text();
+                image = item.select("enclosure").attr("url");
                 break;  // stop after finding the first patch
             }
         }
@@ -142,7 +144,7 @@ public class palworldNews {
             //remove Date from title 2024/02/07
             title = title.substring(11);
             
-            SendMessage.toChannelWithLink("1205879327200378910", title, "```prolog\n" + s + "\n```", java.awt.Color.GREEN, link);
+            SendMessage.toChannelWithLink("1205879327200378910", title, "```prolog\n" + s + "\n```", java.awt.Color.GREEN, link, image);
         }
 
     }

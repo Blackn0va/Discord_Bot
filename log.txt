@@ -1,0 +1,5 @@
+
+Erkanntes Betriebssystem: windows 11
+Fehler beim Starten von DC: Token may not be null
+Discord Bot wird gestoppt
+Discord Bot ist nicht gestartet
