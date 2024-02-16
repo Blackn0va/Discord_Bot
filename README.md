@@ -14,7 +14,7 @@
 <br/>
 
 <br/>
-Bot der Bot kann openai, Star Citizen Server Status, Regeln, Berechtigungen setzen beim akzeptieren der Regeln usw..<br/>
+openai, Star Citizen Server Status, Regeln, Berechtigungen setzen beim akzeptieren der Regeln usw..<br/>
 Star Citizen Patchnotes als embedded Message an Discord Senden.<br/>
 Palworld Patchnotes als embedded Message an Discord Senden.<br/>
 
