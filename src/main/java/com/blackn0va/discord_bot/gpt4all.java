@@ -7,11 +7,27 @@ import java.net.http.HttpResponse;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class gpt4all {
+
+    public static Future<String> getAnswerInThread(String question) {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        Future<String> future = executor.submit(new Callable<String>() {
+            @Override
+            public String call() throws Exception {
+                return getAnswer(question);
+            }
+        });
+        executor.shutdown(); // Es ist wichtig, den Executor zu schließen, um Systemressourcen freizugeben
+        return future;
+    }
 
     public static String getAnswer(String question) throws Exception {
         String text = "";

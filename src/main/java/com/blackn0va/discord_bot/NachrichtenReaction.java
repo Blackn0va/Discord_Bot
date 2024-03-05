@@ -2,6 +2,7 @@ package com.blackn0va.discord_bot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Future;
 import java.awt.Color;
 import com.theokanning.openai.completion.chat.ChatMessage;
 /**
@@ -64,10 +65,17 @@ public class NachrichtenReaction extends ListenerAdapter {
                             // get message without !gpt
                             String message = ereignis.getMessage().getContentStripped().substring(4);
 
-                            String answer = gpt4all.getAnswer(message);
-                            ereignis.getChannel().sendTyping().queue();
-                            SendMessage.toChannel(ereignis.getChannel().getId(), "GPT-3 Antwort", answer, Color.GREEN);
-
+                            Future<String> futureAnswer = gpt4all.getAnswerInThread(message);
+                            new Thread(() -> {
+                                try {
+                                    String answer = futureAnswer.get();
+                                    ereignis.getChannel().sendTyping().queue();
+                                    SendMessage.toChannel(ereignis.getChannel().getId(), "GPT-3 Antwort", answer,
+                                            Color.GREEN);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }).start();
                         }
 
                     }
