@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.awt.Color;
 import com.theokanning.openai.completion.chat.ChatMessage;
-import com.theokanning.openai.completion.chat.ChatMessageRole;
-
 /**
 *
 * @author Black
@@ -51,69 +49,31 @@ public class NachrichtenReaction extends ListenerAdapter {
                             + ereignis.getGuild().getName() + " in: " + ereignis.getChannel().getName() + " mit: "
                             + ereignis.getMessage().getContentStripped());
 
-                    if (ereignis.getChannel().getId().equals(Main.GPTChannelID)) {
+                    if (ereignis.getMessage().getContentStripped().startsWith("!")) {
+                        if (ereignis.getMessage().getContentStripped().equalsIgnoreCase("!regeln")) {
+                            // delete message
+                            ereignis.getMessage().delete().queue();
 
-                        // if content do not start with ! then send message ignore Case sensitive
-                        if (!ereignis.getMessage().getContentStripped().startsWith("!")) {
+                            ereignis.getChannel().sendTyping().queue();
+                            SendMessage.toChannel(ereignis.getChannel().getId(),
+                                    "Regeln auf " + ereignis.getGuild().getName(), regeln, Color.GREEN);
+                            WriteLogs.permissions("Regeln wurden angezeigt");
 
-                            String frage = ereignis.getMessage().getContentStripped();
-                            System.out.println("Frage:\n" + frage);
-                            WriteLogs.chat("Frage:\n" + frage);
+                        } else if (ereignis.getMessage().getContentStripped().contains("!gpt")) {
 
-                            // Create message
-                            final ChatMessage systemMessage = new ChatMessage(ChatMessageRole.USER.value(), frage);
+                            // get message without !gpt
+                            String message = ereignis.getMessage().getContentStripped().substring(4);
 
-                            // Add message to list
-                            messages.add(systemMessage);
-
-                            // ask GPT
-                            openai.getAnswer(frage);
-
-                            // openai.getAnswer(ereignis.getMessage().toString());
-                            if (Main.answer.contains("You exceeded your current quota")) {
-                                // answer = "Ich habe keine Antwort gefunden";
-                                ereignis.getChannel().sendTyping().queue();
-                                ereignis.getChannel()
-                                        .sendMessage("Du hast dein aktuelles Kontingent überschritten!")
-                                        .queue();
-                                WriteLogs.writeLog("Du hast dein aktuelles Kontingent überschritten!");
-                            } else {
-
-                                if (Main.answer.contains("Incorrect API key")) {
-                                    ereignis.getChannel().sendTyping().queue();
-                                    ereignis.getChannel()
-                                            .sendMessage("API Key überprüfen!")
-                                            .queue();
-                                    WriteLogs.writeLog("API Key überprüfen!");
-                                } else {
-                                    ereignis.getChannel().sendTyping().queue();
-                                    ereignis.getChannel().sendMessage(Main.answer)
-                                            .queue();
-                                    WriteLogs.chat("Antwort: " + Main.answer);
-                                }
-
-                            }
-                        }
-
-                    } else {
-                        if (ereignis.getMessage().getContentStripped().startsWith("!")) {
-                            if (ereignis.getMessage().getContentStripped().equalsIgnoreCase("!regeln")) {
-                                // delete message
-                                ereignis.getMessage().delete().queue();
-
-                                ereignis.getChannel().sendTyping().queue();
-                                SendMessage.toChannel(ereignis.getChannel().getId(),
-                                        "Regeln auf " + ereignis.getGuild().getName(), regeln, Color.GREEN);
-                                WriteLogs.permissions("Regeln wurden angezeigt");
-
-                                 
-
-                            }
+                            String answer = gpt4all.getAnswer(message);
+                            ereignis.getChannel().sendTyping().queue();
+                            SendMessage.toChannel(ereignis.getChannel().getId(), "GPT-3 Antwort", answer, Color.GREEN);
 
                         }
+
                     }
                 }
             }
+
         } catch (Exception e) {
             System.out.println("Fehler in onMessageReceived: " + e.getMessage());
             WriteLogs.writeLog("Fehler in onMessageReceived: " + e.getMessage());

@@ -23,7 +23,7 @@ public class Main {
     public static String status = "";
     public static String token = "";
     public static String desktopPath = "";
-    public static String GPTChannelID = "";
+    public static String GPTChannelID = "1155287768491110410";
     public static String SCNewsChannelID = "";
     public static String answer = "";
     public static String RSSNews = "";
@@ -120,11 +120,7 @@ public class Main {
 
         }
 
-
-        
         discordBot.start();
-
-
 
         // start Timer for News and Status
 
