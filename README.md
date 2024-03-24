@@ -7,50 +7,68 @@
 [![GitHub commits](https://badgen.net/github/commits/Blackn0va/Discord_Bot)](https://GitHub.com/Blackn0va/Discord_Bot/commit/)
 
 
-![grafik](https://github.com/Blackn0va/Discord_Bot/assets/12220332/e1773592-1714-4507-91de-1c2c3e4c47b8)
-![grafik](https://github.com/Blackn0va/Discord_Bot/assets/12220332/c3b539db-a3c6-452b-bca5-8686f9d159cc)
+## Features
 
+- Aktualisiert alle 10 Minuten den Star Citizen Status
+- Überprüft jede Stunde auf neue Star Citizen und Palworld Patches
+- Postet Patchnotes in einen Discord Channel, falls verfügbar
+- Erlaubt das Posten und Akzeptieren von Regeln
+- Vergibt eine Rolle an Benutzer, die die Regeln akzeptieren
+- Unterstützt OpenAI und GPT4All APIs
+- Verwendet eine Konfigurationsdatei für Tokens
+
+## Installation
+
+1. Installiere die erforderlichen Abhängigkeiten:
+    - Linux: `apt install openjdk-17-jdk screen -y`
+    - Windows: Installiere das entsprechende JDK
+
+2. Führe den Bot aus:
+    - Linux: `screen -mdS dcbot java -jar Discord_Bot.jar`
+    - Windows: Starte die `Discord_Bot.jar`-Datei
+
+## Verwendung
+
+Der Bot unterstützt folgende Befehle:
+
+- `!regeln`: Zeigt die Regeln an
+- `!stream <Link>`: Setzt den Streaming-Link
+- `!say <Nachricht>`: Sendet eine Nachricht
+- `!status <Spielversion>`: Überprüft den Star Citizen Status
+- `!play <Link>`: Spielt einen Song ab
+- `!News`: Zeigt die neuesten Star Citizen News an
+
+## Konfiguration
+
+Der Bot liest die Tokens aus einer Konfigurationsdatei `config.txt`. Die Datei muss folgendes Format haben:
+Die Datei `token.txt` muss 2 Zeilen haben:
+- `token` (Discord Token)
+- `openaitoken` (OpenAI API-Token)
 
 <br/>
+Der Bot unterstützt folgende Funktionen:
+- Überprüfung des Star Citizen Serverstatus
+- Anzeigen von Regeln und Setzen von Berechtigungen beim Akzeptieren der Regeln
+- Senden von Star Citizen Patchnotes als eingebettete Nachricht an Discord
+- Senden von Palworld Patchnotes als eingebettete Nachricht an Discord
 
-<br/>
-openai, Star Citizen Server Status, Regeln, Berechtigungen setzen beim akzeptieren der Regeln usw..<br/>
-Star Citizen Patchnotes als embedded Message an Discord Senden.<br/>
-Palworld Patchnotes als embedded Message an Discord Senden.<br/>
+Der Bot läuft sowohl auf Linux als auch auf Windows.
 
-Läuft auf Linux und Windows
-
-Der Token wird aus einer Datei "token.txt" ausgelesen. Dabei wird unter Linux und Windows Betriesbssystemen unterschieden. Unter linux muss der Token unter
-
-#Linux /root/token.txt
-
-#Windows Desktop/token.txt
-
-Die Datei token.txt muss 2 Zeilen haben:<br/> 
-token (Discord Token)<br/>
-openaitoken (Openai API Token)<br/>
+Der Token wird aus einer Datei "token.txt" ausgelesen. Dabei wird zwischen Linux- und Windows-Betriebssystemen unterschieden. Unter Linux muss der Token in der Datei "/root/token.txt" und unter Windows in der Datei "Desktop/token.txt" gespeichert werden.
 
 
-Beispielinhalt: <br/>
-MzgxOLAKSDLTE4NDEx.G28qtc.Rdmk8JD7fAJKASdhh-osXpxiAsd09flO9ZSMLKIE <br/>
-sk-g5ALSKDJLJASHCVZ3BlbkFJXHHNluGJ68MUn1rT8HWX <br/>
+# Linux /root/token.txt
+# Windows Desktop/token.txt
 
 
 Channels die benötigt werden:
-                            sc-news
-                            chatgpt
-                            regeln
+- sc-news
+- chatgpt
+- regeln
 
-Die Zeilen dürfen nicht leer sein, wenn ihr keinen OpenAI API Key habt, schreibt irgendwas rein.
 
-Linux install:
-
-apt install openjdk-17-jdk screen -y
-
-Run Bot: screen -mdS dcbot java -jar Discord_Bot.jar
-
-Commands: <br/>!regeln <br/>!stream https://www.twitch.tv/8lackn0va <br/>!say Mahlzeit <br/>!status Star citizen 3.18 <br/>!play https://open.spotify.com/track/2YFtpiy2WoAQVQbM1SIwES <br/>!News (RSS Feed from Robertspace)
-
+![grafik](https://github.com/Blackn0va/Discord_Bot/assets/12220332/e1773592-1714-4507-91de-1c2c3e4c47b8)
+![grafik](https://github.com/Blackn0va/Discord_Bot/assets/12220332/c3b539db-a3c6-452b-bca5-8686f9d159cc)
        
 
 
