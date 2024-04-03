@@ -21,7 +21,7 @@
         <appendAssemblyId>false</appendAssemblyId>
           <archive>
             <manifest>
-              <mainClass>com.blackn0va.Main</mainClass>
+              <mainClass>com.blackn0va.discord_bot.Main</mainClass>
             </manifest>
           </archive>
           <descriptorRefs>

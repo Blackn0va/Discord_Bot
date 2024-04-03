@@ -17,7 +17,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class gpt4all {
 
-    // Methode zum Starten eines neuen Threads, um eine Antwort von GPT-4 zu erhalten
     public static Future<String> getAnswerInThread(String question) {
         ExecutorService executor = Executors.newSingleThreadExecutor();
         Future<String> future = executor.submit(new Callable<String>() {
@@ -30,17 +29,14 @@ public class gpt4all {
         return future;
     }
 
-    // Methode zum Abrufen einer Antwort von GPT-4
     public static String getAnswer(String question) throws Exception {
         String text = "";
         try {
-            // Verkürzen der Frage auf maximal 100 Wörter
             String shortenedPrompt = shortenText(question, 100);
             String apiBase = "http://192.168.178.117:4891/v1";
             String apiKey = "";
             String model = "mistral-7b-instruct-v0.1.Q4_0.gguf";
 
-            // Erstellen der Parameter für die API-Anfrage
             Map<String, Object> params = new HashMap<>();
             params.put("model", model);
             params.put("prompt", shortenedPrompt);
@@ -51,10 +47,8 @@ public class gpt4all {
             params.put("echo", true);
             params.put("stream", false);
 
-            // Umwandeln der Parameter in einen JSON-String
             String requestBody = new ObjectMapper().writeValueAsString(params);
 
-            // Erstellen und Senden der HTTP-Anfrage
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(apiBase + "/completions"))
@@ -79,7 +73,6 @@ public class gpt4all {
         return text;
     }
 
-    // Methode zum Verkürzen eines Texts auf eine bestimmte Anzahl von Wörtern
     public static String shortenText(String text, int maxWords) {
         String[] words = text.split(" ");
         if (words.length <= maxWords) {
