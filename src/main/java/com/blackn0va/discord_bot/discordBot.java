@@ -9,12 +9,13 @@ import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 
 public class discordBot {
+    // Statische Variable zum Speichern des JDABuilders
     public static JDA bauplan;
 
+    // Methode zum Starten des Discord Bots
     public static void start() {
         try {
-
-            // JDA bauplan = JDABuilder.createDefault(token).build();
+            // Erstellen eines JDABuilder mit dem Token aus der Main-Klasse
             JDABuilder builder = JDABuilder.createDefault(Main.token)
                     .enableIntents(GatewayIntent.GUILD_MEMBERS, GatewayIntent.MESSAGE_CONTENT,
                             GatewayIntent.GUILD_MESSAGES, GatewayIntent.DIRECT_MESSAGES, GatewayIntent.GUILD_MEMBERS,
@@ -24,31 +25,33 @@ public class discordBot {
                             GatewayIntent.GUILD_VOICE_STATES)
                     .setAutoReconnect(true)
                     .addEventListeners(new NachrichtenReaction(), new GiveRole());
+            // Konfigurieren der Speichernutzung des Bots
             configureMemoryUsage(builder);
+            // Erstellen des Bots und setzen des Status auf ONLINE
             bauplan = builder.build();
             bauplan.getPresence().setStatus(OnlineStatus.ONLINE);
+            // Warten, bis der Bot mit Discord verbunden ist
             bauplan.awaitStatus(JDA.Status.CONNECTED);
 
-            // bauplan.addEventListener(new NachrichtenReaction());
             WriteLogs.writeLog("Discord Bot gestartet");
         } catch (Exception e) {
             WriteLogs.writeLog("Fehler beim Starten von DC: " + e.getMessage());
+            // Bei einem Fehler beim Starten des Bots, versuchen, den Bot neu zu starten
             restartDiscordBot();
-
         }
 
         try {
+            // Speichern der IDs der Textkanäle "chatgpt" und "📣rsi-news" in der
+            // Main-Klasse
             Main.GPTChannelID = bauplan.getTextChannelsByName("chatgpt", true).get(0).getId();
             Main.SCNewsChannelID = bauplan.getTextChannelsByName("📣rsi-news", true).get(0).getId();
-
-            // System.out.println(RegelnAkzeptiert);
-
         } catch (Exception e) {
         }
     }
 
+    // Methode zum Konfigurieren der Speichernutzung des Discord Bots
     public static void configureMemoryUsage(JDABuilder bauplan) {
-        // Disable cache for member activities (streaming/games/spotify)
+        // Deaktivieren des Caches für verschiedene Funktionen
         bauplan.disableCache(CacheFlag.ACTIVITY);
         bauplan.disableCache(CacheFlag.CLIENT_STATUS);
         bauplan.disableCache(CacheFlag.EMOJI);
@@ -59,28 +62,27 @@ public class discordBot {
         bauplan.disableCache(CacheFlag.VOICE_STATE);
         bauplan.disableCache(CacheFlag.SCHEDULED_EVENTS);
         bauplan.disableCache(CacheFlag.STICKER);
- 
+
+        // Cachen aller Mitglieder
         bauplan.setMemberCachePolicy(MemberCachePolicy.ALL);
 
-
-        // Only cache members who are either in a voice channel or owner of the guild
-        // Disable member chunking on startup
+        // Nur Mitglieder cachen, die entweder in einem Sprachkanal sind oder Besitzer
+        // der Gilde sind
         bauplan.setChunkingFilter(ChunkingFilter.NONE);
-        // Consider guilds with more than 50 members as "large".
-        // Large guilds will only provide online members in their setup and thus reduce
-        // bandwidth if chunking is disabled.
+        // Gilden mit mehr als 50 Mitgliedern als "groß" betrachten
         bauplan.setLargeThreshold(5);
     }
 
+    // Methode zum Stoppen des Discord Bots
     public static void stop() {
         WriteLogs.writeLog("Discord Bot wird gestoppt");
         System.out.println("Discord Bot wird gestoppt");
-        if (bauplan != null) { // Check if bauplan is not null
-            bauplan.shutdown(); // Call the shutdown() method on bauplan
+        if (bauplan != null) { // Überprüfen, ob bauplan nicht null ist
+            bauplan.shutdown(); // Aufrufen der shutdown()-Methode auf bauplan
             try {
                 WriteLogs.writeLog("Warte auf Disconnect von DC...");
                 System.out.println("Warte auf Disconnect von DC...");
-                // Create a new thread that will wait for the bot to disconnect
+                // Erstellen eines neuen Threads, der auf das Trennen des Bots wartet
                 Thread disconnectThread = new Thread(() -> {
                     try {
                         bauplan.awaitStatus(JDA.Status.SHUTDOWN);
@@ -90,12 +92,12 @@ public class discordBot {
                     }
                 });
                 disconnectThread.start();
-                // Wait for the disconnect thread to finish, with a timeout
-                disconnectThread.join(5000); // Wait for 5 seconds
+                // Warten auf das Beenden des Trennungs-Threads, mit einem Timeout
+                disconnectThread.join(5000); // Warten für 5 Sekunden
                 if (disconnectThread.isAlive()) {
                     WriteLogs.writeLog("DC hat nicht reagiert. Beende den Thread...");
                     System.out.println("DC hat nicht reagiert. Beende den Thread...");
-                    disconnectThread.interrupt(); // Interrupt the thread if it's still running
+                    disconnectThread.interrupt(); // Unterbrechen des Threads, wenn er noch läuft
                 }
             } catch (InterruptedException e) {
                 WriteLogs.writeLog("Fehler beim warten: " + e);
@@ -104,7 +106,7 @@ public class discordBot {
                 WriteLogs.writeLog("Trenne die Verbindung und beende alle Hintergrundthreads");
                 System.out.println("Trenne die Verbindung und beende alle Hintergrundthreads");
                 bauplan.shutdownNow();
-                bauplan = null; // Set bauplan to null
+                bauplan = null; // Setzen von bauplan auf null
                 // Garbage Collect
                 System.gc();
             }
@@ -113,16 +115,17 @@ public class discordBot {
             System.out.println("Discord Bot gestoppt");
 
         } else {
-            // Handle the case where bauplan is null
+            // Behandeln des Falls, in dem bauplan null ist
             WriteLogs.writeLog("Discord Bot ist nicht gestartet");
             System.out.println("Discord Bot ist nicht gestartet");
         }
     }
 
+    // Methode zum Neustarten des Discord Bots
     public static void restartDiscordBot() {
         stop();
         try {
-            Thread.sleep(5000); // Wait for 5 seconds
+            Thread.sleep(5000); // Warten für 5 Sekunden
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

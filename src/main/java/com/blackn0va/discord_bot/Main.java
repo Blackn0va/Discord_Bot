@@ -17,6 +17,7 @@ import scala.App;
  */
 public class Main {
 
+    // Verschiedene statische Variablen zur Speicherung von Konfigurationsdaten und Zustandsinformationen
     public static String openaitoken = "";
     public static String RegelnChannelID = "";
     public static String RegelnPostID = "";
@@ -31,6 +32,7 @@ public class Main {
     public static String workingDir = System.getProperty("user.dir");
     public static String os = System.getProperty("os.name").toLowerCase();
 
+    // Erstellen von geplanten Ausführungsdiensten für Patch- und Statusaktualisierungen
     private static final ScheduledExecutorService schedulerPatch = Executors.newScheduledThreadPool(1);
     private static final ScheduledExecutorService schedulerStatus = Executors.newScheduledThreadPool(1);
     public static String IconURL = "https://avatars.githubusercontent.com/u/12220332?v=4";
@@ -40,7 +42,7 @@ public class Main {
 
     public static String TokenFile = "";
 
-    // Public Strings für Berechtigungen
+    // Öffentliche Zeichenketten für Berechtigungen
     public static String RegelnAkzeptiert = "";
 
     /**
@@ -49,22 +51,20 @@ public class Main {
      */
     public static void main(String[] args) throws Exception {
 
-        // rssNews.getNews();
-        // Betriebssystem bestimmen, wegen der unterschiedlichen Pfade
+        // Erkennung des Betriebssystems für die Pfadverwaltung
         System.out.println("Erkanntes Betriebssystem: " + os);
         WriteLogs.writeLog("Erkanntes Betriebssystem: " + os);
 
-        // rssNews.getNews();
-
+        // Unterscheidung zwischen Windows- und Unix-basierten Betriebssystemen
         if (os.contains("win")) {
             try { // Betriebssystem ist Windows basiert
 
                 TokenFile = workingDir + "\\" + "Token.txt";
 
-                // if file not exists, create it
+                // Wenn die Datei nicht existiert, wird sie erstellt
                 if (!new File(TokenFile).exists()) {
                     new File(TokenFile).createNewFile();
-                    // insert 6 lines in the file
+                    // Einfügen von 3 Zeilen in die Datei
                     try (BufferedWriter bw = new BufferedWriter(new FileWriter(TokenFile))) {
                         bw.write("token");
                         bw.newLine();
@@ -76,7 +76,7 @@ public class Main {
                     }
                 } else {
                     File file = new File(TokenFile);
-                    // line one of the file is token and line 2 is openaitoken
+                    // Die erste Zeile der Datei ist der Token und die zweite Zeile ist der OpenAI-Token
                     try (BufferedReader br = new BufferedReader(new FileReader(file))) {
                         token = br.readLine();
                         openaitoken = br.readLine();
@@ -96,7 +96,7 @@ public class Main {
 
                 if (!new File(TokenFile).exists()) {
                     new File(TokenFile).createNewFile();
-                    // insert 6 lines in the file
+                    // Einfügen von 3 Zeilen in die Datei
                     try (BufferedWriter bw = new BufferedWriter(new FileWriter(TokenFile))) {
                         bw.write("token");
                         bw.newLine();
@@ -120,9 +120,10 @@ public class Main {
 
         }
 
+        // Starten des Discord-Bots
         discordBot.start();
 
-        // start Timer for News and Status
+        // Starten der Timer für News und Status
 
         schedulerPatch.scheduleAtFixedRate(() -> {
             try {

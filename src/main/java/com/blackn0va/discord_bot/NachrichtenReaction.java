@@ -13,8 +13,9 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class NachrichtenReaction extends ListenerAdapter {
-
+    // Eine Liste zum Speichern von Chat-Nachrichten
     public static final List<ChatMessage> messages = new ArrayList<>();
+    // Eine Zeichenkette, die die Regeln für den Discord-Server enthält
     public static String regeln = "\u00A7 1. 🤝 Sei ein Freund, kein Feind. Respekt und Höflichkeit sind hier das A und O.\n\n"
             +
             "\u00A7 2. 🚫 Kein Platz für Hass. Beleidigungen, Diskriminierung, Rassismus oder Antisemitismus haben hier keinen Platz.\n\n"
@@ -35,41 +36,55 @@ public class NachrichtenReaction extends ListenerAdapter {
             +
             "Wenn du die Regeln gelesen und verstanden hast, dann klicke auf das ✅\n\n";
 
+    // Diese Methode wird aufgerufen, wenn eine Nachricht empfangen wird
     @Override
     public void onMessageReceived(MessageReceivedEvent ereignis) {
 
         try {
+            // Überprüfen, ob die Nachricht von einem Server (Gilde) kommt
             if (ereignis.isFromGuild()) {
-                // Wenn es ein Bot ist, dann wird die Nachricht nicht weiter verarbeitet
+                // Wenn die Nachricht von einem Bot kommt, wird sie nicht weiter verarbeitet
                 if (!ereignis.getAuthor().isBot()) {
+                    // Ausgabe der Nachrichtendetails in der Konsole
                     System.out.println("Nachricht von: " + ereignis.getAuthor().getName() + " auf: "
                             + ereignis.getGuild().getName() + " in: " + ereignis.getChannel().getName() + " mit: "
                             + ereignis.getMessage().getContentStripped());
 
+                    // Schreiben der Nachrichtendetails in die Log-Datei
                     WriteLogs.chat("Nachricht von: " + ereignis.getAuthor().getName() + " auf: "
                             + ereignis.getGuild().getName() + " in: " + ereignis.getChannel().getName() + " mit: "
                             + ereignis.getMessage().getContentStripped());
 
+                    // Überprüfen, ob die Nachricht mit "!" beginnt
                     if (ereignis.getMessage().getContentStripped().startsWith("!")) {
+                        // Wenn die Nachricht "!regeln" ist
                         if (ereignis.getMessage().getContentStripped().equalsIgnoreCase("!regeln")) {
-                            // delete message
+                            // Löschen der Nachricht
                             ereignis.getMessage().delete().queue();
 
+                            // Senden einer Schreibaktion
                             ereignis.getChannel().sendTyping().queue();
+                            // Senden der Regeln an den Kanal
                             SendMessage.toChannel(ereignis.getChannel().getId(),
                                     "Regeln auf " + ereignis.getGuild().getName(), regeln, Color.GREEN);
+                            // Schreiben eines Log-Eintrags, dass die Regeln angezeigt wurden
                             WriteLogs.permissions("Regeln wurden angezeigt");
 
+                            // Wenn die Nachricht "!gpt" enthält
                         } else if (ereignis.getMessage().getContentStripped().contains("!gpt")) {
 
-                            // get message without !gpt
+                            // Extrahieren der Nachricht ohne "!gpt"
                             String message = ereignis.getMessage().getContentStripped().substring(4);
 
+                            // Anfordern einer Antwort von GPT-3 in einem separaten Thread
                             Future<String> futureAnswer = gpt4all.getAnswerInThread(message);
                             new Thread(() -> {
                                 try {
+                                    // Erhalten der Antwort von GPT-3
                                     String answer = futureAnswer.get();
+                                    // Senden einer Schreibaktion
                                     ereignis.getChannel().sendTyping().queue();
+                                    // Senden der Antwort von GPT-3 an den Kanal
                                     SendMessage.toChannel(ereignis.getChannel().getId(), "GPT-3 Antwort", answer,
                                             Color.GREEN);
                                 } catch (Exception e) {
@@ -82,8 +97,11 @@ public class NachrichtenReaction extends ListenerAdapter {
                 }
             }
 
+            // Behandlung von Ausnahmen
         } catch (Exception e) {
+            // Ausgabe der Fehlermeldung in der Konsole
             System.out.println("Fehler in onMessageReceived: " + e.getMessage());
+            // Schreiben der Fehlermeldung in die Log-Datei
             WriteLogs.writeLog("Fehler in onMessageReceived: " + e.getMessage());
         }
 

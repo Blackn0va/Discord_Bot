@@ -7,11 +7,13 @@ import com.theokanning.openai.service.OpenAiService;
 
 public class openai {
 
-    // funktion return string antwort
+    // Funktion, die eine Antwort von OpenAI's GPT-3.5-Turbo-Modell erhält
     public static String getAnswer(String question) {
         try {
+            // Erstellen eines neuen OpenAiService mit dem Token aus der Main-Klasse
             OpenAiService service = new OpenAiService(Main.openaitoken);
 
+            // Erstellen einer Anfrage an das ChatCompletion-API
             ChatCompletionRequest chatCompletionRequest = ChatCompletionRequest
                     .builder()
                     .model("gpt-3.5-turbo")
@@ -24,30 +26,27 @@ public class openai {
                     .logitBias(new HashMap<>())
                     .build();
 
-            // service.createCompletion(completionRequest).getChoices().forEach(System.out::print);
+            // Senden der Anfrage und Speichern der Antwort in der Main-Klasse
             Main.answer = service.createChatCompletion(chatCompletionRequest).getChoices().toString()
                     .replace("[ChatCompletionChoice(index=0, message=ChatMessage(role=assistant, content=", "");
 
-            // if answer contains "), finishReason=length)]" remove it
+            // Entfernen von unnötigen Teilen der Antwort
             if (Main.answer.contains("), finishReason=length)]")) {
                 Main.answer = Main.answer.replace("), finishReason=length)]", "");
             }
-            // if answer contains "), finishReason=stop)]" remove it
             if (Main.answer.contains("), finishReason=stop)]")) {
                 Main.answer = Main.answer.replace("), finishReason=stop)]", "");
             }
 
+            // Ausgabe der Antwort und Speichern in den Logs
             System.out.println("Antwort:\n" + Main.answer);
             WriteLogs.writeLog("Antwort:\n" + Main.answer);
-
-            // NachrichtenReaction.answer =
-            // NachrichtenReaction.answer.replace("ReceivedMessage(*)", "");
 
             return Main.answer;
 
         } catch (Exception e) {
+            // Bei einem Fehler wird eine Fehlermeldung ausgegeben und in den Logs gespeichert
             System.out.println("Fehler beim Erstellen der Antwort");
-            //e.printStackTrace();
             WriteLogs.writeLog("Fehler beim Erstellen der Antwort");
             Main.answer = e.toString();
 
