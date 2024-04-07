@@ -130,8 +130,8 @@ public class Main {
 
         schedulerPatch.scheduleAtFixedRate(() -> {
             try {
-                StarCitizenPatchnotes.GetLatestPatchLink();
-                PalworldPatchnotes.GetLatestPatchLink();
+                PatchnotesStarCitizen.GetLatestPatchLink();
+                PatchnotesPalworld.GetLatestPatchLink();
             } catch (IOException e) {
                 e.printStackTrace();
             }

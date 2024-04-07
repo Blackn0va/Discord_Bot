@@ -1,12 +1,12 @@
 com\blackn0va\discord_bot\StarCitizenServerStatus.class
+com\blackn0va\discord_bot\PatchnotesPalworld.class
 com\blackn0va\discord_bot\openai.class
 com\blackn0va\discord_bot\gpt4all$1.class
+com\blackn0va\discord_bot\PatchnotesStarCitizen.class
 com\blackn0va\discord_bot\Main.class
 com\blackn0va\discord_bot\DiscordMessageReaction.class
 com\blackn0va\discord_bot\DiscordSendMessage.class
-com\blackn0va\discord_bot\StarCitizenPatchnotes.class
 com\blackn0va\discord_bot\DiscordBot.class
 com\blackn0va\discord_bot\DiscordGiveRole.class
 com\blackn0va\discord_bot\gpt4all.class
 com\blackn0va\discord_bot\WriteLogs.class
-com\blackn0va\discord_bot\PalworldPatchnotes.class
