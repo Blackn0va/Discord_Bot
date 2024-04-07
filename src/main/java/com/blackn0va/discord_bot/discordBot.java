@@ -8,7 +8,7 @@ import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
 
-public class discordBot {
+public class DiscordBot {
     // Statische Variable zum Speichern des JDABuilders
     public static JDA bauplan;
 
@@ -24,7 +24,7 @@ public class discordBot {
                             GatewayIntent.DIRECT_MESSAGE_TYPING, GatewayIntent.GUILD_WEBHOOKS,
                             GatewayIntent.GUILD_VOICE_STATES)
                     .setAutoReconnect(true)
-                    .addEventListeners(new NachrichtenReaction(), new GiveRole());
+                    .addEventListeners(new DiscordMessageReaction(), new DiscordGiveRole());
             // Konfigurieren der Speichernutzung des Bots
             configureMemoryUsage(builder);
             // Erstellen des Bots und setzen des Status auf ONLINE
@@ -34,6 +34,8 @@ public class discordBot {
             bauplan.awaitStatus(JDA.Status.CONNECTED);
 
             WriteLogs.writeLog("Discord Bot gestartet");
+
+            DiscordMessageReaction.startMessageProcessing();
         } catch (Exception e) {
             WriteLogs.writeLog("Fehler beim Starten von DC: " + e.getMessage());
             // Bei einem Fehler beim Starten des Bots, versuchen, den Bot neu zu starten

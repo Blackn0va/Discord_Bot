@@ -17,7 +17,8 @@ import scala.App;
  */
 public class Main {
 
-    // Verschiedene statische Variablen zur Speicherung von Konfigurationsdaten und Zustandsinformationen
+    // Verschiedene statische Variablen zur Speicherung von Konfigurationsdaten und
+    // Zustandsinformationen
     public static String openaitoken = "";
     public static String RegelnChannelID = "";
     public static String RegelnPostID = "";
@@ -32,7 +33,8 @@ public class Main {
     public static String workingDir = System.getProperty("user.dir");
     public static String os = System.getProperty("os.name").toLowerCase();
 
-    // Erstellen von geplanten Ausführungsdiensten für Patch- und Statusaktualisierungen
+    // Erstellen von geplanten Ausführungsdiensten für Patch- und
+    // Statusaktualisierungen
     private static final ScheduledExecutorService schedulerPatch = Executors.newScheduledThreadPool(1);
     private static final ScheduledExecutorService schedulerStatus = Executors.newScheduledThreadPool(1);
     public static String IconURL = "https://avatars.githubusercontent.com/u/12220332?v=4";
@@ -76,7 +78,8 @@ public class Main {
                     }
                 } else {
                     File file = new File(TokenFile);
-                    // Die erste Zeile der Datei ist der Token und die zweite Zeile ist der OpenAI-Token
+                    // Die erste Zeile der Datei ist der Token und die zweite Zeile ist der
+                    // OpenAI-Token
                     try (BufferedReader br = new BufferedReader(new FileReader(file))) {
                         token = br.readLine();
                         openaitoken = br.readLine();
@@ -121,14 +124,14 @@ public class Main {
         }
 
         // Starten des Discord-Bots
-        discordBot.start();
+        DiscordBot.start();
 
         // Starten der Timer für News und Status
 
         schedulerPatch.scheduleAtFixedRate(() -> {
             try {
-                rssNews.GetLatestPatchLink();
-                palworldNews.GetLatestPatchLink();
+                StarCitizenPatchnotes.GetLatestPatchLink();
+                PalworldPatchnotes.GetLatestPatchLink();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -136,7 +139,7 @@ public class Main {
 
         schedulerStatus.scheduleAtFixedRate(() -> {
             try {
-                statusfeed.getStatus();
+                StarCitizenServerStatus.getStatus();
             } catch (IOException e) {
                 e.printStackTrace();
             }
