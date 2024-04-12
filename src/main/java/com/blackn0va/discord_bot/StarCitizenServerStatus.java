@@ -31,11 +31,35 @@ public class StarCitizenServerStatus {
 
                     // Den Namen und den Status des Komponenten zum Status-String hinzufügen
                     Status += "|" + componentName + "|";
+
                 }
 
             } catch (Exception e) {
                 // Fehlerbehandlung
             }
+
+            Status = Status.replaceAll("Persistent Universe", "PU");
+            Status = Status.replaceAll("Arena Commander", "AC");
+            Status = Status.replaceAll("Platform", "Web");
+
+            // green dot on operational
+            Status = Status.replaceAll("Operational", "✅");
+            // red dot on degraded performance
+            Status = Status.replaceAll("Degraded Performance", "🔴");
+            // yellow dot on partial outage
+            Status = Status.replaceAll("Partial Outage", "🟡");
+            // red dot on major outage
+            Status = Status.replaceAll("Major Outage", "🔴");
+            // yellow dot on performance issues
+            Status = Status.replaceAll("Performance Issues", "🟡");
+            // yellow dot on partial service outage
+            Status = Status.replaceAll("Partial Service Outage", "🟡");
+            // red dot on service outage
+            Status = Status.replaceAll("Service Outage", "🔴");
+            // yellow dot on service disruption
+            Status = Status.replaceAll("Service Disruption", "🟡");
+            // yellow dot on service degradation
+            Status = Status.replaceAll("Service Degradation", "🟡");
 
             // Ausgabe des Serverstatus
             System.out.println("Serverstatus: " + Status);
