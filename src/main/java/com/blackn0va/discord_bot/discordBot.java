@@ -79,7 +79,7 @@ public class DiscordBot {
     public static void stop() {
         WriteLogs.writeLog("Discord Bot wird gestoppt");
         System.out.println("Discord Bot wird gestoppt");
-        if (bauplan != null) { // Überprüfen, ob bauplan nicht null ist
+        if (bauplan != null) { // Überprüfen, ob bauplan nicht null ist 
             bauplan.shutdown(); // Aufrufen der shutdown()-Methode auf bauplan
             try {
                 WriteLogs.writeLog("Warte auf Disconnect von DC...");
