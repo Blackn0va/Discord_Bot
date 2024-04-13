@@ -67,11 +67,18 @@ public class PatchnotesPalworld {
         // Abrufen des Arbeitsverzeichnisses der Anwendung
         workingDir = System.getProperty("user.dir");
 
-        // Überprüfen, ob die Versionsdatei existiert
-        File file = new File(workingDir + "\\PalworldVersion.txt");
-        if (!file.exists()) {
-            // Wenn nicht, erstellen Sie eine neue Datei
-            file.createNewFile();
+        File file = null;
+
+        if (Main.os.contains("win")) {
+            file = new File(workingDir + "\\Palworld_Version.txt");
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+        } else if (Main.os.contains("nix") || Main.os.contains("nux") || Main.os.contains("aix")) {
+            file = new File(workingDir + "/Palworld_Version.txt");
+            if (!file.exists()) {
+                file.createNewFile();
+            }
         }
 
         // Lesen der Versionsdatei
@@ -169,7 +176,7 @@ public class PatchnotesPalworld {
             // Entfernen von unnötigen Teilen des Titels
             title = title.substring(11);
             // Senden der Nachricht an den Discord-Channel
-            DiscordSendMessage.toChannelWithLink("1205879327200378910", title, "```prolog\n" + s + "\n```",
+            DiscordSendMessage.toChannelWithLink(Main.PalworldPatchChannelID, title, "```prolog\n" + s + "\n```",
                     java.awt.Color.GREEN, link, image);
         }
 

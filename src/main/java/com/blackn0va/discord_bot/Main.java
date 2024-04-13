@@ -26,6 +26,14 @@ public class Main {
     public static String token = "";
     public static String desktopPath = "";
     public static String GPTChannelID = "1155287768491110410";
+    public static String PalworldPatchChannelID = "1205879327200378910";
+    public static String StarCitizenPatchChannelID = "1101892014351585290";
+
+    // TESTS
+    // public static String GPTChannelID = "1155287768491110410";
+    // public static String PalworldPatchChannelID = "1155287768491110410";
+    // public static String StarCitizenPatchChannelID = "1155287768491110410";
+
     public static String SCNewsChannelID = "";
     public static String answer = "";
     public static String RSSNews = "";
@@ -130,6 +138,7 @@ public class Main {
 
         schedulerPatch.scheduleAtFixedRate(() -> {
             try {
+                System.out.println("Checking for new patches...");
                 PatchnotesStarCitizen.GetLatestPatchLink();
                 PatchnotesPalworld.GetLatestPatchLink();
             } catch (IOException e) {

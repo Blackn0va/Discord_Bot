@@ -1,5 +1,6 @@
 package com.blackn0va.discord_bot;
 
+
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -66,12 +67,13 @@ public class DiscordBot {
         bauplan.disableCache(CacheFlag.STICKER);
 
         // Cachen aller Mitglieder
-        bauplan.setMemberCachePolicy(MemberCachePolicy.ALL);
+        bauplan.setMemberCachePolicy(MemberCachePolicy.ONLINE);
 
         // Nur Mitglieder cachen, die entweder in einem Sprachkanal sind oder Besitzer
         // der Gilde sind
         bauplan.setChunkingFilter(ChunkingFilter.NONE);
         // Gilden mit mehr als 50 Mitgliedern als "groß" betrachten
+        //
         bauplan.setLargeThreshold(5);
     }
 
@@ -79,7 +81,7 @@ public class DiscordBot {
     public static void stop() {
         WriteLogs.writeLog("Discord Bot wird gestoppt");
         System.out.println("Discord Bot wird gestoppt");
-        if (bauplan != null) { // Überprüfen, ob bauplan nicht null ist 
+        if (bauplan != null) { // Überprüfen, ob bauplan nicht null ist
             bauplan.shutdown(); // Aufrufen der shutdown()-Methode auf bauplan
             try {
                 WriteLogs.writeLog("Warte auf Disconnect von DC...");

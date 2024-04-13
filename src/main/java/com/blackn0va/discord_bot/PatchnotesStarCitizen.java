@@ -61,14 +61,22 @@ public class PatchnotesStarCitizen {
                 // Abrufen des Arbeitsverzeichnisses der Anwendung
                 workingDir = System.getProperty("user.dir");
 
-                // Erstellen einer neuen Datei mit dem Namen "Version.txt" im Arbeitsverzeichnis
-                File file = new File(workingDir + "\\Version.txt");
-                // Überprüfen, ob die Datei bereits existiert
-                if (!file.exists()) {
-                        // Wenn nicht, erstellen Sie eine neue Datei
-                        file.createNewFile();
+                File file = null;
+
+                if (Main.os.contains("win")) {
+                        file = new File(workingDir + "\\StarCitizen_Version.txt");
+                        if (!file.exists()) {
+                                file.createNewFile();
+                        }
+                } else if (Main.os.contains("nix") || Main.os.contains("nux") || Main.os.contains("aix")) {
+                        file = new File(workingDir + "/StarCitizen_Version.txt");
+                        if (!file.exists()) {
+                                file.createNewFile();
+                        }
                 }
 
+
+                System.out.println("Patchlink: " + file);
                 // Lesen der Versionsdatei
                 BufferedReader br = new BufferedReader(new FileReader(file));
                 String st;
@@ -188,7 +196,7 @@ public class PatchnotesStarCitizen {
                         // Senden Sie jeden String als Nachricht an einen Discord-Kanal
                         // Die Nachricht wird in einem Codeblock mit der Sprache "prolog" formatiert, um
                         // eine bessere Lesbarkeit zu gewährleisten
-                        DiscordSendMessage.toChannel("1101892014351585290", "Star Citizen Update!",
+                        DiscordSendMessage.toChannel(Main.StarCitizenPatchChannelID, "Star Citizen Update!",
                                         "```prolog\n" + s + "\n```", java.awt.Color.GREEN);
                 }
 
