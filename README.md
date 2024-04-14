@@ -70,9 +70,7 @@ Channels die benötigt werden:
 
 ![grafik](https://github.com/Blackn0va/Discord_Bot/assets/12220332/b6d8e0ee-b300-4735-947a-53ed2a82747d)
 
-![grafik](https://github.com/Blackn0va/Discord_Bot/assets/12220332/e1773592-1714-4507-91de-1c2c3e4c47b8)
-![grafik](https://github.com/Blackn0va/Discord_Bot/assets/12220332/c3b539db-a3c6-452b-bca5-8686f9d159cc)
-       
+![grafik](https://github.com/Blackn0va/Discord_Bot/assets/12220332/a01727c0-2ee1-47e2-9ee8-9e78e9613a46)
 
 
 [![Blackn0va's github stats](https://github-readme-stats.vercel.app/api?username=Blackn0va&theme=blue-green)](https://github.com/Blackn0va/)
