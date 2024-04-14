@@ -65,10 +65,11 @@ Channels die benötigt werden:
 - sc-news
 - chatgpt
 - regeln
+- -Server status
 
-![grafik](https://github.com/Blackn0va/Discord_Bot/assets/12220332/31acb154-ad69-4daf-ab6f-695f9df55428)
 
-![grafik](https://github.com/Blackn0va/Discord_Bot/assets/12220332/b6d8e0ee-b300-4735-947a-53ed2a82747d)
+![grafik](https://github.com/Blackn0va/Discord_Bot/assets/12220332/1657cbc1-3a4a-4624-96b3-b0eaceb27037)
+
 
 ![grafik](https://github.com/Blackn0va/Discord_Bot/assets/12220332/a01727c0-2ee1-47e2-9ee8-9e78e9613a46)
 
