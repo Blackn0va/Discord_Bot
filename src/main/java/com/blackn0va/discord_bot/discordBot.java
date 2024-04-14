@@ -67,7 +67,7 @@ public class DiscordBot {
         bauplan.disableCache(CacheFlag.STICKER);
 
         // Cachen aller Mitglieder
-        bauplan.setMemberCachePolicy(MemberCachePolicy.ONLINE);
+        bauplan.setMemberCachePolicy(MemberCachePolicy.ALL);
 
         // Nur Mitglieder cachen, die entweder in einem Sprachkanal sind oder Besitzer
         // der Gilde sind
