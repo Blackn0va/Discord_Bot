@@ -19,7 +19,7 @@ public class openai {
                     .temperature(0.5) // Steuert die Zufälligkeit der Antwort
                     .presencePenalty(0.0) // Bestraft Antworten, die implizieren, dass der Assistent präsent ist
                     .frequencyPenalty(0.5) // Bestraft häufige Antworten
-                    .messages(DiscordMessageReaction.messages) // Nachrichtenverlauf
+                    .messages(Main.messages) // Nachrichtenverlauf
                     .n(1) // Anzahl der zu generierenden Antworten
                     .maxTokens(200) // Maximale Länge der Antwort
                     .logitBias(new HashMap<>()) // Bias für bestimmte Tokens

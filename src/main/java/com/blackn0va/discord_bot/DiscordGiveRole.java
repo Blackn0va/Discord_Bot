@@ -1,25 +1,31 @@
 package com.blackn0va.discord_bot;
 
+import java.awt.Color;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
-import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.events.message.react.GenericMessageReactionEvent;
-import net.dv8tion.jda.api.events.message.react.MessageReactionAddEvent;
-import net.dv8tion.jda.api.events.message.react.MessageReactionRemoveEvent;
 import net.dv8tion.jda.api.events.session.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class DiscordGiveRole extends ListenerAdapter {
     // Erstellen Sie eine Warteschlange für Ereignisse, bei denen eine Reaktion
     // hinzugefügt wird
-    Queue<GenericMessageReactionEvent> AddeventQueue = new LinkedList<>();
+    Queue<GenericMessageReactionEvent> ReactionAddeventQueue = new LinkedList<>();
     // Erstellen Sie eine Warteschlange für Ereignisse, bei denen eine Reaktion
     // entfernt wird
-    Queue<GenericMessageReactionEvent> RemoveeventQueue = new LinkedList<>();
+    Queue<GenericMessageReactionEvent> ReactionRemoveQueue = new LinkedList<>();
+    Map<Long, Integer> currentPageNums = new HashMap<>();
+
+    // Erstellen Sie eine Warteschlange für ButtonInteractionEvent
+    Queue<ButtonInteractionEvent> buttonClickQueue = new LinkedList<>();
 
     // Diese Methode wird aufgerufen, wenn der Bot bereit ist
     @Override
@@ -45,147 +51,138 @@ public class DiscordGiveRole extends ListenerAdapter {
         }
     }
 
-    @Override
-    public void onMessageReactionAdd(MessageReactionAddEvent ereignis) {
-        // Fügen Sie das Ereignis zur Warteschlange hinzu
-        reactionAddQueue(ereignis);
-        // Verarbeiten Sie das Ereignis
-        addEvent();
-    }
-
-    @Override
-    public void onMessageReactionRemove(MessageReactionRemoveEvent ereignis) {
-        // Fügen Sie das Ereignis zur Warteschlange hinzu
-        reactionRemoveQueue(ereignis);
-        // Verarbeiten Sie das Ereignis
-        removeEvent();
-    }
-
     // Methode zum Hinzufügen von Ereignissen zur Warteschlange
     public void reactionAddQueue(GenericMessageReactionEvent ereignis) {
-        AddeventQueue.add(ereignis);
+        ReactionAddeventQueue.add(ereignis);
     }
 
     // Methode zum Hinzufügen von Ereignissen zur Warteschlange
     public void reactionRemoveQueue(GenericMessageReactionEvent ereignis) {
-        RemoveeventQueue.add(ereignis);
+        ReactionRemoveQueue.add(ereignis);
     }
 
-    // Diese Methode verarbeitet Ereignisse aus der Warteschlange
-    public void addEvent() {
-        // Zuerst wird überprüft, ob die Warteschlange nicht leer ist
-        if (!AddeventQueue.isEmpty()) {
-            // Das Ereignis wird aus der Warteschlange entfernt
-            GenericMessageReactionEvent ereignis = AddeventQueue.remove();
+    @Override
+    public void onButtonInteraction(ButtonInteractionEvent event) {
+        // Fügen Sie das Event zur Warteschlange hinzu
+        buttonClickQueue.add(event);
+        // Verarbeiten Sie das Event
+        ProcessButtonClickEvent();
+    }
 
-            // Der Benutzer, der die Reaktion ausgelöst hat, wird ermittelt
-            User user = ereignis.getUser();
-            if (user != null) {
-                // Es wird überprüft, ob der Benutzer kein Bot ist
-                if (!user.isBot()) {
-                    // Es wird überprüft, ob der Kanalname "regeln" enthält
-                    if (ereignis.getChannel().getName().contains("regeln")) {
-                        // Es wird überprüft, ob das Emoji der Reaktion "✅" ist
-                        if (ereignis.getReaction().getEmoji().getName().equals("✅")) {
-                            // Ein Log-Eintrag wird erstellt, dass die Regeln akzeptiert wurden
-                            WriteLogs.permissions(
-                                    "Regeln wurden akzeptiert von: " + ereignis.getUser().getName() + " auf: "
-                                            + ereignis.getGuild().getName());
-                            // Eine Nachricht wird auf der Konsole ausgegeben, dass die Regeln akzeptiert
-                            // wurden
-                            System.out
-                                    .println("Regeln wurden akzeptiert von: " + ereignis.getUser().getName() + " auf: "
-                                            + ereignis.getGuild().getName());
-                            try {
-                                // Das Mitglied, das die Reaktion ausgelöst hat, wird ermittelt
-                                Member member = ereignis.getMember();
-                                // Die Rolle "Regeln akzeptiert" wird gesucht
-                                List<Role> roles = ereignis.getGuild().getRolesByName("Regeln akzeptiert", true);
-                                // Es wird überprüft, ob das Mitglied und die Rolle existieren
-                                if (member != null && roles != null && !roles.isEmpty()) {
-                                    // Die Rolle wird dem Mitglied zugewiesen
-                                    ereignis.getGuild().addRoleToMember(member, roles.get(0)).queue();
-                                } else {
-                                    // Ein Log-Eintrag wird erstellt, dass das Mitglied oder die Rolle nicht
-                                    // gefunden wurden
-                                    WriteLogs.permissions("Mitglied oder Rolle konnte nicht gefunden werden");
-                                    // Eine Nachricht wird auf der Konsole ausgegeben, dass das Mitglied oder die
-                                    // Rolle nicht gefunden wurden
-                                    System.out.println("Mitglied oder Rolle konnte nicht gefunden werden");
-                                }
-                            } catch (Exception e) {
-                                // Ein Log-Eintrag wird erstellt, dass ein Fehler beim Zuweisen der Rolle
-                                // aufgetreten ist
-                                WriteLogs.permissions("Fehler beim zuweisen der Rolle: " + e.getMessage());
-                                // Eine Nachricht wird auf der Konsole ausgegeben, dass ein Fehler beim Zuweisen
-                                // der Rolle aufgetreten ist
-                                System.out.println("Fehler beim zuweisen der Rolle: " + e.getMessage());
-                            }
-                        }
+    // Methode zum Verarbeiten von Button-Klick-Events
+    public void ProcessButtonClickEvent() {
+        // Entfernen Sie das nächste Event aus der Warteschlange
+        ButtonInteractionEvent event = buttonClickQueue.remove();
+        // Überprüfen Sie, ob ein Event vorhanden ist
+        if (event != null) {
+            // Get the ID of the clicked button
+            String buttonId = event.getComponentId();
 
+            // check if button Regeln Akzeptieren is klicked
+            if (buttonId.equals("RegelnAkzeptieren")) {
+                WriteLogs.permissions("Regeln wurden akzeptiert von: " + event.getUser().getName()
+                        + " auf: " + event.getGuild().getName());
+                // Eine Nachricht wird auf der Konsole ausgegeben, dass die Regeln nicht
+                // akzeptiert wurden
+                System.out.println("Regeln wurden akzeptiert von: " + event.getUser().getName()
+                        + " auf: " + event.getGuild().getName());
+                try {
+                    Member member = event.getMember();
+                    // Die Rolle "Regeln akzeptiert" wird gesucht
+                    List<Role> roles = event.getGuild().getRolesByName("Regeln akzeptiert", true);
+
+                    // Es wird überprüft, ob das Mitglied und die Rolle existieren
+                    if (member != null) {
+                        // Die Rolle wird dem Mitglied gegeben
+                        event.getGuild().addRoleToMember(member, roles.get(0)).queue();
+                    } else {
+                        // Ein Log-Eintrag wird erstellt, dass das Mitglied oder die Rolle nicht
+                        // gefunden wurden
+                        WriteLogs.permissions("Mitglied oder Rolle konnte nicht gefunden werden");
+                        // Eine Nachricht wird auf der Konsole ausgegeben, dass das Mitglied oder die
+                        // Rolle nicht gefunden wurden
+                        System.out.println("Mitglied oder Rolle konnte nicht gefunden werden");
                     }
+
+                } catch (Exception e) {
+                    // Ein Log-Eintrag wird erstellt, dass ein Fehler beim Entfernen der Rolle
+                    // aufgetreten ist
+                    WriteLogs.permissions("Fehler beim entfernen der Rolle: " + e.getMessage());
+                    // Eine Nachricht wird auf der Konsole ausgegeben, dass ein Fehler beim
+                    // Entfernen der Rolle aufgetreten ist
+                    System.out.println("Fehler beim entfernen der Rolle: " + e.getMessage());
+                }
+                event.deferEdit().queue();
+
+            } else if (buttonId.equals("RegelnAblehnen")) {
+                // Ein Log-Eintrag wird erstellt, dass die Regeln nicht akzeptiert wurden
+                WriteLogs.permissions("Regeln wurden nicht akzeptiert von: " + event.getUser().getName()
+                        + " auf: " + event.getGuild().getName());
+                // Eine Nachricht wird auf der Konsole ausgegeben, dass die Regeln nicht
+                // akzeptiert wurden
+                System.out.println("Regeln wurden nicht akzeptiert von: " + event.getUser().getName()
+                        + " auf: " + event.getGuild().getName());
+                
+                try {
+                    // Das Mitglied, das die Reaktion entfernt hat, wird ermittelt
+                    Member member = event.getMember();
+                    // Die Rolle "Regeln akzeptiert" wird gesucht
+                    List<Role> roles = event.getGuild().getRolesByName("Regeln akzeptiert", true);
+                    // Es wird überprüft, ob das Mitglied und die Rolle existieren
+                    if (member != null && roles != null && !roles.isEmpty()) {
+                        // Die Rolle wird dem Mitglied entzogen
+                        event.getGuild().removeRoleFromMember(member, roles.get(0)).queue();
+                    } else {
+                        // Ein Log-Eintrag wird erstellt, dass das Mitglied oder die Rolle nicht
+                        // gefunden wurden
+                        WriteLogs.permissions("Mitglied oder Rolle konnte nicht gefunden werden");
+                        // Eine Nachricht wird auf der Konsole ausgegeben, dass das Mitglied oder die
+                        // Rolle nicht gefunden wurden
+                        System.out.println("Mitglied oder Rolle konnte nicht gefunden werden");
+                    }
+                } catch (Exception e) {
+                    // Ein Log-Eintrag wird erstellt, dass ein Fehler beim Entfernen der Rolle
+                    // aufgetreten ist
+                    WriteLogs.permissions("Fehler beim entfernen der Rolle: " + e.getMessage());
+                    // Eine Nachricht wird auf der Konsole ausgegeben, dass ein Fehler beim
+                    // Entfernen der Rolle aufgetreten ist
+                    System.out.println("Fehler beim entfernen der Rolle: " + e.getMessage());
+                }
+                event.deferEdit().queue();
+
+            } else if (buttonId.equals("back") || buttonId.equals("next")) {
+                // Get the current page number from the map
+                Long messageId = event.getInteraction().getMessageIdLong();
+                Main.StarCitizencurrentPageNum = currentPageNums.getOrDefault(messageId, 1);
+
+                // Calculate the new page number
+                int newPageNum = buttonId.equals("back") ? Main.StarCitizencurrentPageNum - 1
+                        : Main.StarCitizencurrentPageNum + 1;
+
+                // Check if the new page number is valid
+                if (newPageNum >= 1 && newPageNum <= Main.StarCitizenPatchPages.size()) {
+                    // Update the current page number in the map
+                    currentPageNums.put(messageId, newPageNum);
+
+                    // Create a new embed with the new page
+                    EmbedBuilder embed = new EmbedBuilder()
+                            .setTitle("Star Citizen Patch") // You need to set the title here
+                            .setDescription("```prolog\n" + Main.StarCitizenPatchPages.get(newPageNum - 1).replace("[", "").replace("]", "") + "\n```")
+                            .setColor(Color.GREEN) // You need to set the color here
+                            .setTimestamp(java.time.Instant.now())
+                            .setFooter("Seite " + newPageNum + " von " + Main.StarCitizenPatchPages.size(),
+                                    Main.IconURL);
+
+                    // Update the message with the new embed
+                    event.getInteraction().editMessageEmbeds(embed.build()).queue();
+                } else if (newPageNum < 1) {
+                    // If the new page number is less than 1, do nothing
+                    event.deferEdit().queue();
+                } else {
+                    // If the new page number is not valid, send an error message
+                    event.deferEdit().queue();
                 }
             }
         }
     }
-
-    // Diese Methode verarbeitet Ereignisse aus der Warteschlange
-    public void removeEvent() {
-        // Zuerst wird überprüft, ob die Warteschlange nicht leer ist
-        if (!RemoveeventQueue.isEmpty()) {
-            // Das Ereignis wird aus der Warteschlange entfernt
-            GenericMessageReactionEvent ereignis = RemoveeventQueue.remove();
-
-            // Der Benutzer, der die Reaktion entfernt hat, wird ermittelt
-            User user = ereignis.getUser();
-            if (user != null) {
-                // Es wird überprüft, ob der Benutzer kein Bot ist
-                if (!user.isBot()) {
-                    // Es wird überprüft, ob der Kanalname "regeln" enthält
-                    if (ereignis.getChannel().getName().contains("regeln")) {
-                        // Es wird überprüft, ob das Emoji der Reaktion "✅" ist
-                        if (ereignis.getReaction().getEmoji().getName().equals("✅")) {
-                            // Ein Log-Eintrag wird erstellt, dass die Regeln nicht akzeptiert wurden
-                            WriteLogs.permissions("Regeln wurden nicht akzeptiert von: " + ereignis.getUser().getName()
-                                    + " auf: " + ereignis.getGuild().getName());
-                            // Eine Nachricht wird auf der Konsole ausgegeben, dass die Regeln nicht
-                            // akzeptiert wurden
-                            System.out.println("Regeln wurden nicht akzeptiert von: " + ereignis.getUser().getName()
-                                    + " auf: " + ereignis.getGuild().getName());
-                            try {
-                                // Das Mitglied, das die Reaktion entfernt hat, wird ermittelt
-                                Member member = ereignis.getMember();
-                                // Die Rolle "Regeln akzeptiert" wird gesucht
-                                List<Role> roles = ereignis.getGuild().getRolesByName("Regeln akzeptiert", true);
-                                // Es wird überprüft, ob das Mitglied und die Rolle existieren
-                                if (member != null && roles != null && !roles.isEmpty()) {
-                                    // Die Rolle wird dem Mitglied entzogen
-                                    ereignis.getGuild().removeRoleFromMember(member, roles.get(0)).queue();
-                                } else {
-                                    // Ein Log-Eintrag wird erstellt, dass das Mitglied oder die Rolle nicht
-                                    // gefunden wurden
-                                    WriteLogs.permissions("Mitglied oder Rolle konnte nicht gefunden werden");
-                                    // Eine Nachricht wird auf der Konsole ausgegeben, dass das Mitglied oder die
-                                    // Rolle nicht gefunden wurden
-                                    System.out.println("Mitglied oder Rolle konnte nicht gefunden werden");
-                                }
-                            } catch (Exception e) {
-                                // Ein Log-Eintrag wird erstellt, dass ein Fehler beim Entfernen der Rolle
-                                // aufgetreten ist
-                                WriteLogs.permissions("Fehler beim entfernen der Rolle: " + e.getMessage());
-                                // Eine Nachricht wird auf der Konsole ausgegeben, dass ein Fehler beim
-                                // Entfernen der Rolle aufgetreten ist
-                                System.out.println("Fehler beim entfernen der Rolle: " + e.getMessage());
-                            }
-
-                        }
-
-                    }
-                }
-            }
-
-        }
-
-    }
-
 }
