@@ -1,7 +1,5 @@
 package com.blackn0va.discord_bot;
 
-
-
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -12,10 +10,10 @@ import net.dv8tion.jda.api.utils.cache.CacheFlag;
 
 public class DiscordBot {
 
-
     // Methode zum Starten des Discord Bots
     public static void start() {
         try {
+            // disable logging complete
             // Erstellen eines JDABuilder mit dem Token aus der Main-Klasse
             JDABuilder builder = JDABuilder.createDefault(Main.token)
                     .enableIntents(GatewayIntent.GUILD_MEMBERS, GatewayIntent.MESSAGE_CONTENT,
@@ -34,12 +32,14 @@ public class DiscordBot {
             // Warten, bis der Bot mit Discord verbunden ist
             Main.bauplan.awaitStatus(JDA.Status.CONNECTED);
 
+            System.out.println("Discord Bot gestartet");
             WriteLogs.writeLog("Discord Bot gestartet");
 
             DiscordMessageReaction.startMessageProcessing();
 
         } catch (Exception e) {
-            WriteLogs.writeLog("Fehler beim Starten von DC: " + e.getMessage());
+            WriteLogs.writeLog("Fehler beim Starten von DC: ");
+            System.out.println("Fehler beim Starten von DC: ");
             // Bei einem Fehler beim Starten des Bots, versuchen, den Bot neu zu starten
             restartDiscordBot();
         }
@@ -55,6 +55,7 @@ public class DiscordBot {
 
     // Methode zum Konfigurieren der Speichernutzung des Discord Bots
     public static void configureMemoryUsage(JDABuilder bauplan) {
+
         // Deaktivieren des Caches für verschiedene Funktionen
         bauplan.disableCache(CacheFlag.ACTIVITY);
         bauplan.disableCache(CacheFlag.CLIENT_STATUS);
@@ -92,8 +93,8 @@ public class DiscordBot {
                     try {
                         Main.bauplan.awaitStatus(JDA.Status.SHUTDOWN);
                     } catch (InterruptedException e) {
-                        WriteLogs.writeLog("Fehler beim warten: " + e);
-                        System.out.println("Fehler beim warten: " + e);
+                        WriteLogs.writeLog("Fehler beim warten: ");
+                        System.out.println("Fehler beim warten: ");
                     }
                 });
                 disconnectThread.start();
@@ -105,7 +106,8 @@ public class DiscordBot {
                     disconnectThread.interrupt(); // Unterbrechen des Threads, wenn er noch läuft
                 }
             } catch (InterruptedException e) {
-                WriteLogs.writeLog("Fehler beim warten: " + e);
+                WriteLogs.writeLog("Fehler beim warten: ");
+                System.out.println("Fehler beim warten: ");
             } finally {
                 // Trennen die Verbindung und beende alle Hintergrundthreads
                 WriteLogs.writeLog("Trenne die Verbindung und beende alle Hintergrundthreads");
@@ -128,11 +130,12 @@ public class DiscordBot {
 
     // Methode zum Neustarten des Discord Bots
     public static void restartDiscordBot() {
+        System.out.println("Neustart des Discord Bots");
         stop();
         try {
             Thread.sleep(5000); // Warten für 5 Sekunden
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            System.out.println("Fehler beim Warten: ");
         }
         start();
     }

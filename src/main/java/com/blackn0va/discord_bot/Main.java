@@ -8,17 +8,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import com.theokanning.openai.completion.chat.ChatMessage;
 import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import scala.App;
 
@@ -27,6 +24,7 @@ import scala.App;
  * @author Black
  */
 public class Main {
+
     // Discord Bot Einstellungen
     public static String token = "";
     public static String openaitoken = "";
@@ -39,9 +37,13 @@ public class Main {
     public static String GPTChannelID = "1155287768491110410";
     public static String StarCitizenPatchChannelID = "1101892014351585290";
     public static String PalworldPatchChannelID = "1205879327200378910";
-    public static Queue<Message> OutgoingMessageQueue = new LinkedList<>();
+    // Tests
+    // public static String GPTChannelID = "1155287768491110410";
+    // public static String StarCitizenPatchChannelID = "1231318450606051388";
+    // public static String PalworldPatchChannelID = "1155287768491110410";
+    // public static Queue<Message> OutgoingMessageQueue = new LinkedList<>();
 
-    public static String answer = "1101892014351585290";
+    public static String answer = "1155287768491110410";
 
     // Nachrichten-IDs
     public static String RegelnPostID = "";
@@ -95,6 +97,7 @@ public class Main {
     private static final ScheduledExecutorService schedulerStarCitizenServerStatus = Executors
             .newScheduledThreadPool(1);
     private static final ScheduledExecutorService schedulerPatchStarCitizen = Executors.newScheduledThreadPool(1);
+
     // Eine Zeichenkette, die die Regeln für den Discord-Server enthält
     public static String regeln = "\u00A7 1. 🤝 Sei ein Freund, kein Feind. Respekt und Höflichkeit sind hier das A und O.\n\n"
             +

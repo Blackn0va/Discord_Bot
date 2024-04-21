@@ -50,7 +50,19 @@
             <groupId>net.dv8tion</groupId>
             <artifactId>JDA</artifactId>
             <version>LATEST</version>
-        </dependency>     
+        </dependency>  
+        <dependency>
+    <groupId>ch.qos.logback</groupId>
+    <artifactId>logback-classic</artifactId>
+    <version>LATEST</version> <!-- Verwenden Sie die neueste verfügbare Version -->
+</dependency>   
+<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+<dependency>
+    <groupId>org.slf4j</groupId>
+    <artifactId>slf4j-api</artifactId>
+    <version>2.0.13</version>
+</dependency>
+
     <dependency>
     <groupId>com.theokanning.openai-gpt3-java</groupId>
     <artifactId>service</artifactId>
@@ -62,7 +74,6 @@
     <artifactId>json</artifactId>
     <version>LATEST</version>
 </dependency>
-
         <dependency>
   <!-- jsoup HTML parser library @ https://jsoup.org/ -->
   <groupId>org.jsoup</groupId>

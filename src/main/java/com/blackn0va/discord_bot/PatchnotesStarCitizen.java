@@ -1,6 +1,5 @@
 package com.blackn0va.discord_bot;
 
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -20,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PatchnotesStarCitizen {
-public static ConcurrentLinkedQueue<Message> starCitizenQueue = new ConcurrentLinkedQueue<>();
+        public static ConcurrentLinkedQueue<Message> starCitizenQueue = new ConcurrentLinkedQueue<>();
 
         // Hauptmethode
         public static void GetLatestPatchLink() throws IOException {
@@ -255,7 +254,7 @@ public static ConcurrentLinkedQueue<Message> starCitizenQueue = new ConcurrentLi
 
                 try {
                         Main.StarCitizenPatchPages = PatchnotesStarCitizen.getPages();
-                        System.out.println("Seiten: " + Main.StarCitizenPatchPages.size());
+                        System.out.println("StarCitizen Patchnotes Seiten: " + Main.StarCitizenPatchPages.size());
 
                         // Textkanal über dessen ID abrufen
                         TextChannel channel = Main.bauplan.getTextChannelById(Main.StarCitizenPatchChannelID);
@@ -285,35 +284,59 @@ public static ConcurrentLinkedQueue<Message> starCitizenQueue = new ConcurrentLi
 
                                                 // prüfen ob text schon gespostet wurde
                                                 if (beschreibungEingebetteterInhalt.contains(ersteWoerter)) {
-                                                        System.out.println("StarCitizen Patche bereits gepostet");
+                                                        try {
+                                                                System.out.println(
+                                                                                "StarCitizen Patche bereits gepostet");
 
-                                                        // editiere die seite auf die gleiche wie sie aktuell ist
-                                                        DiscordSendMessage.editMessageEmbeds(
-                                                                        Main.StarCitizenPatchChannelID,
-                                                                        "Star Citizen Patchnotes!",
-                                                                        PatchnotesStarCitizen.getPage(1), 1, MessageID);
+                                                                // editiere die seite auf die gleiche wie sie aktuell
+                                                                // ist
+                                                                DiscordSendMessage.editMessageEmbeds(
+                                                                                Main.StarCitizenPatchChannelID,
+                                                                                "Star Citizen Patchnotes!",
+                                                                                PatchnotesStarCitizen.getPage(1), 1,
+                                                                                MessageID);
+                                                        } catch (Exception e) {
+                                                                System.out.println(
+                                                                                "Fehler beim Abrufen der StarCitizen Patchnotes: 1");
+                                                        }
+
                                                 }
                                         } else {
+                                                try {
+                                                        System.out.println("StarCitizen Patch wird gepostet");
+                                                        // Wenn die aktuelle Seite die erste Seite ist, wird die
+                                                        // Nachricht
+                                                        // gesendet
+                                                        DiscordSendMessage.sendPaginatedMessage(
+                                                                        Main.StarCitizenPatchChannelID,
+                                                                        "Star Citizen Patchnotes!",
+                                                                        PatchnotesStarCitizen
+                                                                                        .getPage(Main.StarCitizencurrentPageNum));
+                                                } catch (Exception e) {
+                                                        System.out.println(
+                                                                        "Fehler beim Abrufen der StarCitizen Patchnotes: 2");
+                                                }
+
+                                        }
+
+                                } else {
+                                        try {
                                                 System.out.println("StarCitizen Patch wird gepostet");
                                                 // Wenn die aktuelle Seite die erste Seite ist, wird die Nachricht
                                                 // gesendet
                                                 DiscordSendMessage.sendPaginatedMessage(Main.StarCitizenPatchChannelID,
                                                                 "Star Citizen Patchnotes!",
-                                                                PatchnotesStarCitizen
-                                                                                .getPage(Main.StarCitizencurrentPageNum));
+                                                                PatchnotesStarCitizen.getPage(
+                                                                                Main.StarCitizencurrentPageNum));
+                                        } catch (Exception e) {
+                                                System.out.println("Fehler beim Abrufen der StarCitizen Patchnotes: 3");
                                         }
 
-                                } else {
-                                        System.out.println("StarCitizen Patch wird gepostet");
-                                        // Wenn die aktuelle Seite die erste Seite ist, wird die Nachricht gesendet
-                                        DiscordSendMessage.sendPaginatedMessage(Main.StarCitizenPatchChannelID,
-                                                        "Star Citizen Patchnotes!",
-                                                        PatchnotesStarCitizen.getPage(Main.StarCitizencurrentPageNum));
                                 }
                         }
 
                 } catch (Exception e) {
-                        e.printStackTrace();
+                        System.out.println("Fehler beim Abrufen der StarCitizen Patchnotes: 4");
                 }
 
         }

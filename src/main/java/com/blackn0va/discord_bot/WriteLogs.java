@@ -43,7 +43,7 @@ public class WriteLogs {
                     bw.write("--------");
                     bw.newLine();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    System.out.println("Error: ");
                 }
             }
 
@@ -53,13 +53,13 @@ public class WriteLogs {
                     bw.newLine();
                     bw.write(log);
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    System.out.println("Error: ");
                 }
             }
 
         } catch (Exception e) {
             // Ausgabe einer Fehlermeldung
-            System.out.println("Error: " + e);
+            System.out.println("Error: " );
         }
 
     }
@@ -67,13 +67,13 @@ public class WriteLogs {
     // Methode zum Schreiben von Berechtigungsprotokollen
     public static void permissions(String log) {
         // Bestimmen des Betriebssystems
-        String os = System.getProperty("os.name").toLowerCase();
+        
         // Wenn das Betriebssystem Windows ist, setzen Sie den Pfad für das Protokoll
-        if (os.contains("win")) {
+        if (Main.os.contains("win")) {
             logPath = workingDir + "\\" + permissionlog;
             // Wenn das Betriebssystem Linux oder Unix ist, setzen Sie den Pfad für das
             // Protokoll
-        } else if (os.contains("nix") || os.contains("nux") || os.contains("aix")) {
+        } else if (Main.os.contains("nix") || Main.os.contains("nux") || Main.os.contains("aix")) {
             logPath = workingDir + "/" + permissionlog;
         }
 
@@ -94,7 +94,7 @@ public class WriteLogs {
                     bw.write("--------");
                     bw.newLine();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    System.out.println("Error: ");
                 }
             }
 
@@ -104,27 +104,25 @@ public class WriteLogs {
                     bw.newLine();
                     bw.write(log);
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    System.out.println("Error: ");
                 }
             }
 
         } catch (Exception e) {
             // Ausgabe einer Fehlermeldung
-            System.out.println("Error: " + e);
+            System.out.println("Error: " );
         }
 
     }
 
     // Methode zum Schreiben von Chatprotokollen
     public static void chat(String log) {
-        // Bestimmen des Betriebssystems
-        String os = System.getProperty("os.name").toLowerCase();
         // Wenn das Betriebssystem Windows ist, setzen Sie den Pfad für das Protokoll
-        if (os.contains("win")) {
+        if (Main.os.contains("win")) {
             logPath = workingDir + "\\" + chatlog;
             // Wenn das Betriebssystem Linux oder Unix ist, setzen Sie den Pfad für das
             // Protokoll
-        } else if (os.contains("nix") || os.contains("nux") || os.contains("aix")) {
+        } else if (Main.os.contains("nix") || Main.os.contains("nux") || Main.os.contains("aix")) {
             logPath = workingDir + "/" + chatlog;
         }
 
@@ -145,7 +143,7 @@ public class WriteLogs {
                     bw.write("--------");
                     bw.newLine();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    System.out.println("Error: ");
                 }
             }
 
@@ -155,12 +153,12 @@ public class WriteLogs {
                     bw.newLine();
                     bw.write(log);
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    System.out.println("Error: ");
                 }
             }
 
         } catch (Exception e) {
-            System.out.println("Error: " + e);
+            System.out.println("Error: ");
         }
 
     }
