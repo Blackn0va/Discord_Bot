@@ -32,11 +32,7 @@
 Der Bot unterstützt folgende Befehle:
 
 - `!regeln`: Zeigt die Regeln an
-- `!stream <Link>`: Setzt den Streaming-Link
-- `!say <Nachricht>`: Sendet eine Nachricht
-- `!status <Spielversion>`: Überprüft den Star Citizen Status
-- `!play <Link>`: Spielt einen Song ab
-- `!News`: Zeigt die neuesten Star Citizen News an
+
 
 ## Konfiguration
 
@@ -60,7 +56,6 @@ Der Token wird aus einer Datei "token.txt" ausgelesen. Dabei wird zwischen Linux
 # Linux /root/token.txt
 # Windows Desktop/token.txt
 
-
 Channels die benötigt werden:
 - sc-news
 - chatgpt
@@ -71,7 +66,8 @@ Channels die benötigt werden:
 ![grafik](https://github.com/Blackn0va/Discord_Bot/assets/12220332/1657cbc1-3a4a-4624-96b3-b0eaceb27037)
 
 
-![Unbenannt](https://github.com/Blackn0va/Discord_Bot/assets/12220332/4e2b0058-8b24-4393-b700-2e75e9e7047c)
+![Unbenannt](https://github.com/Blackn0va/Discord_Bot/assets/12220332/20019efb-b5e3-442a-a5a1-436ec4f02a0e)
+
 
 
 
