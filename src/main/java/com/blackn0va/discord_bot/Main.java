@@ -195,12 +195,10 @@ public class Main {
 
         }
 
-        // Starten des Discord-Bots
+        // Starte den Discord-Bot
         DiscordBot.start();
 
-        // Starten der Timer für News und Status
-
-        // Erstellen Sie separate Threads für die Patchnotizen-Jobs
+        // Erstelle einen separaten Thread für den Star Citizen Server Status Job
         Thread starCitizenServerStatusThread = new Thread(() -> {
             schedulerStarCitizenServerStatus.scheduleAtFixedRate(() -> {
                 // PatchnotesStarCitizen.GetStarCitizenPatchnotes();
@@ -213,27 +211,24 @@ public class Main {
             }, 0, 10, TimeUnit.MINUTES);
         });
 
-        // Erstellen Sie separate Threads für die Patchnotizen-Jobs
+        // Erstelle einen separaten Thread für den Star Citizen Patchnotizen Job
         Thread starCitizenThread = new Thread(() -> {
             schedulerPatchStarCitizen.scheduleAtFixedRate(() -> {
                 PatchnotesStarCitizen.GetStarCitizenPatchnotes();
             }, 0, 60, TimeUnit.MINUTES);
         });
 
+        // Erstelle einen separaten Thread für den Palworld Patchnotizen Job
         Thread palWorldThread = new Thread(() -> {
             schedulerPatchPalWorld.scheduleAtFixedRate(() -> {
                 PatchnotesPalworld.GetPalworldPatchnotes();
             }, 0, 60, TimeUnit.MINUTES);
         });
 
-        // Starten Sie die Threads
+        // Starte die Threads
         starCitizenThread.start();
         palWorldThread.start();
         starCitizenServerStatusThread.start();
-        // String ChannelID, String Title, String Message, int page, String messageID
-        // DiscordSendMessage.editMessage("1183032789407383562", "Regeln auf Laonda
-        // Discord", Main.regeln, "1231366842681917442");
-
     }
 
 }

@@ -254,7 +254,7 @@ public class PatchnotesStarCitizen {
 
                 try {
                         Main.StarCitizenPatchPages = null;
-                        
+
                         Main.StarCitizenPatchPages = PatchnotesStarCitizen.getPages();
                         System.out.println("StarCitizen Patchnotes Seiten: " + Main.StarCitizenPatchPages.size());
 

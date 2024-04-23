@@ -122,7 +122,7 @@ public class DiscordGiveRole extends ListenerAdapter {
                 // akzeptiert wurden
                 System.out.println("Regeln wurden nicht akzeptiert von: " + event.getUser().getName()
                         + " auf: " + event.getGuild().getName());
-                
+
                 try {
                     // Das Mitglied, das die Reaktion entfernt hat, wird ermittelt
                     Member member = event.getMember();
@@ -151,35 +151,37 @@ public class DiscordGiveRole extends ListenerAdapter {
                 event.deferEdit().queue();
 
             } else if (buttonId.equals("back") || buttonId.equals("next")) {
-                // Get the current page number from the map
+                // Hole die aktuelle Seitennummer aus der Map
                 Long messageId = event.getInteraction().getMessageIdLong();
                 Main.StarCitizencurrentPageNum = currentPageNums.getOrDefault(messageId, 1);
 
-                // Calculate the new page number
+                // Berechne die neue Seitennummer
                 int newPageNum = buttonId.equals("back") ? Main.StarCitizencurrentPageNum - 1
                         : Main.StarCitizencurrentPageNum + 1;
 
-                // Check if the new page number is valid
+                // Prüfe, ob die neue Seitennummer gültig ist
                 if (newPageNum >= 1 && newPageNum <= Main.StarCitizenPatchPages.size()) {
-                    // Update the current page number in the map
+                    // Aktualisiere die aktuelle Seitennummer in der Map
                     currentPageNums.put(messageId, newPageNum);
 
-                    // Create a new embed with the new page
+                    // Erstelle einen neuen Embed mit der neuen Seite
                     EmbedBuilder embed = new EmbedBuilder()
-                            .setTitle("Star Citizen Patch") // You need to set the title here
-                            .setDescription("```prolog\n" + Main.StarCitizenPatchPages.get(newPageNum - 1).replace("[", "").replace("]", "") + "\n```")
-                            .setColor(Color.GREEN) // You need to set the color here
+                            .setTitle("Star Citizen Patch") // Setze hier den Titel
+                            .setDescription("```prolog\n"
+                                    + Main.StarCitizenPatchPages.get(newPageNum - 1).replace("[", "").replace("]", "")
+                                    + "\n```")
+                            .setColor(Color.GREEN) // Setze hier die Farbe
                             .setTimestamp(java.time.Instant.now())
                             .setFooter("Seite " + newPageNum + " von " + Main.StarCitizenPatchPages.size(),
                                     Main.IconURL);
 
-                    // Update the message with the new embed
+                    // Aktualisiere die Nachricht mit dem neuen Embed
                     event.getInteraction().editMessageEmbeds(embed.build()).queue();
                 } else if (newPageNum < 1) {
-                    // If the new page number is less than 1, do nothing
+                    // Wenn die neue Seitennummer kleiner als 1 ist, mache nichts
                     event.deferEdit().queue();
                 } else {
-                    // If the new page number is not valid, send an error message
+                    // Wenn die neue Seitennummer nicht gültig ist, sende eine Fehlermeldung
                     event.deferEdit().queue();
                 }
             }
