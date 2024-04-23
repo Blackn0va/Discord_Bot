@@ -200,25 +200,36 @@ public class Main {
 
         // Starten der Timer für News und Status
 
-        schedulerStarCitizenServerStatus.scheduleAtFixedRate(() -> {
-            // PatchnotesStarCitizen.GetStarCitizenPatchnotes();
-            try {
-                StarCitizenStatus.getStatus();
+        // Erstellen Sie separate Threads für die Patchnotizen-Jobs
+        Thread starCitizenServerStatusThread = new Thread(() -> {
+            schedulerStarCitizenServerStatus.scheduleAtFixedRate(() -> {
+                // PatchnotesStarCitizen.GetStarCitizenPatchnotes();
+                try {
+                    StarCitizenStatus.getStatus();
 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }, 0, 10, TimeUnit.MINUTES);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }, 0, 10, TimeUnit.MINUTES);
+        });
 
-        schedulerPatchStarCitizen.scheduleAtFixedRate(() -> {
-            PatchnotesStarCitizen.GetStarCitizenPatchnotes();
-            // PatchnotesPalworld.GetPalworldPatchnotes();
-        }, 0, 60, TimeUnit.MINUTES);
+        // Erstellen Sie separate Threads für die Patchnotizen-Jobs
+        Thread starCitizenThread = new Thread(() -> {
+            schedulerPatchStarCitizen.scheduleAtFixedRate(() -> {
+                PatchnotesStarCitizen.GetStarCitizenPatchnotes();
+            }, 0, 60, TimeUnit.MINUTES);
+        });
 
-        schedulerPatchPalWorld.scheduleAtFixedRate(() -> {
-            // PatchnotesStarCitizen.GetStarCitizenPatchnotes();
-            PatchnotesPalworld.GetPalworldPatchnotes();
-        }, 0, 60, TimeUnit.MINUTES);
+        Thread palWorldThread = new Thread(() -> {
+            schedulerPatchPalWorld.scheduleAtFixedRate(() -> {
+                PatchnotesPalworld.GetPalworldPatchnotes();
+            }, 0, 60, TimeUnit.MINUTES);
+        });
+
+        // Starten Sie die Threads
+        starCitizenThread.start();
+        palWorldThread.start();
+        starCitizenServerStatusThread.start();
         // String ChannelID, String Title, String Message, int page, String messageID
         // DiscordSendMessage.editMessage("1183032789407383562", "Regeln auf Laonda
         // Discord", Main.regeln, "1231366842681917442");

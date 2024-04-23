@@ -213,6 +213,7 @@ public class PatchnotesPalworld {
 
         try {
             Main.PalworldPatchPages = null;
+
             Main.PalworldPatchPages = PatchnotesPalworld.getPages();
             System.out.println("Palworld Patchnotes Seiten: " + Main.PalworldPatchPages.size());
 
