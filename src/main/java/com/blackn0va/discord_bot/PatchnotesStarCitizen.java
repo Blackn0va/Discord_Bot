@@ -254,8 +254,9 @@ public class PatchnotesStarCitizen {
 
                 try {
                         Main.StarCitizenPatchPages = null;
+                        Main.StarCitizenFinalStrings.clear();
 
-                        Main.StarCitizenPatchPages = PatchnotesStarCitizen.getPages();
+                        Main.StarCitizenPatchPages = getPages();
                         System.out.println("StarCitizen Patchnotes Seiten: " + Main.StarCitizenPatchPages.size());
 
                         // Textkanal über dessen ID abrufen
