@@ -32,11 +32,7 @@
 Der Bot unterstützt folgende Befehle:
 
 - `!regeln`: Zeigt die Regeln an
-- `!stream <Link>`: Setzt den Streaming-Link
-- `!say <Nachricht>`: Sendet eine Nachricht
-- `!status <Spielversion>`: Überprüft den Star Citizen Status
-- `!play <Link>`: Spielt einen Song ab
-- `!News`: Zeigt die neuesten Star Citizen News an
+
 
 ## Konfiguration
 
@@ -59,7 +55,6 @@ Der Token wird aus einer Datei "token.txt" ausgelesen. Dabei wird zwischen Linux
 
 # Linux /root/token.txt
 # Windows Desktop/token.txt
-
 
 Channels die benötigt werden:
 - sc-news
