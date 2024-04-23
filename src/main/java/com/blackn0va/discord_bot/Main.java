@@ -34,13 +34,13 @@ public class Main {
 
     // Kanal-IDs
     public static String RegelnChannelID = "";
-    public static String GPTChannelID = "1155287768491110410";
-    public static String StarCitizenPatchChannelID = "1101892014351585290";
-    public static String PalworldPatchChannelID = "1205879327200378910";
+    //public static String GPTChannelID = "1155287768491110410";
+    //public static String StarCitizenPatchChannelID = "1101892014351585290";
+   // public static String PalworldPatchChannelID = "1205879327200378910";
     // Tests
-    // public static String GPTChannelID = "1155287768491110410";
-    // public static String StarCitizenPatchChannelID = "1231318450606051388";
-    // public static String PalworldPatchChannelID = "1155287768491110410";
+    public static String GPTChannelID = "1155287768491110410";
+     public static String StarCitizenPatchChannelID = "1231318450606051388";
+     public static String PalworldPatchChannelID = "1155287768491110410";
     // public static Queue<Message> OutgoingMessageQueue = new LinkedList<>();
 
     public static String answer = "1155287768491110410";

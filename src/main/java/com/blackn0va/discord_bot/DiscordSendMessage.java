@@ -241,7 +241,8 @@ public class DiscordSendMessage {
             // Senden der eingebetteten Nachricht an den Kanal und Hinzufügen einer Reaktion
             // zur gesendeten Nachricht
             channel.sendMessageEmbeds(embed.build()).queue(sentMessage -> {
-                sentMessage.addReaction(Emoji.fromUnicode("\u2705")).queue();
+                //add fire
+                sentMessage.addReaction(Emoji.fromUnicode("\uD83D\uDD25")).queue();
             });
 
             // Setzen Sie alle Variablen auf null und rufen Sie den Garbage Collector auf,
