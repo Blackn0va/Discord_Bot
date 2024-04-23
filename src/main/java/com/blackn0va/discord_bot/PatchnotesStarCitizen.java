@@ -253,6 +253,8 @@ public class PatchnotesStarCitizen {
                 System.out.println("Prüfung auf neue StarCitizen Patches...");
 
                 try {
+                        Main.StarCitizenPatchPages = null;
+                        
                         Main.StarCitizenPatchPages = PatchnotesStarCitizen.getPages();
                         System.out.println("StarCitizen Patchnotes Seiten: " + Main.StarCitizenPatchPages.size());
 

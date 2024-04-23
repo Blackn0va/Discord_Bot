@@ -212,6 +212,7 @@ public class PatchnotesPalworld {
         System.out.println("Prüfung auf neue Palworld Patches...");
 
         try {
+            Main.PalworldPatchPages = null;
             Main.PalworldPatchPages = PatchnotesPalworld.getPages();
             System.out.println("Palworld Patchnotes Seiten: " + Main.PalworldPatchPages.size());
 
