@@ -20,6 +20,7 @@ import java.util.List;
 
 public class PatchnotesStarCitizen {
         public static ConcurrentLinkedQueue<Message> starCitizenQueue = new ConcurrentLinkedQueue<>();
+        public static String Titel = "";
 
         // Hauptmethode
         public static void GetLatestPatchLink() throws IOException {
@@ -173,6 +174,25 @@ public class PatchnotesStarCitizen {
                 Main.StarCitizenRSSNews = Main.StarCitizenRSSNews.replaceAll("Star Citizen Patch",
                                 "**Star Citizen Patch**");
 
+                String news = Main.StarCitizenRSSNews; // Angenommen, dies ist der String, der die Nachrichten enthält
+                Titel = null;
+
+                // Zerlege den String in Zeilen
+                String[] lines = news.split("\n");
+
+                // Durchlaufe jede Zeile
+                for (String line : lines) {
+                        // Überprüfe, ob die Zeile mit "**Star Citizen Patch**" beginnt
+                        if (line.startsWith("**Star Citizen Patch**")) {
+                                // Wenn ja, speichere die Zeile in der Variable 'titel'
+                                Titel = line;
+                                break;
+                        }
+                }
+
+                // Jetzt enthält die Variable 'titel' die gewünschte Zeile oder null, wenn die
+                // Zeile nicht gefunden wurde
+
                 // Teilen Sie denMain.StarCitizenRSSNews-String in kleinere Strings auf, die
                 // nicht länger
                 // als
@@ -296,7 +316,7 @@ public class PatchnotesStarCitizen {
                                                                 // ist
                                                                 DiscordSendMessage.editMessageEmbeds(
                                                                                 Main.StarCitizenPatchChannelID,
-                                                                                "Star Citizen Patchnotes!",
+                                                                                Titel,
                                                                                 PatchnotesStarCitizen.getPage(1), 1,
                                                                                 MessageID);
                                                         } catch (Exception e) {
@@ -314,7 +334,7 @@ public class PatchnotesStarCitizen {
                                                         // gesendet
                                                         DiscordSendMessage.sendPaginatedMessage(
                                                                         Main.StarCitizenPatchChannelID,
-                                                                        "Star Citizen Patchnotes!",
+                                                                        Titel,
                                                                         PatchnotesStarCitizen
                                                                                         .getPage(Main.StarCitizencurrentPageNum));
                                                 } catch (Exception e) {
@@ -330,7 +350,7 @@ public class PatchnotesStarCitizen {
                                                 // Wenn die aktuelle Seite die erste Seite ist, wird die Nachricht
                                                 // gesendet
                                                 DiscordSendMessage.sendPaginatedMessage(Main.StarCitizenPatchChannelID,
-                                                                "Star Citizen Patchnotes!",
+                                                                Titel,
                                                                 PatchnotesStarCitizen.getPage(
                                                                                 Main.StarCitizencurrentPageNum));
                                         } catch (Exception e) {
