@@ -72,14 +72,14 @@ public class PatchnotesPalworld {
             BufferedWriter writer = new BufferedWriter(new FileWriter(file));
             writer.write(Main.PalworldPatchlink);
             writer.close();
-            System.out.println("Neuer Palworld Patch wurde gefunden!");
+            WriteLogs.writeLog("Neuer Palworld Patch wurde gefunden!");
             // Abrufen der Patchnotizen
             GetPatchNotes();
 
         } else {
             // Wenn die PatchLink-Datei mit dem neuesten PatchLink übereinstimmt, geben Sie
             // eine Meldung aus
-            System.out.println("Kein Neuer Palworld Patch gefunden!");
+            WriteLogs.writeLog("Kein Neuer Palworld Patch gefunden!");
             GetPatchNotes();
         }
 
@@ -209,13 +209,13 @@ public class PatchnotesPalworld {
     }
 
     public static void GetPalworldPatchnotes() {
-        System.out.println("Prüfung auf neue Palworld Patches...");
+        WriteLogs.writeLog("Prüfung auf neue Palworld Patches...");
 
         try {
             Main.PalworldPatchPages = null;
 
             Main.PalworldPatchPages = PatchnotesPalworld.getPages();
-            System.out.println("Palworld Patchnotes Seiten: " + Main.PalworldPatchPages.size());
+            WriteLogs.writeLog("Palworld Patchnotes Seiten: " + Main.PalworldPatchPages.size());
 
             // Textkanal über dessen ID abrufen
             TextChannel channel = Main.bauplan.getTextChannelById(Main.PalworldPatchChannelID);
@@ -246,63 +246,58 @@ public class PatchnotesPalworld {
                         String ersteWoerter = PatchnotesPalworld.getPage(Main.PalworldCurrentPageNum).substring(0, 50);
                         ersteWoerter = ersteWoerter.replaceAll("\\[", "");
                         ersteWoerter = ersteWoerter.replaceAll("\\]", "");
-                        System.out.println("Erste Wörter: " + ersteWoerter);
+                        WriteLogs.writeLog("Erste Wörter: " + ersteWoerter);
                         // prüfen ob text schon gespostet wurde
                         if (beschreibungEingebetteterInhalt.contains(ersteWoerter)) {
                             try {
-                                System.out.println("Palworld Patch bereits gepostet");
-
-                                // editiere die seite auf die gleiche wie sie aktuell ist
-                                DiscordSendMessage.editMessageEmbeds(Main.PalworldPatchChannelID,
-                                        "Palworld Patchnotes!",
-                                        PatchnotesPalworld.getPage(1), 1, MessageID);
+                                WriteLogs.writeLog("Palworld Patch bereits gepostet");
                             } catch (Exception e) {
-                                System.out.println("Fehler beim Bearbeiten der Nachricht: ");
+                                WriteLogs.writeLog("Fehler beim Bearbeiten der Nachricht: ");
                             }
 
                         } else {
                             try {
                                 // Wenn die letzte Nachricht nicht die ersten Wörter der aktuellen Seite
                                 // enthält, senden Sie die aktuelle Seite
-                                System.out.println("Palworld Patch wird gepostet");
+                                WriteLogs.writeLog("Palworld Patch wird gepostet");
                                 DiscordSendMessage.toChannelWithLink(Main.PalworldPatchChannelID, Main.PalworldTitle,
                                         "```prolog\n" + Main.PalworldPatchPages.get(0).replace("[", "").replace("]", "")
                                                 + "\n```",
                                         Color.GREEN, Main.PalworldLink, Main.PalworldPicture);
                             } catch (Exception e) {
-                                System.out.println("Fehler beim Senden der Nachricht: ");
+                                WriteLogs.writeLog("Fehler beim Senden der Nachricht: ");
                             }
 
                         }
                     } else {
                         try {
-                            System.out.println("Palworld Patch wird gepostet");
+                            WriteLogs.writeLog("Palworld Patch wird gepostet");
                             DiscordSendMessage.toChannelWithLink(Main.PalworldPatchChannelID, Main.PalworldTitle,
                                     "```prolog\n" + Main.PalworldPatchPages.get(0).replace("[", "").replace("]", "")
                                             + "\n```",
                                     Color.GREEN, Main.PalworldLink, Main.PalworldPicture);
                         } catch (Exception e) {
-                            System.out.println("Fehler beim Senden der Nachricht: ");
+                            WriteLogs.writeLog("Fehler beim Senden der Nachricht: ");
                         }
 
                     }
 
                 } else {
                     try {
-                        System.out.println("Palworld Patch wird gepostet");
+                        WriteLogs.writeLog("Palworld Patch wird gepostet");
                         DiscordSendMessage.toChannelWithLink(Main.PalworldPatchChannelID, Main.PalworldTitle,
                                 "```prolog\n" + Main.PalworldPatchPages.get(0).replace("[", "").replace("]", "")
                                         + "\n```",
                                 Color.GREEN, Main.PalworldLink, Main.PalworldPicture);
                     } catch (Exception e) {
-                        System.out.println("Fehler beim Senden der Nachricht: ");
+                        WriteLogs.writeLog("Fehler beim Senden der Nachricht: ");
                     }
 
                 }
             }
 
         } catch (Exception e) {
-            System.out.println("Fehler beim Abrufen der Patchnotes: ");
+            WriteLogs.writeLog("Fehler beim Abrufen der Patchnotes: ");
         }
     }
 

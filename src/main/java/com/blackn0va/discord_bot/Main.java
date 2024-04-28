@@ -34,13 +34,13 @@ public class Main {
 
     // Kanal-IDs
     public static String RegelnChannelID = "";
-    //public static String GPTChannelID = "1155287768491110410";
-    //public static String StarCitizenPatchChannelID = "1101892014351585290";
-   // public static String PalworldPatchChannelID = "1205879327200378910";
-    // Tests
     public static String GPTChannelID = "1155287768491110410";
-     public static String StarCitizenPatchChannelID = "1231318450606051388";
-     public static String PalworldPatchChannelID = "1155287768491110410";
+    public static String StarCitizenPatchChannelID = "1101892014351585290";
+    public static String PalworldPatchChannelID = "1205879327200378910";
+    // Tests
+    // public static String GPTChannelID = "1155287768491110410";
+    // public static String StarCitizenPatchChannelID = "1231318450606051388";
+    // public static String PalworldPatchChannelID = "1155287768491110410";
     // public static Queue<Message> OutgoingMessageQueue = new LinkedList<>();
 
     public static String answer = "1155287768491110410";
@@ -126,7 +126,6 @@ public class Main {
     public static void main(String[] args) throws Exception {
 
         // Erkennung des Betriebssystems für die Pfadverwaltung
-        System.out.println("Erkanntes Betriebssystem: " + os);
         WriteLogs.writeLog("Erkanntes Betriebssystem: " + os);
 
         // Unterscheidung zwischen Windows- und Unix-basierten Betriebssystemen
@@ -157,12 +156,13 @@ public class Main {
                         openaitoken = br.readLine();
                         RegelnAkzeptiert = br.readLine();
 
-                        System.out.println("Token: " + token);
+                        WriteLogs.writeLog("Token: " + token);
+
                     }
                 }
 
             } catch (IOException e) {
-                System.out.println("Exception caught =" + e.getMessage());
+                WriteLogs.writeLog("Exception caught =" + e.getMessage());
             }
         } else if (os.contains("nix") || os.contains("aix") || os.contains("nux")) {
             try { // Betriebssystem ist Linux/Unix basiert
@@ -189,7 +189,6 @@ public class Main {
                 }
 
             } catch (IOException e) {
-                System.out.println("Exception caught =" + e.getMessage());
                 WriteLogs.writeLog("Exception caught =" + e.getMessage());
             }
 

@@ -28,7 +28,6 @@ public class DiscordSendMessage {
             Main.StarCitizenRSSNews = "";
         } catch (Exception e) {
             // Ausgabe einer Fehlermeldung und Schreiben der Fehlermeldung in die Protokolle
-            System.out.println("Error: " + e);
             WriteLogs.writeLog("Error: " + e);
         }
 

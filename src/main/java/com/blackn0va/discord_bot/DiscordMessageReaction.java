@@ -28,8 +28,6 @@ public class DiscordMessageReaction extends ListenerAdapter {
 
             // Behandlung von Ausnahmen
         } catch (Exception e) {
-            // Ausgabe der Fehlermeldung in der Konsole
-            System.out.println("Fehler in onMessageReceived: " + e.getMessage());
             // Schreiben der Fehlermeldung in die Log-Datei
             WriteLogs.writeLog("Fehler in onMessageReceived: " + e.getMessage());
         }
@@ -49,10 +47,6 @@ public class DiscordMessageReaction extends ListenerAdapter {
                     String message = queuedEvent.getMessage().getContentDisplay();
                     String channel = queuedEvent.getChannel().getName();
                     String guild = queuedEvent.getGuild().getName();
-
-                    System.out.println(
-                            "Nachricht von: " + user + " auf: " + guild + " in: " + channel + " mit: " + message);
-
                     WriteLogs
                             .chat("Nachricht von: " + user + " auf: " + guild + " in: " + channel + " mit: " + message);
 
@@ -70,7 +64,6 @@ public class DiscordMessageReaction extends ListenerAdapter {
                                     Main.regeln,
                                     Color.GREEN);
 
-                         
                             // add 1 button
 
                             // Schreiben eines Log-Eintrags, dass die Regeln angezeigt wurden

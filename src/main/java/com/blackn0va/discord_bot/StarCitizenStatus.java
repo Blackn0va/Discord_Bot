@@ -62,13 +62,12 @@ public class StarCitizenStatus {
             Status = Status.replaceAll("Service Degradation", "🟡");
 
             // Ausgabe des Serverstatus
-            System.out.println("Serverstatus: " + Status);
+            WriteLogs.writeLog("Serverstatus: " + Status);
             // Setzen des Serverstatus als Aktivität des Discord-Bots
             Main.bauplan.getPresence()
                     .setActivity(Activity.customStatus(Status));
 
             // Ausgabe einer Meldung, dass der Serverstatus aktualisiert wurde
-            System.out.println("Serverstatus wurde aktualisiert. " + Status);
             // Schreiben der Meldung in die Logs
             WriteLogs.writeLog("Serverstatus wurde aktualisiert. " + Status);
 

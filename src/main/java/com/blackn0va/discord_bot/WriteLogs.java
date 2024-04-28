@@ -43,7 +43,7 @@ public class WriteLogs {
                     bw.write("--------");
                     bw.newLine();
                 } catch (IOException e) {
-                    System.out.println("Error: ");
+                    WriteLogs.writeLog("Error: ");
                 }
             }
 
@@ -53,13 +53,15 @@ public class WriteLogs {
                     bw.newLine();
                     bw.write(log);
                 } catch (IOException e) {
-                    System.out.println("Error: ");
+                    WriteLogs.writeLog("Error: ");
                 }
             }
 
+            System.out.println(log);
+
         } catch (Exception e) {
             // Ausgabe einer Fehlermeldung
-            System.out.println("Error: " );
+            WriteLogs.writeLog("Error: ");
         }
 
     }
@@ -67,7 +69,7 @@ public class WriteLogs {
     // Methode zum Schreiben von Berechtigungsprotokollen
     public static void permissions(String log) {
         // Bestimmen des Betriebssystems
-        
+
         // Wenn das Betriebssystem Windows ist, setzen Sie den Pfad für das Protokoll
         if (Main.os.contains("win")) {
             logPath = workingDir + "\\" + permissionlog;
@@ -94,7 +96,7 @@ public class WriteLogs {
                     bw.write("--------");
                     bw.newLine();
                 } catch (IOException e) {
-                    System.out.println("Error: ");
+                    WriteLogs.writeLog("Error: ");
                 }
             }
 
@@ -104,13 +106,15 @@ public class WriteLogs {
                     bw.newLine();
                     bw.write(log);
                 } catch (IOException e) {
-                    System.out.println("Error: ");
+                    WriteLogs.writeLog("Error: ");
                 }
             }
 
+            System.out.println(log);
+
         } catch (Exception e) {
             // Ausgabe einer Fehlermeldung
-            System.out.println("Error: " );
+            WriteLogs.writeLog("Error: ");
         }
 
     }
@@ -143,7 +147,7 @@ public class WriteLogs {
                     bw.write("--------");
                     bw.newLine();
                 } catch (IOException e) {
-                    System.out.println("Error: ");
+                    WriteLogs.writeLog("Error: ");
                 }
             }
 
@@ -153,12 +157,14 @@ public class WriteLogs {
                     bw.newLine();
                     bw.write(log);
                 } catch (IOException e) {
-                    System.out.println("Error: ");
+                    WriteLogs.writeLog("Error: ");
                 }
             }
 
+            System.out.println(log);
+
         } catch (Exception e) {
-            System.out.println("Error: ");
+            WriteLogs.writeLog("Error: ");
         }
 
     }

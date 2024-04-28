@@ -62,7 +62,7 @@ public class PatchnotesStarCitizen {
                         }
                 }
 
-                System.out.println("Patchlink: " + file);
+                WriteLogs.writeLog("Patchlink: " + file);
                 // Lesen der Versionsdatei
                 BufferedReader br = new BufferedReader(new FileReader(file));
                 String st;
@@ -78,14 +78,14 @@ public class PatchnotesStarCitizen {
                         BufferedWriter writer = new BufferedWriter(new FileWriter(file));
                         writer.write(Main.StarCitizenPatchlink);
                         writer.close();
-                        System.out.println("Neuer Star Citizen Patch wurde gefunden!");
+                        WriteLogs.writeLog("Neuer Star Citizen Patch wurde gefunden!");
                         // Abrufen der Patchnotizen
                         GetPatchNotes();
 
                 } else {
                         // Wenn die PatchLink-Datei mit dem neuesten PatchLink übereinstimmt, geben Sie
                         // eine Meldung aus
-                        System.out.println("Kein Neuer Star Citizen Patch gefunden!");
+                        WriteLogs.writeLog("Kein Neuer Star Citizen Patch gefunden!");
                         GetPatchNotes();
                 }
         }
@@ -250,14 +250,14 @@ public class PatchnotesStarCitizen {
         }
 
         public static void GetStarCitizenPatchnotes() {
-                System.out.println("Prüfung auf neue StarCitizen Patches...");
+                WriteLogs.writeLog("Prüfung auf neue StarCitizen Patches...");
 
                 try {
                         Main.StarCitizenPatchPages = null;
                         Main.StarCitizenFinalStrings.clear();
 
                         Main.StarCitizenPatchPages = getPages();
-                        System.out.println("StarCitizen Patchnotes Seiten: " + Main.StarCitizenPatchPages.size());
+                        WriteLogs.writeLog("StarCitizen Patchnotes Seiten: " + Main.StarCitizenPatchPages.size());
 
                         // Textkanal über dessen ID abrufen
                         TextChannel channel = Main.bauplan.getTextChannelById(Main.StarCitizenPatchChannelID);
@@ -288,7 +288,8 @@ public class PatchnotesStarCitizen {
                                                 // prüfen ob text schon gespostet wurde
                                                 if (beschreibungEingebetteterInhalt.contains(ersteWoerter)) {
                                                         try {
-                                                                System.out.println(
+
+                                                                WriteLogs.writeLog(
                                                                                 "StarCitizen Patche bereits gepostet");
 
                                                                 // editiere die seite auf die gleiche wie sie aktuell
@@ -299,14 +300,15 @@ public class PatchnotesStarCitizen {
                                                                                 PatchnotesStarCitizen.getPage(1), 1,
                                                                                 MessageID);
                                                         } catch (Exception e) {
-                                                                System.out.println(
+
+                                                                WriteLogs.writeLog(
                                                                                 "Fehler beim Abrufen der StarCitizen Patchnotes: 1");
                                                         }
 
                                                 }
                                         } else {
                                                 try {
-                                                        System.out.println("StarCitizen Patch wird gepostet");
+                                                        WriteLogs.writeLog("StarCitizen Patch wird gepostet");
                                                         // Wenn die aktuelle Seite die erste Seite ist, wird die
                                                         // Nachricht
                                                         // gesendet
@@ -316,7 +318,7 @@ public class PatchnotesStarCitizen {
                                                                         PatchnotesStarCitizen
                                                                                         .getPage(Main.StarCitizencurrentPageNum));
                                                 } catch (Exception e) {
-                                                        System.out.println(
+                                                        WriteLogs.writeLog(
                                                                         "Fehler beim Abrufen der StarCitizen Patchnotes: 2");
                                                 }
 
@@ -324,7 +326,7 @@ public class PatchnotesStarCitizen {
 
                                 } else {
                                         try {
-                                                System.out.println("StarCitizen Patch wird gepostet");
+                                                WriteLogs.writeLog("StarCitizen Patch wird gepostet");
                                                 // Wenn die aktuelle Seite die erste Seite ist, wird die Nachricht
                                                 // gesendet
                                                 DiscordSendMessage.sendPaginatedMessage(Main.StarCitizenPatchChannelID,
@@ -332,14 +334,15 @@ public class PatchnotesStarCitizen {
                                                                 PatchnotesStarCitizen.getPage(
                                                                                 Main.StarCitizencurrentPageNum));
                                         } catch (Exception e) {
-                                                System.out.println("Fehler beim Abrufen der StarCitizen Patchnotes: 3");
+
+                                                WriteLogs.writeLog("Fehler beim Abrufen der StarCitizen Patchnotes: 3");
                                         }
 
                                 }
                         }
 
                 } catch (Exception e) {
-                        System.out.println("Fehler beim Abrufen der StarCitizen Patchnotes: 4");
+                        WriteLogs.writeLog("Fehler beim Abrufen der StarCitizen Patchnotes: 4");
                 }
 
         }

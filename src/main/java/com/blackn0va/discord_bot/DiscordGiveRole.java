@@ -33,20 +33,13 @@ public class DiscordGiveRole extends ListenerAdapter {
 
         // Ein Log-Eintrag wird erstellt, dass der Bot jetzt online ist
         WriteLogs.writeLog("Der Bot ist jetzt online!\n");
-        // Eine Nachricht wird auf der Konsole ausgegeben, dass der Bot jetzt online ist
-        System.out.println("Der Bot ist jetzt online!\n");
 
         // Für jede Gilde, in der der Bot Mitglied ist
         for (Guild guild : ereignis.getJDA().getGuilds()) {
             // Die Mitglieder der Gilde werden geladen
             guild.loadMembers().onSuccess(members -> {
-                // Für jedes Mitglied der Gilde
-                for (Member member : members) {
-                    // Der effektive Name des Mitglieds wird auf der Konsole ausgegeben
-                    System.out.println(member.getEffectiveName());
-                    // Ein Log-Eintrag wird erstellt mit dem effektiven Namen des Mitglieds
-                    WriteLogs.writeLog(member.getEffectiveName());
-                }
+                // zähle alle member und gebe sie aus
+                WriteLogs.writeLog("Members in " + guild.getName() + ": " + members.size());
             });
         }
     }
@@ -82,10 +75,6 @@ public class DiscordGiveRole extends ListenerAdapter {
             if (buttonId.equals("RegelnAkzeptieren")) {
                 WriteLogs.permissions("Regeln wurden akzeptiert von: " + event.getUser().getName()
                         + " auf: " + event.getGuild().getName());
-                // Eine Nachricht wird auf der Konsole ausgegeben, dass die Regeln nicht
-                // akzeptiert wurden
-                System.out.println("Regeln wurden akzeptiert von: " + event.getUser().getName()
-                        + " auf: " + event.getGuild().getName());
                 try {
                     Member member = event.getMember();
                     // Die Rolle "Regeln akzeptiert" wird gesucht
@@ -99,28 +88,18 @@ public class DiscordGiveRole extends ListenerAdapter {
                         // Ein Log-Eintrag wird erstellt, dass das Mitglied oder die Rolle nicht
                         // gefunden wurden
                         WriteLogs.permissions("Mitglied oder Rolle konnte nicht gefunden werden");
-                        // Eine Nachricht wird auf der Konsole ausgegeben, dass das Mitglied oder die
-                        // Rolle nicht gefunden wurden
-                        System.out.println("Mitglied oder Rolle konnte nicht gefunden werden");
                     }
 
                 } catch (Exception e) {
                     // Ein Log-Eintrag wird erstellt, dass ein Fehler beim Entfernen der Rolle
                     // aufgetreten ist
                     WriteLogs.permissions("Fehler beim entfernen der Rolle: " + e.getMessage());
-                    // Eine Nachricht wird auf der Konsole ausgegeben, dass ein Fehler beim
-                    // Entfernen der Rolle aufgetreten ist
-                    System.out.println("Fehler beim entfernen der Rolle: " + e.getMessage());
                 }
                 event.deferEdit().queue();
 
             } else if (buttonId.equals("RegelnAblehnen")) {
                 // Ein Log-Eintrag wird erstellt, dass die Regeln nicht akzeptiert wurden
                 WriteLogs.permissions("Regeln wurden nicht akzeptiert von: " + event.getUser().getName()
-                        + " auf: " + event.getGuild().getName());
-                // Eine Nachricht wird auf der Konsole ausgegeben, dass die Regeln nicht
-                // akzeptiert wurden
-                System.out.println("Regeln wurden nicht akzeptiert von: " + event.getUser().getName()
                         + " auf: " + event.getGuild().getName());
 
                 try {
@@ -136,17 +115,11 @@ public class DiscordGiveRole extends ListenerAdapter {
                         // Ein Log-Eintrag wird erstellt, dass das Mitglied oder die Rolle nicht
                         // gefunden wurden
                         WriteLogs.permissions("Mitglied oder Rolle konnte nicht gefunden werden");
-                        // Eine Nachricht wird auf der Konsole ausgegeben, dass das Mitglied oder die
-                        // Rolle nicht gefunden wurden
-                        System.out.println("Mitglied oder Rolle konnte nicht gefunden werden");
                     }
                 } catch (Exception e) {
                     // Ein Log-Eintrag wird erstellt, dass ein Fehler beim Entfernen der Rolle
                     // aufgetreten ist
                     WriteLogs.permissions("Fehler beim entfernen der Rolle: " + e.getMessage());
-                    // Eine Nachricht wird auf der Konsole ausgegeben, dass ein Fehler beim
-                    // Entfernen der Rolle aufgetreten ist
-                    System.out.println("Fehler beim entfernen der Rolle: " + e.getMessage());
                 }
                 event.deferEdit().queue();
 

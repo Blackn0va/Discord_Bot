@@ -38,7 +38,6 @@ public class openai {
             }
 
             // Ausgabe der Antwort und Speichern in den Logs
-            System.out.println("Antwort:\n" + Main.answer);
             WriteLogs.writeLog("Antwort:\n" + Main.answer);
 
             return Main.answer;
@@ -46,7 +45,6 @@ public class openai {
         } catch (Exception e) {
             // Bei einem Fehler wird eine Fehlermeldung ausgegeben und in den Logs
             // gespeichert
-            System.out.println("Fehler beim Erstellen der Antwort");
             WriteLogs.writeLog("Fehler beim Erstellen der Antwort");
             Main.answer = e.toString();
 

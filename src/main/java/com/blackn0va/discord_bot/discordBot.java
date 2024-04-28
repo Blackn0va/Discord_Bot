@@ -31,15 +31,12 @@ public class DiscordBot {
             Main.bauplan.getPresence().setStatus(OnlineStatus.ONLINE);
             // Warten, bis der Bot mit Discord verbunden ist
             Main.bauplan.awaitStatus(JDA.Status.CONNECTED);
-
-            System.out.println("Discord Bot gestartet");
             WriteLogs.writeLog("Discord Bot gestartet");
 
             DiscordMessageReaction.startMessageProcessing();
 
         } catch (Exception e) {
             WriteLogs.writeLog("Fehler beim Starten von DC: ");
-            System.out.println("Fehler beim Starten von DC: ");
             // Bei einem Fehler beim Starten des Bots, versuchen, den Bot neu zu starten
             restartDiscordBot();
         }
@@ -82,19 +79,16 @@ public class DiscordBot {
     // Methode zum Stoppen des Discord Bots
     public static void stop() {
         WriteLogs.writeLog("Discord Bot wird gestoppt");
-        System.out.println("Discord Bot wird gestoppt");
         if (Main.bauplan != null) { // Überprüfen, ob bauplan nicht null ist
             Main.bauplan.shutdown(); // Aufrufen der shutdown()-Methode auf bauplan
             try {
                 WriteLogs.writeLog("Warte auf Disconnect von DC...");
-                System.out.println("Warte auf Disconnect von DC...");
                 // Erstellen eines neuen Threads, der auf das Trennen des Bots wartet
                 Thread disconnectThread = new Thread(() -> {
                     try {
                         Main.bauplan.awaitStatus(JDA.Status.SHUTDOWN);
                     } catch (InterruptedException e) {
                         WriteLogs.writeLog("Fehler beim warten: ");
-                        System.out.println("Fehler beim warten: ");
                     }
                 });
                 disconnectThread.start();
@@ -102,16 +96,13 @@ public class DiscordBot {
                 disconnectThread.join(5000); // Warten für 5 Sekunden
                 if (disconnectThread.isAlive()) {
                     WriteLogs.writeLog("DC hat nicht reagiert. Beende den Thread...");
-                    System.out.println("DC hat nicht reagiert. Beende den Thread...");
                     disconnectThread.interrupt(); // Unterbrechen des Threads, wenn er noch läuft
                 }
             } catch (InterruptedException e) {
                 WriteLogs.writeLog("Fehler beim warten: ");
-                System.out.println("Fehler beim warten: ");
             } finally {
                 // Trennen die Verbindung und beende alle Hintergrundthreads
                 WriteLogs.writeLog("Trenne die Verbindung und beende alle Hintergrundthreads");
-                System.out.println("Trenne die Verbindung und beende alle Hintergrundthreads");
                 Main.bauplan.shutdownNow();
                 Main.bauplan = null; // Setzen von bauplan auf null
                 // Garbage Collect
@@ -119,23 +110,21 @@ public class DiscordBot {
             }
 
             WriteLogs.writeLog("Discord Bot gestoppt");
-            System.out.println("Discord Bot gestoppt");
 
         } else {
             // Behandeln des Falls, in dem bauplan null ist
             WriteLogs.writeLog("Discord Bot ist nicht gestartet");
-            System.out.println("Discord Bot ist nicht gestartet");
         }
     }
 
     // Methode zum Neustarten des Discord Bots
     public static void restartDiscordBot() {
-        System.out.println("Neustart des Discord Bots");
+        WriteLogs.writeLog("Neustart des Discord Bots");
         stop();
         try {
             Thread.sleep(5000); // Warten für 5 Sekunden
         } catch (InterruptedException e) {
-            System.out.println("Fehler beim Warten: ");
+            WriteLogs.writeLog("Fehler beim Warten: ");
         }
         start();
     }
