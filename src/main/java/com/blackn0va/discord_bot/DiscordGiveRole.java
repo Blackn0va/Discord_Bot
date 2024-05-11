@@ -10,10 +10,13 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.events.message.react.GenericMessageReactionEvent;
 import net.dv8tion.jda.api.events.session.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.interactions.commands.OptionType;
+import net.dv8tion.jda.api.interactions.commands.build.Commands;
 
 public class DiscordGiveRole extends ListenerAdapter {
     // Erstellen Sie eine Warteschlange für Ereignisse, bei denen eine Reaktion
@@ -40,6 +43,11 @@ public class DiscordGiveRole extends ListenerAdapter {
             guild.loadMembers().onSuccess(members -> {
                 // zähle alle member und gebe sie aus
                 WriteLogs.writeLog("Members in " + guild.getName() + ": " + members.size());
+
+                guild.updateCommands().addCommands(
+                        Commands.slash("echoo", "Antwortet mit der Nachricht")
+                                .addOption(OptionType.STRING, "text", "Die Nachricht, die der Bot senden soll", true))
+                        .queue();
             });
         }
     }
@@ -60,6 +68,21 @@ public class DiscordGiveRole extends ListenerAdapter {
         buttonClickQueue.add(event);
         // Verarbeiten Sie das Event
         ProcessButtonClickEvent();
+    }
+
+    @Override
+    public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
+        // erhalte den Namen des Befehls
+        String commandName = event.getName();
+        // Überprüfe, ob der Befehl "echoo" ist
+        if (commandName.equals("echoo")) {
+            event.deferReply().setEphemeral(true).queue(interactionHook -> {
+                // Hole den Text aus den Optionen
+                String text = event.getOption("text").getAsString();
+                // Antwort mit dem Text
+                interactionHook.editOriginal("```" + text + "```").queue();
+            });
+        }
     }
 
     // Methode zum Verarbeiten von Button-Klick-Events
