@@ -202,7 +202,7 @@ public class Main {
             schedulerStarCitizenServerStatus.scheduleAtFixedRate(() -> {
                 // PatchnotesStarCitizen.GetStarCitizenPatchnotes();
                 try {
-                    StarCitizenStatus.getStatus();
+                    // StarCitizenStatus.getStatus();
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -213,7 +213,7 @@ public class Main {
         // Erstelle einen separaten Thread für den Star Citizen Patchnotizen Job
         Thread starCitizenThread = new Thread(() -> {
             schedulerPatchStarCitizen.scheduleAtFixedRate(() -> {
-                PatchnotesStarCitizen.GetStarCitizenPatchnotes();
+                //PatchnotesStarCitizen.GetStarCitizenPatchnotes();
             }, 0, 60, TimeUnit.MINUTES);
         });
 
