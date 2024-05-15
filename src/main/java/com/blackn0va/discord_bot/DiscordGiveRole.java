@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
@@ -30,26 +29,23 @@ public class DiscordGiveRole extends ListenerAdapter {
     // Erstellen Sie eine Warteschlange für ButtonInteractionEvent
     Queue<ButtonInteractionEvent> buttonClickQueue = new LinkedList<>();
 
-    // Diese Methode wird aufgerufen, wenn der Bot bereit ist
     @Override
     public void onReady(ReadyEvent ereignis) {
 
-        // Ein Log-Eintrag wird erstellt, dass der Bot jetzt online ist
-        WriteLogs.writeLog("Der Bot ist jetzt online!\n");
-
-        // Für jede Gilde, in der der Bot Mitglied ist
-        for (Guild guild : ereignis.getJDA().getGuilds()) {
-            // Die Mitglieder der Gilde werden geladen
-            guild.loadMembers().onSuccess(members -> {
-                // zähle alle member und gebe sie aus
-                WriteLogs.writeLog("Members in " + guild.getName() + ": " + members.size());
-
-                guild.updateCommands().addCommands(
-                        Commands.slash("echoo", "Antwortet mit der Nachricht")
-                                .addOption(OptionType.STRING, "text", "Die Nachricht, die der Bot senden soll", true))
+        // register command only for guild where name is Laonda Discord
+        ereignis.getJDA().getGuilds().forEach(guild -> {
+            if (guild.getName().equals("Laonda Discord")) {
+                // Erstellen Sie eine Liste von Befehlen
+                Commands commands = new Commands();
+                // Fügen Sie einen Befehl hinzu
+                guild.upsertCommand("echo", "echo")
+                        .addOption(OptionType.STRING, "input", "Der Text, der zurückgegeben werden soll", true)
                         .queue();
-            });
-        }
+                System.out.println("Command echo added");
+
+            }
+        });
+
     }
 
     // Methode zum Hinzufügen von Ereignissen zur Warteschlange
@@ -75,10 +71,10 @@ public class DiscordGiveRole extends ListenerAdapter {
         // erhalte den Namen des Befehls
         String commandName = event.getName();
         // Überprüfe, ob der Befehl "echoo" ist
-        if (commandName.equals("echoo")) {
+        if (commandName.equals("echo")) {
             event.deferReply().setEphemeral(true).queue(interactionHook -> {
                 // Hole den Text aus den Optionen
-                String text = event.getOption("text").getAsString();
+                String text = event.getOption("input").getAsString();
                 // Antwort mit dem Text
                 interactionHook.editOriginal("```" + text + "```").queue();
             });
