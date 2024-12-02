@@ -19,7 +19,7 @@ public class DiscordBot {
                     .enableIntents(GatewayIntent.GUILD_MEMBERS, GatewayIntent.MESSAGE_CONTENT,
                             GatewayIntent.GUILD_MESSAGES, GatewayIntent.DIRECT_MESSAGES, GatewayIntent.GUILD_MEMBERS,
                             GatewayIntent.DIRECT_MESSAGE_REACTIONS,
-                            GatewayIntent.GUILD_EMOJIS_AND_STICKERS, GatewayIntent.GUILD_MESSAGE_REACTIONS,
+                            GatewayIntent.GUILD_EXPRESSIONS, GatewayIntent.GUILD_MESSAGE_REACTIONS,
                             GatewayIntent.DIRECT_MESSAGE_TYPING, GatewayIntent.GUILD_WEBHOOKS,
                             GatewayIntent.GUILD_VOICE_STATES)
                     .setAutoReconnect(true)
@@ -41,13 +41,6 @@ public class DiscordBot {
             restartDiscordBot();
         }
 
-        try {
-            // Speichern der IDs der Textkanäle "chatgpt" und "📣rsi-news" in der
-            // Main-Klasse
-            Main.GPTChannelID = Main.bauplan.getTextChannelsByName("chatgpt", true).get(0).getId();
-            Main.StarCitizenPatchChannelID = Main.bauplan.getTextChannelsByName("📣rsi-news", true).get(0).getId();
-        } catch (Exception e) {
-        }
     }
 
     // Methode zum Konfigurieren der Speichernutzung des Discord Bots

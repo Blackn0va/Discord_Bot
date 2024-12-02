@@ -6,18 +6,9 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-import com.theokanning.openai.completion.chat.ChatMessage;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import scala.App;
 
 /**
  *
@@ -27,20 +18,12 @@ public class Main {
 
     // Discord Bot Einstellungen
     public static String token = "";
-    public static String openaitoken = "";
     public static JDA bauplan;
     public static String IconURL = "https://avatars.githubusercontent.com/u/12220332?v=4";
     public static String Footer = "Bot";
 
     // Kanal-IDs
     public static String RegelnChannelID = "";
-    public static String GPTChannelID = "1155287768491110410";
-    public static String StarCitizenPatchChannelID = "1101892014351585290";
-    public static String PalworldPatchChannelID = "1205879327200378910";
-    // Tests
-    // public static String GPTChannelID = "1155287768491110410";
-    // public static String StarCitizenPatchChannelID = "1231318450606051388";
-    // public static String PalworldPatchChannelID = "1155287768491110410";
     // public static Queue<Message> OutgoingMessageQueue = new LinkedList<>();
 
     public static String answer = "1155287768491110410";
@@ -48,55 +31,19 @@ public class Main {
     // Nachrichten-IDs
     public static String RegelnPostID = "";
 
-    // Star Citizen Patch-Notizen Einstellungen
-    public static String StarCitizenVersionFile = "";
-    public static String StarCitizenPersistence = "";
-    public static String StarCitizenLive = "";
-    public static String StarCitizenVersion = "";
-    public static String StarCitizenLink = "";
-    public static String StarCitizenBaseUrl = "https://robertsspaceindustries.com/patch-notes";
-    public static String StarCitizenPatchlink = "https://robertsspaceindustries.com";
-    public static List<String> StarCitizenFinalStrings = new ArrayList<>();
-    public static Map<Integer, String> StarCitizenPageCache = new HashMap<>();
-    public static List<String> StarCitizenPatchPages;
-    public static int StarCitizencurrentPageNum = 1;
-    public static String StarCitizenServerStatus = "";
-    public static String StarCitizenRSSNews = "";
-
-    // Palworld Patch-Notizen Einstellungen
-    public static String PalworldVersionFile = "";
-    public static String PalworldRSSNews = "";
-    public static String PalworldPersistence = "";
-    public static String PalworldLive = "";
-    public static String PalworldVersion = "";
-    public static String PalworldLink = "";
-    public static String PalworldBaseUrl = "https://store.steampowered.com/feeds/news/app/1623730/?cc=DE&l=german&snr=1_2108_9__2107";
-    public static String PalworldPatchlink = "";
-    public static String PalworldPicture = "";
-    public static String PalworldTitle = "";
-    public static String PalworldDescription = "";
-    public static List<String> PalworldPatchPages;
-    public static int PalworldCurrentPageNum = 1;
-    public static Map<Integer, String> PalworldPageCache = new HashMap<>();
-    public static List<String> PalworldFinalStrings = new ArrayList<>();
     // Systemeinstellungen
     public static String workingDir = System.getProperty("user.dir");
     public static String os = System.getProperty("os.name").toLowerCase();
     public static String desktopPath = "";
     public static final String jarPath = new File(
-            App.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParent();
+            Main.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParent();
 
     // Nachrichtenverarbeitung
     public static ConcurrentLinkedQueue<MessageReceivedEvent> messageQueue = new ConcurrentLinkedQueue<>();
-    public static final List<ChatMessage> messages = new ArrayList<>();
 
     // Sonstiges
     public static String RegelnAkzeptiert = "";
     public static String TokenFile = "";
-    private static final ScheduledExecutorService schedulerPatchPalWorld = Executors.newScheduledThreadPool(1);
-    private static final ScheduledExecutorService schedulerStarCitizenServerStatus = Executors
-            .newScheduledThreadPool(1);
-    private static final ScheduledExecutorService schedulerPatchStarCitizen = Executors.newScheduledThreadPool(1);
 
     // Eine Zeichenkette, die die Regeln für den Discord-Server enthält
     public static String regeln = "\u00A7 1. 🤝 Sei ein Freund, kein Feind. Respekt und Höflichkeit sind hier das A und O.\n\n"
@@ -141,10 +88,6 @@ public class Main {
                     try (BufferedWriter bw = new BufferedWriter(new FileWriter(TokenFile))) {
                         bw.write("token");
                         bw.newLine();
-                        bw.write("openaitoken");
-                        bw.newLine();
-                        bw.write("Regeln_Akzeptiert_Gruppen_Name");
-                        bw.newLine();
 
                     }
                 } else {
@@ -153,9 +96,6 @@ public class Main {
                     // OpenAI-Token
                     try (BufferedReader br = new BufferedReader(new FileReader(file))) {
                         token = br.readLine();
-                        openaitoken = br.readLine();
-                        RegelnAkzeptiert = br.readLine();
-
                         WriteLogs.writeLog("Token: " + token);
 
                     }
@@ -175,16 +115,10 @@ public class Main {
                     try (BufferedWriter bw = new BufferedWriter(new FileWriter(TokenFile))) {
                         bw.write("token");
                         bw.newLine();
-                        bw.write("openaitoken");
-                        bw.newLine();
-                        bw.write("Regeln_Akzeptiert_Gruppen_Name");
-                        bw.newLine();
                     }
                 } else {
                     try (BufferedReader br = new BufferedReader(new FileReader(TokenFile))) {
                         token = br.readLine();
-                        openaitoken = br.readLine();
-                        RegelnAkzeptiert = br.readLine();
                     }
                 }
 
@@ -197,38 +131,6 @@ public class Main {
         // Starte den Discord-Bot
         DiscordBot.start();
 
-        // Erstelle einen separaten Thread für den Star Citizen Server Status Job
-        Thread starCitizenServerStatusThread = new Thread(() -> {
-            schedulerStarCitizenServerStatus.scheduleAtFixedRate(() -> {
-                // PatchnotesStarCitizen.GetStarCitizenPatchnotes();
-                try {
-                    // StarCitizenStatus.getStatus();
-                    //new comment
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }, 0, 10, TimeUnit.MINUTES);
-        });
-
-        // Erstelle einen separaten Thread für den Star Citizen Patchnotizen Job
-        Thread starCitizenThread = new Thread(() -> {
-            schedulerPatchStarCitizen.scheduleAtFixedRate(() -> {
-                //PatchnotesStarCitizen.GetStarCitizenPatchnotes();
-            }, 0, 60, TimeUnit.MINUTES);
-        });
-
-        // Erstelle einen separaten Thread für den Palworld Patchnotizen Job
-        Thread palWorldThread = new Thread(() -> {
-            schedulerPatchPalWorld.scheduleAtFixedRate(() -> {
-                PatchnotesPalworld.GetPalworldPatchnotes();
-            }, 0, 60, TimeUnit.MINUTES);
-        });
-
-        // Starte die Threads
-        starCitizenThread.start();
-        palWorldThread.start();
-        starCitizenServerStatusThread.start();
     }
 
 }

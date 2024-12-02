@@ -8,13 +8,8 @@
 
 
 ## Features
-
-- Aktualisiert alle 10 Minuten den Star Citizen Status
-- Überprüft jede Stunde auf neue Star Citizen und Palworld Patches
-- Postet Patchnotes in einen Discord Channel, falls verfügbar
 - Erlaubt das Posten und Akzeptieren von Regeln
 - Vergibt eine Rolle an Benutzer, die die Regeln akzeptieren
-- Unterstützt OpenAI und GPT4All APIs
 - Verwendet eine Konfigurationsdatei für Tokens
 
 ## Installation
@@ -37,16 +32,13 @@ Der Bot unterstützt folgende Befehle:
 ## Konfiguration
 
 Der Bot liest die Tokens aus einer Konfigurationsdatei `config.txt`. Die Datei muss folgendes Format haben:
-Die Datei `token.txt` muss 2 Zeilen haben:
+Die Datei `token.txt` muss 1 Zeile haben:
 - `token` (Discord Token)
-- `openaitoken` (OpenAI API-Token)
+
 
 <br/>
 Der Bot unterstützt folgende Funktionen:
-- Überprüfung des Star Citizen Serverstatus
 - Anzeigen von Regeln und Setzen von Berechtigungen beim Akzeptieren der Regeln
-- Senden von Star Citizen Patchnotes als eingebettete Nachricht an Discord
-- Senden von Palworld Patchnotes als eingebettete Nachricht an Discord
 
 Der Bot läuft sowohl auf Linux als auch auf Windows.
 
@@ -57,10 +49,7 @@ Der Token wird aus einer Datei "token.txt" ausgelesen. Dabei wird zwischen Linux
 # Windows Desktop/token.txt
 
 Channels die benötigt werden:
-- sc-news
-- chatgpt
 - regeln
-- -Server status
 
 
 ![grafik](https://github.com/Blackn0va/Discord_Bot/assets/12220332/1657cbc1-3a4a-4624-96b3-b0eaceb27037)

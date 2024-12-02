@@ -1,12 +1,10 @@
 package com.blackn0va.discord_bot;
 
-import java.awt.Color;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
-import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
@@ -15,7 +13,6 @@ import net.dv8tion.jda.api.events.message.react.GenericMessageReactionEvent;
 import net.dv8tion.jda.api.events.session.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
-import net.dv8tion.jda.api.interactions.commands.build.Commands;
 
 public class DiscordGiveRole extends ListenerAdapter {
     // Erstellen Sie eine Warteschlange für Ereignisse, bei denen eine Reaktion
@@ -36,7 +33,6 @@ public class DiscordGiveRole extends ListenerAdapter {
         ereignis.getJDA().getGuilds().forEach(guild -> {
             if (guild.getName().equals("Laonda Discord")) {
                 // Erstellen Sie eine Liste von Befehlen
-                Commands commands = new Commands();
                 // Fügen Sie einen Befehl hinzu
                 guild.upsertCommand("echo", "echo")
                         .addOption(OptionType.STRING, "input", "Der Text, der zurückgegeben werden soll", true)
@@ -143,39 +139,7 @@ public class DiscordGiveRole extends ListenerAdapter {
                 event.deferEdit().queue();
 
             } else if (buttonId.equals("back") || buttonId.equals("next")) {
-                // Hole die aktuelle Seitennummer aus der Map
-                Long messageId = event.getInteraction().getMessageIdLong();
-                Main.StarCitizencurrentPageNum = currentPageNums.getOrDefault(messageId, 1);
 
-                // Berechne die neue Seitennummer
-                int newPageNum = buttonId.equals("back") ? Main.StarCitizencurrentPageNum - 1
-                        : Main.StarCitizencurrentPageNum + 1;
-
-                // Prüfe, ob die neue Seitennummer gültig ist
-                if (newPageNum >= 1 && newPageNum <= Main.StarCitizenPatchPages.size()) {
-                    // Aktualisiere die aktuelle Seitennummer in der Map
-                    currentPageNums.put(messageId, newPageNum);
-
-                    // Erstelle einen neuen Embed mit der neuen Seite
-                    EmbedBuilder embed = new EmbedBuilder()
-                            .setTitle("Star Citizen Patch") // Setze hier den Titel
-                            .setDescription("```prolog\n"
-                                    + Main.StarCitizenPatchPages.get(newPageNum - 1).replace("[", "").replace("]", "")
-                                    + "\n```")
-                            .setColor(Color.GREEN) // Setze hier die Farbe
-                            .setTimestamp(java.time.Instant.now())
-                            .setFooter("Seite " + newPageNum + " von " + Main.StarCitizenPatchPages.size(),
-                                    Main.IconURL);
-
-                    // Aktualisiere die Nachricht mit dem neuen Embed
-                    event.getInteraction().editMessageEmbeds(embed.build()).queue();
-                } else if (newPageNum < 1) {
-                    // Wenn die neue Seitennummer kleiner als 1 ist, mache nichts
-                    event.deferEdit().queue();
-                } else {
-                    // Wenn die neue Seitennummer nicht gültig ist, sende eine Fehlermeldung
-                    event.deferEdit().queue();
-                }
             }
         }
     }

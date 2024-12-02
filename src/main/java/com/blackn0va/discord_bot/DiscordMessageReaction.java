@@ -1,7 +1,6 @@
 package com.blackn0va.discord_bot;
 
 import java.awt.Color;
-import java.util.concurrent.Future;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -63,30 +62,8 @@ public class DiscordMessageReaction extends ListenerAdapter {
                             DiscordSendMessage.toChannel(queuedEvent.getChannel().getId(), "Regeln auf " + guild,
                                     Main.regeln,
                                     Color.GREEN);
-
-                            // add 1 button
-
                             // Schreiben eines Log-Eintrags, dass die Regeln angezeigt wurden
                             WriteLogs.permissions("Regeln wurden angezeigt " + user);
-
-                            // Wenn die Nachricht "!gpt" enthält
-                        } else if (message.contains("!gpt")) {
-                            // Anfordern einer Antwort von GPT-3 in einem separaten Thread
-                            Future<String> futureAnswer = gpt4all.getAnswerInThread(message.substring(4));
-                            new Thread(() -> {
-                                try {
-                                    // Erhalten der Antwort von GPT-3
-                                    String answer = futureAnswer.get();
-                                    // Senden einer Schreibaktion
-                                    queuedEvent.getChannel().sendTyping().queue();
-                                    // Senden der Antwort von GPT-3 an den Kanal
-                                    DiscordSendMessage.toChannel(queuedEvent.getChannel().getId(), "GPT-3 Antwort",
-                                            answer,
-                                            Color.GREEN);
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                            }).start();
                         }
 
                     }
