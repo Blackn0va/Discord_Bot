@@ -15,6 +15,7 @@ import net.dv8tion.jda.api.events.message.react.GenericMessageReactionEvent;
 import net.dv8tion.jda.api.events.session.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
+import net.dv8tion.jda.api.interactions.components.buttons.Button;
 
 public class DiscordGiveRole extends ListenerAdapter {
     // Erstellen Sie eine Warteschlange für Ereignisse, bei denen eine Reaktion
@@ -92,6 +93,14 @@ public class DiscordGiveRole extends ListenerAdapter {
                             audioDownload.downloadAudio(link, outputPath, voiceChannelId,
                                     channel.getGuild().getAudioManager());
                             WriteLogs.writeLog("Audio wird abgespielt: " + link);
+
+                            interactionHook.editOriginal("Audio wird abgespielt: " + link)
+                                    .setActionRow(
+                                            Button.primary("volume_up", "Lauter"),
+                                            Button.primary("volume_down", "Leiser"),
+                                            Button.primary("next", "Nächster Track"),
+                                            Button.danger("stop", "Stop"))
+                                    .queue();
                         } catch (Exception e) {
                             WriteLogs.writeLog("Fehler beim Laden der Audiodatei: " + e.getMessage());
                             interactionHook.editOriginal("Fehler beim Laden der Audiodatei: " + e.getMessage()).queue();
@@ -102,7 +111,6 @@ public class DiscordGiveRole extends ListenerAdapter {
                 } else {
                     WriteLogs.writeLog("VoiceState ist null");
                 }
-
             });
         } else if (commandName.equals("next")) {
             event.deferReply().queue();
@@ -195,8 +203,48 @@ public class DiscordGiveRole extends ListenerAdapter {
                 }
                 event.deferEdit().queue();
 
-            } else if (buttonId.equals("back") || buttonId.equals("next")) {
+            } else if (buttonId.equals("volume_up")) {
+                try {
+                    event.deferEdit().queue();
+                    AudioPlayer.player.setVolume(AudioPlayer.player.getVolume() + 10);
+                } catch (Exception e) {
+                    WriteLogs.writeLog("Fehler beim Erhöhen der Lautstärke: " + e.getMessage());
+                }
 
+            } else if (buttonId.equals("volume_down")) {
+                try {
+                    event.deferEdit().queue();
+                    AudioPlayer.player.setVolume(AudioPlayer.player.getVolume() - 10);
+                } catch (Exception e) {
+                    WriteLogs.writeLog("Fehler beim Verringern der Lautstärke: " + e.getMessage());
+                }
+            } else if (buttonId.equals("next")) {
+                try {
+                    event.deferEdit().queue();
+                    GuildVoiceState voiceState = event.getMember().getVoiceState();
+                    if (voiceState != null) {
+                        AudioChannel channel = voiceState.getChannel();
+                        if (channel != null) {
+                            AudioPlayer player = new AudioPlayer(channel.getGuild().getAudioManager());
+                            player.skipTrack();
+                        }
+                    }
+                } catch (Exception e) {
+                    WriteLogs.writeLog("Fehler beim Überspringen des Tracks: " + e.getMessage());
+                }
+            } else if (buttonId.equals("stop")) {
+                try {
+                    event.deferEdit().queue();
+                    GuildVoiceState voiceState = event.getMember().getVoiceState();
+                    if (voiceState != null) {
+                        AudioChannel channel = voiceState.getChannel();
+                        if (channel != null) {
+                            channel.getGuild().getAudioManager().closeAudioConnection();
+                        }
+                    }
+                } catch (Exception e) {
+                    WriteLogs.writeLog("Fehler beim Stoppen der Wiedergabe: " + e.getMessage());
+                }
             }
         }
     }

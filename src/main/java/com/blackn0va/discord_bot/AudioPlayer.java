@@ -10,7 +10,7 @@ import net.dv8tion.jda.api.managers.AudioManager;
 
 public class AudioPlayer {
     private final AudioPlayerManager playerManager;
-    private final com.sedmelluq.discord.lavaplayer.player.AudioPlayer player;
+    public static com.sedmelluq.discord.lavaplayer.player.AudioPlayer player;
     private final TrackScheduler trackScheduler;
 
     public AudioPlayer(AudioManager audioManager) {
