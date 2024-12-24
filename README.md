@@ -11,11 +11,12 @@
 - Erlaubt das Posten und Akzeptieren von Regeln
 - Vergibt eine Rolle an Benutzer, die die Regeln akzeptieren
 - Verwendet eine Konfigurationsdatei für Tokens
+- Musikbot, ffmpeg und youtube-dl wird dafür benötigt.
 
 ## Installation
 
 1. Installiere die erforderlichen Abhängigkeiten:
-    - Linux: `apt install openjdk-17-jdk screen -y`
+    - Linux: `apt install openjdk-21-jdk screen -y`
     - Windows: Installiere das entsprechende JDK
 
 2. Führe den Bot aus:
@@ -27,6 +28,7 @@
 Der Bot unterstützt folgende Befehle:
 
 - `!regeln`: Zeigt die Regeln an
+- `/play <link>`: Spielt ein Youtube Video ab.
 
 
 ## Konfiguration
