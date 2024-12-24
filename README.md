@@ -53,6 +53,8 @@ Der Token wird aus einer Datei "token.txt" ausgelesen. Dabei wird zwischen Linux
 Channels die benötigt werden:
 - regeln
 
+![grafik](https://github.com/user-attachments/assets/2c2b2963-c546-472e-9a69-4584e4615a85)
+
 
 ![grafik](https://github.com/Blackn0va/Discord_Bot/assets/12220332/1657cbc1-3a4a-4624-96b3-b0eaceb27037)
 
