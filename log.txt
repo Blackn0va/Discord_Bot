@@ -1,0 +1,10 @@
+Logfile
+--------
+Logfile created
+--------
+
+Erkanntes Betriebssystem: windows 11
+Fehler beim Starten von DC: 
+Neustart des Discord Bots
+Discord Bot wird gestoppt
+Discord Bot ist nicht gestartet

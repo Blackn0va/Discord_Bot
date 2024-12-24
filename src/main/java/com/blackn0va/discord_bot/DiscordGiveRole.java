@@ -5,8 +5,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
+import net.dv8tion.jda.api.entities.GuildVoiceState;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
+import net.dv8tion.jda.api.entities.channel.middleman.AudioChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.events.message.react.GenericMessageReactionEvent;
@@ -28,20 +30,24 @@ public class DiscordGiveRole extends ListenerAdapter {
 
     @Override
     public void onReady(ReadyEvent ereignis) {
-
-        // register command only for guild where name is Laonda Discord
         ereignis.getJDA().getGuilds().forEach(guild -> {
-            if (guild.getName().equals("Laonda Discord")) {
-                // Erstellen Sie eine Liste von Befehlen
-                // Fügen Sie einen Befehl hinzu
-                guild.upsertCommand("echo", "echo")
-                        .addOption(OptionType.STRING, "input", "Der Text, der zurückgegeben werden soll", true)
+            // register command only for guild where ID is 686179587411148820 and
+            // 284015562382901248
+            if (guild.getId().equals("686179587411148820") || guild.getId().equals("284015562382901248")) {
+                // Register slash command
+                // command play Link to a youtube video
+                guild.upsertCommand("play", "Play a youtube video")
+                        .addOption(OptionType.STRING, "link", "Link to a youtube video", true)
                         .queue();
-                System.out.println("Command echo added");
-
+                // next
+                guild.upsertCommand("next", "Next page")
+                        .queue();
+                // stop
+                guild.upsertCommand("stop", "Stop the audio")
+                        .queue();
+                WriteLogs.writeLog("Befehl echo wurde hinzugefügt.");
             }
         });
-
     }
 
     // Methode zum Hinzufügen von Ereignissen zur Warteschlange
@@ -64,16 +70,67 @@ public class DiscordGiveRole extends ListenerAdapter {
 
     @Override
     public void onSlashCommandInteraction(SlashCommandInteractionEvent event) {
-        // erhalte den Namen des Befehls
         String commandName = event.getName();
-        // Überprüfe, ob der Befehl "echoo" ist
-        if (commandName.equals("echo")) {
+        if (commandName.equals("play")) {
             event.deferReply().setEphemeral(true).queue(interactionHook -> {
-                // Hole den Text aus den Optionen
-                String text = event.getOption("input").getAsString();
-                // Antwort mit dem Text
-                interactionHook.editOriginal("```" + text + "```").queue();
+                String link = event.getOption("link").getAsString();
+                String voiceChannelId = null;
+                Member member;
+                AudioChannel channel;
+
+                GuildVoiceState voiceState = event.getMember().getVoiceState();
+                if (voiceState != null) {
+                    channel = voiceState.getChannel();
+                    if (channel != null) {
+                        voiceChannelId = channel.getId();
+                        WriteLogs.writeLog("Voice ChannelID: " + voiceChannelId);
+                        member = event.getMember();
+
+                        try {
+                            String outputPath = Main.outputPath;
+                            AudioDownload audioDownload = new AudioDownload();
+                            audioDownload.downloadAudio(link, outputPath, voiceChannelId,
+                                    channel.getGuild().getAudioManager());
+                            WriteLogs.writeLog("Audio wird abgespielt: " + link);
+                        } catch (Exception e) {
+                            WriteLogs.writeLog("Fehler beim Laden der Audiodatei: " + e.getMessage());
+                            interactionHook.editOriginal("Fehler beim Laden der Audiodatei: " + e.getMessage()).queue();
+                        }
+                    } else {
+                        WriteLogs.writeLog("Voice Channel ist null");
+                    }
+                } else {
+                    WriteLogs.writeLog("VoiceState ist null");
+                }
+
             });
+        } else if (commandName.equals("next")) {
+            event.deferReply().queue();
+            try {
+                GuildVoiceState voiceState = event.getMember().getVoiceState();
+                if (voiceState != null) {
+                    AudioChannel channel = voiceState.getChannel();
+                    if (channel != null) {
+                        AudioPlayer player = new AudioPlayer(channel.getGuild().getAudioManager());
+                        player.skipTrack();
+                    }
+                }
+            } catch (Exception e) {
+                WriteLogs.writeLog("Fehler beim Überspringen des Tracks: " + e.getMessage());
+            }
+        } else if (commandName.equals("stop")) {
+            event.deferReply().queue();
+            try {
+                GuildVoiceState voiceState = event.getMember().getVoiceState();
+                if (voiceState != null) {
+                    AudioChannel channel = voiceState.getChannel();
+                    if (channel != null) {
+                        channel.getGuild().getAudioManager().closeAudioConnection();
+                    }
+                }
+            } catch (Exception e) {
+                WriteLogs.writeLog("Fehler beim Stoppen der Wiedergabe: " + e.getMessage());
+            }
         }
     }
 

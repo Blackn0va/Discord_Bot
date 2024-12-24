@@ -15,7 +15,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
  * @author Black
  */
 public class Main {
-
+    public static String outputPath = "/root/masterbot/audio/";
     // Discord Bot Einstellungen
     public static String token = "";
     public static JDA bauplan;

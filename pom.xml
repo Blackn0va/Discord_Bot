@@ -6,8 +6,8 @@
     <packaging>jar</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
         <exec.mainClass>com.blackn0va.discord_bot.Discord_Bot</exec.mainClass>
     </properties>
   <build>
@@ -46,6 +46,11 @@
             <artifactId>JDA</artifactId>
             <version>LATEST</version>
         </dependency>  
+        <dependency>
+    <groupId>dev.arbjerg</groupId>
+    <artifactId>lavaplayer</artifactId>
+    <version>LATEST</version>
+</dependency>
         <dependency>
     <groupId>ch.qos.logback</groupId>
     <artifactId>logback-classic</artifactId>
